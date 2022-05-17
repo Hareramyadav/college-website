@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="buttons d-flex justify-content-between align-items-center">
+        <div class="image-button m-auto">
+            <a class="btn button" type="button" id="image_button">Images</a>
+        </div>
+        <div class="video-button m-auto">
+            <a class="btn button" type="button" id="video_button">Videos</a>
+        </div>
+    </div>
+    <div class="images" id="images">
+        {% for i in image %}
+        <div class="image-box">
+            <img src="{{i.media.url}}" alt="" srcset="">
+        </div>
+        {% endfor %}
+    </div>
+    <div class="videos" id="videos">
+        {% for v in video %}
+        <div class="image-box">
+            <iframe width="600" height="265" src="{{v.video_url}}" allowfullscreen></iframe>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid blog d-flex mt-5">
+    <div class="card d-flex flex-row justify-content-between px-2 py-2 me-3 align-items-center">
+        <div class="card-text">
+            <h3>{{blog.blog_title}}</h3>
+            <p>{{blog.created_at}}</p>
+            <p>{{blog.short_desc}}</p>
+        </div>
+        <div class="card-image">
+            <img src="{{blog.blog_image.url}}" alt="" srcset="" height="200">
+        </div>
+    </div>
+</div>
+{% endblock %}

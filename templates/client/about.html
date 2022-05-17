@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    {% for a in about %}
+    <p>{{a.long_desc}}</p>
+    {% endfor %}
+</div>
+{% endblock %}

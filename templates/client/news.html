@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="">
+        {% for m in main_news %}
+        <img src="{{m.news_image.url}}" alt="" srcset="" height="500">
+        <h3 class="mt-3 main-news-heading">{{m.title}}</h3>
+        <h6 class="mt-2">{{m.created_at}}</h6>
+        {% endfor %}
+    </div>
+    <div class="">
+        {% for s in side_news %}
+        <img src="{{s.news_image.url}}" alt="" srcset="" height="500">
+        <h3 class="mt-3 main-news-heading">{{s.title}}</h3>
+        <h6 class="mt-2">{{s.created_at}}</h6>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

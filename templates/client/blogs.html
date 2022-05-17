@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid blog d-flex">
+    {% for b in blogs %}
+    <div class="card d-flex flex-row justify-content-between px-2 py-2 me-3 align-items-center">
+        <div class="card-text">
+            <h3>{{b.blog_title}}</h3>
+            <p>{{b.created_at}}</p>
+            <p>{{b.short_desc}}</p>
+            <a href="{% url 'blogs' blog_id=b.id %}">Continue Reading</a>
+        </div>
+        <div class="card-image">
+            <img src="{{b.blog_image.url}}" alt="" srcset="" height="200">
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

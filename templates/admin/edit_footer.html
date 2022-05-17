@@ -1,0 +1,45 @@
+{% extends 'admin/admin_dashboard.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="footer-form">
+        {% if messages %}
+        {% for message in messages %}
+        <h3>{{ message }}</h3>
+        {% endfor %}
+        {% endif %}
+        <form method="POST" action="{% url 'edit_footer' footer_id=footer_id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="heading">Footer Heading</label>
+                <input type="text" name="heading" class="form-control" id="" placeholder="" value="{{footer.heading}}">
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" name="address" class="form-control" id="" placeholder="" value="{{footer.address}}">
+            </div>
+            <div class="form-group">
+                <label for="phone_number">Phone Number</label>
+                <input type="text" name="phone_number" class="form-control" id="" placeholder="" value="{{footer.phone_number}}">
+            </div>
+            <div class="form-group">
+                <label for="menu_position">Footer Position</label>
+                <select class="form-select" name="footer_position" id="">
+                    <option value="footer_first" selected>Footer First</option>
+                    <option value="footer_second">Footer Second</option>
+                    <option value="footer_third">Footer Third</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quick_links">Quick Links</label>
+                <input type="text" name="quick_links" class="form-control" id="" placeholder="" value="{{footer.quick_links}}">
+            </div>
+            <div class="form-group">
+                <label for="social_links">Social Links</label>
+                <input type="text" name="social_links" class="form-control" id="" placeholder="" value="{{footer.social_links}}">
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
