@@ -34,9 +34,24 @@ $(document).ready(function(){
             return false;
         }
     })
-    $('.delete_testimonial').click(function(){
+    $('.delete_media').click(function(){
         if(!confirm("Are you sure you want to delete?")){
             return false;
         }
     })
+    $('.delete_blog').click(function(){
+        if(!confirm("Are you sure you want to delete?")){
+            return false;
+        }
+    })
+    $('.delete_testimonial').click(function(){
+        if(!confirm("Are you sure you want to delete?")){
+            return false;
+        }
+    });
+    $('.delete_popup').click(function(){
+        if(!confirm("Are you sure you want to delete?")){
+            return false;
+        }
+    });
 });

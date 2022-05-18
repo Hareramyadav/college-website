@@ -2,13 +2,14 @@
 {% load static %}
 {% block content %}
 <div class="container">
+    <h3>Edit Menu</h3>
     <form method="POST" action="{% url 'edit_menu' menu_id=menu_id %}" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="form-group">
+        <div class="form-group mb-3">
             <label for="menu_name">Menu Name</label>
             <input type="text" name="menu_name" class="form-control" id="" placeholder="" value="{{menu.menu_name}}">
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
             <label for="menu_link">Menu Link</label>
             <input type="text" name="menu_link" class="form-control" id="" placeholder="" value="{{menu.menu_link}}">
         </div>

@@ -1,539 +1,635 @@
-*{
+* {
     margin: 0;
     padding: 0;
+}
+
+body {
+    background: none !important;
     font-family: 'Open Sans', sans-serif;
 }
-body{
-    background: none !important;
+
+:root {
+    --white: #ffffff;
+    --light: #F8F9FA;
+    --danger: #DD3444;
+    --dark: #343A3F;
+    --logo-color-first: #02CD69;
+    --logo-color-second: #fa636d;
+    --logo-color-third: #01388B;
+    --logo-color-third-opac: #01388b77;
+    --logo-color-fourth: #50BA9C;
+    --black: #000000;
 }
 
-:root{
-    --white:#ffffff;
-    --light:#F8F9FA;
-    --danger:#DD3444;
-    --dark:#343A3F;
-    --logo-color-first:#02CD69;
-    --logo-color-second:#fa636d;
-    --logo-color-third:#01388B;
-    --logo-color-third-opac:#01388b77;
-    --logo-color-fourth:#50BA9C;
-    --black:#000000;
-}
-
-.button{
+.button {
     background-color: var(--logo-color-fourth) !important;
     color: var(--white) !important;
     font-size: 20px !important;
     font-weight: bold !important;
 }
-.button:focus{
+
+.button:focus {
     box-shadow: none !important;
 }
-.navbar-collapse{
+
+/* Contact section........... */
+
+
+/* Blog Section................ */
+.blogs-page {
+    /* display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px; */
+}
+
+/* Single Blog Section................ */
+
+/* Gallery Section.............. */
+
+/* Admission / Inquiry form & display section............ */
+.admission-form-display {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+}
+
+.navbar-collapse {
     flex-grow: 0 !important;
 }
 
-.bottom-navbar{
+.bottom-navbar {
     background: var(--logo-color-third);
 }
-.bottom-navbar-mobile{
+
+.bottom-navbar-mobile {
     display: none !important;
 }
-.top-navbar .nav-item .nav-link{
+
+.top-navbar .nav-item .nav-link {
     color: var(--black) !important;
 }
-.nav-item .bottom-nav-link{
+
+.nav-item .bottom-nav-link {
     color: #ffffff !important;
 }
-.botton-navbar .nav-item .nav-link{
+
+.botton-navbar .nav-item .nav-link {
     padding-left: 15px !important;
     padding-right: 15px !important;
 }
-.nav-item .nav-link:hover{
-    background-color: rgba(0, 0,0, 0.2) !important;
+
+.nav-item .nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.2) !important;
     border-bottom-left-radius: 10px;
     border-top-right-radius: 10px;
 }
-.navbar-brand img{
+
+.navbar-brand img {
     width: 100px;
     height: 70px;
 }
-.logo-second{
+
+.logo-second {
     display: none;
 }
-.top-navbar .dropdown .dropdown-menu li{
-    border-bottom: 1px solid rgba(0, 0,0, 0.3) !important;
+
+.top-navbar .dropdown .dropdown-menu li {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3) !important;
 }
-.top-navbar .dropdown .dropdown-menu li:last-child{
+
+.top-navbar .dropdown .dropdown-menu li:last-child {
     border-bottom: 0 !important;
 }
-.top-navbar .dropdown .dropdown-menu .dropdown-item:hover{
+
+.top-navbar .dropdown .dropdown-menu .dropdown-item:hover {
     background: none !important;
     color: var(--dark) !important;
 }
-@media screen and (max-width:768px){
-    .bottom-navbar.navbar{
+
+@media screen and (max-width:768px) {
+    .bottom-navbar.navbar {
         padding-top: 0px !important;
         padding-bottom: 0px !important;
     }
-    .bottom-navbar{
+
+    .bottom-navbar {
         background: transparent;
     }
-    .nav-item .nav-link{
+
+    .nav-item .nav-link {
         color: var(--dark) !important;
     }
-    .bottom-navbar{
+
+    .bottom-navbar {
         display: none !important;
     }
-    .bottom-navbar-mobile{
+
+    .bottom-navbar-mobile {
         display: block !important;
     }
-    .logo-second{
+
+    .logo-second {
         display: block;
     }
-    .logo-second-desktop{
+
+    .logo-second-desktop {
         display: none;
     }
 }
 
-.footer{
+.footer {
     background: var(--black);
 }
-.footer-heading{
+
+.footer-heading {
     color: var(--light);
     display: flex;
 }
-.footer-heading hr{
+
+.footer-heading hr {
     height: 2px !important;
     width: 100px;
     background-color: var(--light) !important;
     opacity: 0.5 !important;
     margin-left: 10px;
 }
-.link-details ul{
+
+.link-details ul {
     padding-left: 0px !important;
 }
+
 @media screen and (max-width:768px) {
-    .footer-heading hr{
+    .footer-heading hr {
         display: none;
     }
 }
 
 @media screen and (max-width:426px) {
-    .footer .d-flex{
+    .footer .d-flex {
         flex-direction: column;
         margin-bottom: 20px;
     }
+
     .footer-first,
     .footer-second,
-    .footer-third{
+    .footer-third {
         width: 100% !important;
     }
 }
-.college-name{
+
+.college-name {
     color: var(--white);
 }
-.icon{
+
+.icon {
     color: var(--light);
 }
 
 /* Carousel Section */
-.carousel-indicators [data-bs-target]{
+.carousel-indicators [data-bs-target] {
     width: 10px !important;
 }
-.overlay{
+
+.overlay {
     position: absolute;
     width: 100%;
     height: 100%;
     background-color: var(--black);
     opacity: 0.4;
 }
-.nasa-info{
+
+.nasa-info {
     margin-top: 50px;
     padding-top: 50px;
     padding-bottom: 50px;
     background-color: var(--light);
 }
-.nasa-info h3{
+
+.nasa-info h3 {
     color: var(--logo-color-third);
     font-weight: bold;
     text-align: center;
     font-family: 'Poppins', sans-serif;
 }
-.nasa-info-heading{
+
+.nasa-info-heading {
     color: var(--logo-color-third);
     font-weight: bold;
     text-align: center;
     font-size: 35px;
     font-family: 'Poppins', sans-serif;
 }
-.nasa-info .card{
+
+.nasa-info .card {
     min-height: 250px;
     min-width: 200px;
     text-align: center;
     margin-left: 10px;
     margin-right: 10px;
     padding-top: 40px;
-    box-shadow: 5px 5px rgba(0, 0,0, 0.2);
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
 }
-.main-slider-content.carousel-caption{
+
+.main-slider-content.carousel-caption {
     top: 45%;
 }
+
 @media screen and (max-width:768px) {
-    .main-slider-content.carousel-caption{
+    .main-slider-content.carousel-caption {
         top: 40%;
     }
-    .main-slider-content h5{
+
+    .main-slider-content h5 {
         font-size: 18px;
     }
 }
+
 @media screen and (max-width:426px) {
-    .main-slider-content.carousel-caption{
+    .main-slider-content.carousel-caption {
         top: 30%;
     }
-    .main-slider-content h5{
+
+    .main-slider-content h5 {
         font-size: 14px;
     }
-    .main-slider-content .button{
+
+    .main-slider-content .button {
         font-size: 14px !important;
     }
 }
 
-.nasa-info .card:hover{
+.nasa-info .card:hover {
     transform: translateY(20px);
     transition: transform .3s ease-in-out;
     border-right: 5px solid var(--logo-color-third);
     border-left: 5px solid var(--logo-color-third);
 }
-@media screen and (max-width:768px){
-    .nasa-info h3{
+
+@media screen and (max-width:768px) {
+    .nasa-info h3 {
         font-size: 20px;
     }
 }
-@media screen and (max-width:426px){
-    .nasa-info{
+
+@media screen and (max-width:426px) {
+    .nasa-info {
         flex-direction: column !important;
     }
-    .nasa-info .card{
+
+    .nasa-info .card {
         margin-bottom: 20px;
     }
 }
-.about-nasa{
+
+/* About Section........... */
+.contactus-page hr,
+.aboutus-page hr {
+    opacity: 0.7;
+}
+
+.admission-form h3,
+.contactus-page h3,
+.aboutus-page h3 {
+    margin-bottom: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.about-nasa {
     margin-top: 50px;
 }
-.about-nasa-heading{
+
+.about-nasa-heading {
     color: var(--logo-color-third);
     font-weight: bold;
     font-size: 30px;
     font-family: 'Poppins', sans-serif;
 }
-.nasa-news{
+
+.nasa-news {
     margin-top: 50px;
     background-color: var(--light);
 }
-.nasa-news .main-news img{
-    width: 100%;
-}
-.nasa-news .side-news img{
+
+.nasa-news .main-news img {
     width: 100%;
 }
 
+.nasa-news .side-news img {
+    width: 100%;
+}
+
+
 @media screen and (max-width:768px) {
-    .about-image img{
-        max-width:300px;
+    .about-image img {
+        max-width: 300px;
         max-height: 400px;
     }
-    .about-nasa-heading{
+
+    .about-nasa-heading {
         font-size: 20px;
     }
-    .about-text{
+
+    .about-text {
         max-height: 350px;
         overflow: hidden;
     }
-    .about-text .button{
+
+    .about-text .button {
         font-size: 18px !important;
     }
+
     /* nasa news section.............. */
-    .main-news img{
+    .main-news img {
         max-height: 400px;
     }
-    .side-news img{
+
+    .side-news img {
         max-height: 90px;
     }
 }
 
-@media screen and (max-width:426px){
-    .about-nasa{
+@media screen and (max-width:426px) {
+    .about-nasa {
         flex-direction: column !important;
     }
-    .about-image img{
+
+    .about-image img {
         max-width: 100%;
     }
-    .about-nasa-heading{
+
+    .about-nasa-heading {
         font-size: 20px;
         margin-top: 20px;
         margin-bottom: 10px;
     }
-    .about-content{
+
+    .about-content {
         width: 100% !important;
     }
-    .about-content.pe-5{
+
+    .about-content.pe-5 {
         padding-right: 0 !important;
     }
+
     /* Nasa news section */
-    .nasa-news-content{
+    .nasa-news-content {
         flex-direction: column !important;
     }
-    .main-news{
+
+    .main-news {
         width: 100% !important;
     }
-    .main-news.pe-5{
+
+    .main-news.pe-5 {
         padding-right: 0 !important;
     }
-    .main-news img{
+
+    .main-news img {
         max-height: 200px;
     }
-    .main-news-heading a{
+
+    .main-news-heading a {
         font-size: 20px;
     }
-    .side-news{
+
+    .side-news {
         width: 100% !important;
         margin-top: 20px;
     }
-    .side-news.ps-5{
+
+    .side-news.ps-5 {
         padding-left: 0 !important;
     }
 }
 
-.messages{
+.messages {
     /* background-color: var(--light); */
     padding-top: 30px;
 }
-.message-provider{
+
+.message-provider {
     position: absolute;
     background-color: var(--white);
     bottom: 5%;
     width: 100%;
 }
-.message-provider h6{
+
+.message-provider h6 {
     font-weight: bold !important;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
-.message-provider p{
+
+.message-provider p {
     margin-bottom: 0 !important;
 }
-.main-message-content .card{
+
+.main-message-content .card {
     width: 250px;
     height: 300px;
-    box-shadow: 3px 3px rgba(0, 0,0, 0.2);
+    box-shadow: 3px 3px rgba(0, 0, 0, 0.2);
 }
-.main-message-content img{
+
+.main-message-content img {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 
 @media screen and (max-width:768px) {
-    .message-provider h6{
+    .message-provider h6 {
         font-size: 12px !important;
     }
-    .message-provider p{
+
+    .message-provider p {
         font-size: 10px;
     }
 }
 
 @media screen and (max-width:426px) {
-    .main-message-content{
+    .main-message-content {
         flex-direction: column !important;
     }
-    .main-message-content .card{
+
+    .main-message-content .card {
         margin-top: 20px !important;
     }
-    .main-message-content .card.mx-5{
+
+    .main-message-content .card.mx-5 {
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
 }
-.modal .modal-header a{
+
+.modal .modal-header a {
     text-decoration: none;
     font-size: 30px;
     cursor: pointer;
     color: var(--black);
 }
-.modal-content{
+
+.modal-content {
     background-color: var(--light) !important;
     border-top-right-radius: 50px !important;
     border-bottom-left-radius: 50px !important;
     border-top-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
-.modal-header{
-    background-color: rgba(0, 0,0, 0.2);
+
+.modal-header {
+    background-color: rgba(0, 0, 0, 0.2);
 }
-.modal-title{
+
+.modal-title {
     color: var(--logo-color-third);
     font-weight: bold;
 }
-.nasa-gallery{
+
+.nasa-gallery {
     margin-top: 50px;
     background-color: var(--light);
     padding-top: 30px;
     padding-bottom: 50px;
 }
-.nasa-gallery h3{
+
+.nasa-gallery h3 {
     color: var(--logo-color-third);
     margin-left: 15px;
 }
 
-.nasa-gallery .card{
+.nasa-gallery .card {
     max-width: 600px;
     min-height: 300px;
-    box-shadow: 5px 5px rgba(0, 0,0, 0.2);;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
+    ;
 }
 
 @media screen and (max-width:768px) {
-    .video-gallery iframe{
+    .video-gallery iframe {
         max-width: 100%;
     }
 }
 
 @media screen and (max-width:426px) {
-    .nasa-gallery-content{
+    .nasa-gallery-content {
         flex-direction: column !important;
     }
-    .nasa-gallery-content .card{
+
+    .nasa-gallery-content .card {
         margin-top: 20px;
     }
-    .image-gallery{
+
+    .image-gallery {
         min-height: 200px !important;
     }
-    .nasa-gallery-content .card.mx-3{
+
+    .nasa-gallery-content .card.mx-3 {
         margin-right: 0 !important;
         margin-left: 0 !important;
     }
 }
 
-.color{
+.color {
     background-color: #FEF4E2;
     height: 200px;
     margin-top: -100px;
 }
-.about-text{
+
+.about-text {
     text-align: justify;
 }
 
-.testimonial{
+.testimonial {
     padding-top: 30px;
 }
-.testimonial-mobile{
+
+.testimonial-mobile {
     display: none;
 }
-.testimonial .carousel-indicators [data-bs-target]{
+
+.testimonial .carousel-indicators [data-bs-target] {
     background-color: var(--black) !important;
 }
-.testimonial .carousel-item-next, 
-.testimonial .carousel-item-prev, 
-.testimonial .carousel-item.active{
+
+.testimonial .carousel-item-next,
+.testimonial .carousel-item-prev,
+.testimonial .carousel-item.active {
     display: flex !important;
 }
-.testimonial .carousel-control-next, 
-.testimonial .carousel-control-prev{
+
+.testimonial .carousel-control-next,
+.testimonial .carousel-control-prev {
     width: 50px !important;
 }
-.testimonial .carousel-indicators{
+
+.testimonial .carousel-indicators {
     bottom: -50px;
 }
+
 @media screen and (max-width:426px) {
-    .testimonial{
+    .testimonial {
         display: none;
     }
-    .testimonial-mobile{
+
+    .testimonial-mobile {
         display: block;
     }
 }
-.student-image{
+
+.student-image {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 20px;
 }
-.student-image img{
+
+.student-image img {
     height: 100px;
     width: 100px;
     border-radius: 50%;
 }
 
-/* 
-************** Admin Dashboard Section...............
-*/
-.admin {
-  min-height: 100vh;
+
+/* Media Queries.................. */
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+
+    /* Gallery section........... */
+    .video-container,
+    .image-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 10px 20px;
+    }
 }
-.admin_content .card {
-  width: 300px;
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+    /* Contact section........... */
+    .contact-map iframe {
+        min-width: 500px;
+    }
+
+    /* Blog Section................ */
+    .blogs-page {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 20px;
+    }
 }
-.bg-success {
-  position: relative;
-}
-#bg-info,
-#bg-warning,
-#bg-success {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
-}
-.bg-info .card-body,
-.bg-warning .card-body,
-.bg-success .card-body {
-  z-index: 5;
-}
-.wrapper {
-  display: flex;
-  align-items: stretch;
-  width: 100%;
-}
-#sidebar {
-  min-width: 250px;
-  max-width: 250px;
-  min-height: 100vh;
-  background-color: var(--primary);
-  opacity: 0.8;
-}
-#sidebar.active {
-  margin-left: -250px;
-  transition: 0.5s;
-  /* transition: 1s; */
-}
-#sidebar ul li {
-  list-style-type: none;
-}
-#sidebar ul li a {
-  display: block;
-  padding: 10px;
-}
-#sidebar ul li a:hover {
-  background: var(--light);
-  color: var(--dark) !important;
-}
-#sidebar a[data-bs-toggle="collapse"] {
-  position: relative;
-}
-#sidebar .dropdown-toggle {
-  display: block;
-  top: 50%;
-  position: absolute;
-  transform: translateY(-50%);
-}
-#sidebar .collapse {
-  background-color: var(--black);
-  padding: 5px 10px;
-}
-.profile li a:hover {
-  background: none !important;
-  color: var(--dark) !important;
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+
+    /* Contact section........... */
+    .contact-map iframe {
+        min-width: 800px;
+    }
 }

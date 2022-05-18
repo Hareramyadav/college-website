@@ -2,15 +2,15 @@
 {% load static %}
 
 {% block content %}
-<div class="container-fluid blog d-flex mt-5">
-    <div class="card d-flex flex-row justify-content-between px-2 py-2 me-3 align-items-center">
-        <div class="card-text">
-            <h3>{{blog.blog_title}}</h3>
-            <p>{{blog.created_at}}</p>
-            <p>{{blog.short_desc}}</p>
-        </div>
+<div class="single-blog bg-light">
+    <div class="container py-3">
+        <h3>{{blog.blog_title}}</h3>
+        <p>{{blog.created_at}}</p>
         <div class="card-image">
-            <img src="{{blog.blog_image.url}}" alt="" srcset="" height="200">
+            <img src="/{{ blog.blog_image.url }}" alt="" srcset="" maxHeight="400" width="100%">
+        </div>
+        <div class="card-text mt-md-5 mt-3">
+            <p>{{blog.long_desc}}</p>
         </div>
     </div>
 </div>

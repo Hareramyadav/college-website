@@ -70,7 +70,7 @@
                 <img src="{{m.news_image.url}}" alt="" srcset="" height="500">
             </a>
             <h3 class="mt-3 main-news-heading">
-                <a href="{{m.news_link}}" class="text-decoration-none text-dark">{{m.title}}</a>
+                <a href="{% url 'news' news_id=m.id %}" class="text-decoration-none text-dark">{{m.title}}</a>
             </h3>
             <h6 class="mt-2">{{m.created_at}}</h6>
             {% endfor %}
@@ -82,29 +82,11 @@
                     <img src="{{s.news_image.url}}" alt="" srcset="" height="120">
                 </a>
                 <h6 class="mt-2">
-                    <a href="{{s.news_link}}" class="text-decoration-none text-dark">{{s.title}}</a>
+                    <a href="{% url 'news' news_id=s.id %}" class="text-decoration-none text-dark">{{s.title}}</a>
                 </h6>
                 <h6 class="mt-2">{{s.created_at}}</h6>
             </div>
             {% endfor %}
-            <div class="news-two mt-3">
-                <a href="#">
-                    <img src="./assets/images/news.jpeg" alt="" srcset="" height="120">
-                </a>
-                <h6 class="mt-2">
-                    <a href="#" class="text-decoration-none text-dark">Admission open for new session of 2079</a>
-                </h6>
-                <h6 class="mt-2">28.04.2022</h6>
-            </div>
-            <div class="news-two mt-3">
-                <a href="#">
-                    <img src="./assets/images/news.jpeg" alt="" srcset="" height="120">
-                </a>
-                <h6 class="mt-2">
-                    <a href="#" class="text-decoration-none text-dark">Admission open for new session of 2079</a>
-                </h6>
-                <h6 class="mt-2">28.04.2022</h6>
-            </div>
         </div>
     </div>
 </div>

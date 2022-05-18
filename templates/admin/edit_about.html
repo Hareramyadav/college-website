@@ -2,18 +2,19 @@
 {% load static %}
 {% block content %}
 <div class="container">
+    <h3>Edit About Us Section</h3>
     <div class="about-form">
         <form method="POST" action="{% url 'edit_about' about_id=about_id %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="about_image">Image</label>
                 <input type="file" name="about_image" class="form-control" id="">
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="short_desc">Short Description</label>
                 <textarea rows="3" name="short_desc" class="form-control" id="">{{about.short_desc}}</textarea>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="long_desc">Long Description</label>
                 <textarea rows="5" name="long_desc" class="form-control" id=""></textarea>
             </div>

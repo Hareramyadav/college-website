@@ -3,11 +3,24 @@ import email
 from pyexpat import model
 from re import T
 from statistics import mode
+from urllib import request
 from django.db import models
 from django.core.exceptions import ValidationError
 
 # Create your models here.
 
+class SiteIdentity(models.Model):
+    site_name = models.CharField(max_length=500, null=True, blank=True)
+    tagline = models.CharField(max_length=3000, blank=True, null=True)
+    logo_first = models.ImageField(blank=True, null=True, upload_to="static/images")
+    logo_second = models.ImageField(blank=True, null=True, upload_to="static/images")
+    favicon = models.ImageField(blank=True, null=True, upload_to="static/images")
+    created_at = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        db_table = 'logo'
+
+    def __str__(self):
+        return str(self.site_name)
 
 class Menu(models.Model):
     menu_name = models.CharField(max_length=300, null=True, blank=True)
@@ -141,9 +154,12 @@ class Footer(models.Model):
     address = models.CharField(max_length=200, null=True, blank=True)
     phone_number = models.CharField(max_length=200, null=True, blank=True)
     email = models.CharField(max_length=200, null=True, blank=True)
+    facebook = models.URLField(max_length=3000, blank=True, null=True)
+    instagram = models.URLField(max_length=3000, blank=True, null=True)
+    twitter = models.URLField(max_length=3000, blank=True, null=True)
+    youtube = models.URLField(max_length=3000, blank=True, null=True)
     footer_position = models.CharField(max_length=200, null=True, blank=True)
     quick_links = models.CharField(max_length=3000, null=True, blank=True)
-    social_links = models.URLField(max_length=3000, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -151,3 +167,37 @@ class Footer(models.Model):
 
     def __str__(self):
         return str(self.footer_position)
+
+class Popup(models.Model):
+    title = models.CharField(max_length=1000, null=True, blank=True)
+    file = models.FileField(null=True, blank=True, upload_to="static/images")
+    message = models.TextField(max_length=5000, null=True, blank=True,)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'popup'
+
+    def __str__(self):
+        return str(self.title)
+
+class AdmissionForm(models.Model):
+    full_name = models.CharField(max_length=500, null=True, blank=True)
+    email = models.EmailField(max_length=500, null=True, blank=True)
+    date_of_birth = models.CharField(max_length=500, null=True, blank=True)
+    gender = models.CharField(max_length=500, null=True, blank=True)
+    mobile_no = models.CharField(max_length=500, null=True, blank=True)
+    current_address = models.CharField(max_length=500, null=True, blank=True)
+    parent_name = models.CharField(max_length=500, null=True, blank=True)
+    parent_no = models.CharField(max_length=500, null=True, blank=True)
+    parent_email = models.EmailField(max_length=500, null=True, blank=True)
+    gpa = models.CharField(max_length=500, null=True, blank=True)
+    school_name = models.CharField(max_length=500, null=True, blank=True)
+    school_address = models.CharField(max_length=500, null=True, blank=True)
+    stream = models.CharField(max_length=500, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'admissionform'
+
+    def __str__(self):
+        return str(self.full_name)

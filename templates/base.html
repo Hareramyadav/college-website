@@ -27,7 +27,7 @@
                     <ul class="navbar-nav m-auto mb-2 mb-lg-0">
                         {% for t in top_header %}
                         <li class="nav-item">
-                            <a class="nav-link bottom-nav-link" aria-current="page" href="{{ t.menu_link }}">
+                            <a class="nav-link bottom-nav-link text-capitalize" aria-current="page" href="{{ t.menu_link }}">
                                 {{ t.menu_name }}</a>
                         </li>
                         {% endfor %}
@@ -46,7 +46,7 @@
                 <div class="collapse navbar-collapse" id="topHeader">
                     <ul class="navbar-nav">
                         {% for b in bottom_header %}
-                        <li class="nav-item dropdown">
+                        <!-- <li class="nav-item dropdown">
                             <a class="nav-link bottom-nav-link dropdown-toggle" id="dropdown" data-bs-toggle="dropdown"
                                 aria-expanded="false" href="{{b.menu_link}}">
                                 {{b.menu_name}}
@@ -56,6 +56,10 @@
                                 <li><a class="dropdown-item" href="#">{{ sub.sub_menu_name }}</a></li>
                                 {% endfor %}
                             </ul>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link bottom-nav-link text-capitalize" aria-current="page" href="{{ b.menu_link }}">
+                                {{ b.menu_name }}</a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -125,10 +129,14 @@
                     <hr>
                 </div>
                 <div class="social-details">
-                    <a href="#"><i class="fa-brands fa-facebook icon me-3"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram icon me-3"></i></a>
-                    <a href="#"><i class="fa-brands fa-youtube icon me-3"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin icon me-3"></i></a>
+                    {% for ft in footer_third %}
+                    <a href="{{ft.facebook}}" target="_blank"><i class="fa-brands fa-facebook icon me-3 fs-3"></i></a>
+                    <a href="{{ft.instagram}}" target="_blank"><i class="fa-brands fa-instagram icon me-3 fs-3"></i></a>
+                    <a href="{{ft.youtube}}" target="_blank"><i class="fa-brands fa-youtube icon me-3 fs-3"></i></a>
+                    {% if ft.twitter %}
+                    <a href="{{ft.twitter}}" target="_blank"><i class="fa-brands fa-twitter icon me-3 fs-3"></i></a>
+                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>

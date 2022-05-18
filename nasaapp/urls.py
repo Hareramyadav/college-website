@@ -15,6 +15,7 @@ urlpatterns = [
     path('delete_footer/<int:footer_id>', views.delete_footer, name="delete_footer"),
     path('about', views.about, name="about"),
     path('news', views.news, name="news"),
+    path('news/<int:news_id>', views.news_single, name="news"),
     path('gallery', views.gallery, name="gallery"),
     path('blogs', views.blogs, name="blogs"),
     path('blogs/<int:blog_id>', views.blog_single, name="blogs"),
@@ -37,4 +38,15 @@ urlpatterns = [
     path('delete_testimonial/<int:test_id>', views.delete_testimonial, name="delete_testimonial"),
     path('testimonials', views.testimonials, name="testimonials"),
     path('testimonials/<int:test_id>', views.testimonial_single, name="testimonials"),
+    path('site_identity', views.site_identity, name="site_identity"),
+    path('edit_identity/<int:site_id>', views.edit_identity, name="edit_identity"),
+    path('create_popup', views.create_popup, name="create_popup"),
+    path('edit_popup/<int:popup_id>', views.edit_popup, name="edit_popup"),
+    path('delete_popup/<int:popup_id>', views.delete_popup, name="delete_popup"),
+    path('inquiry_form', views.inquiry_forms, name="inquiry_form"),
+    path('delete_form/<int:form_id>', views.delete_form, name="delete_form"),
+
+    # client pages
+    path('contact', views.contact, name="contact"),
+    path('admission-from', views.admission_from, name="admission-from"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

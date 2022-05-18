@@ -54,6 +54,13 @@ body{
     padding: 10px;
     border-radius: 10px;
 }
+.active{
+    list-style: none;
+    background: var(--logo-color-second);
+    margin: auto 20px;
+    padding: 10px;
+    border-radius: 10px;
+}
 .sidebar-list ul a{
     text-decoration: none;
     color: var(--white);

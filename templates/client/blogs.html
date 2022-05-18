@@ -2,17 +2,17 @@
 {% load static %}
 
 {% block content %}
-<div class="container-fluid blog d-flex">
+<div class="container-fluid blogs-page">
     {% for b in blogs %}
-    <div class="card d-flex flex-row justify-content-between px-2 py-2 me-3 align-items-center">
-        <div class="card-text">
+    <div class="card px-2 py-2 flex-md-row mb-4 mb-lg-0">
+        <div class="card-text mb-3 mb-lg-0">
             <h3>{{b.blog_title}}</h3>
             <p>{{b.created_at}}</p>
             <p>{{b.short_desc}}</p>
-            <a href="{% url 'blogs' blog_id=b.id %}">Continue Reading</a>
+            <a href="{% url 'blogs' blog_id=b.id %}">View Details</a>
         </div>
         <div class="card-image">
-            <img src="{{b.blog_image.url}}" alt="" srcset="" height="200">
+            <img src="{{b.blog_image.url}}" alt="" srcset="" height="200" width="250">
         </div>
     </div>
     {% endfor %}
