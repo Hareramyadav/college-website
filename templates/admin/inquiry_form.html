@@ -23,6 +23,7 @@
                     <h6>GPA: {{form.full_name}}</h6>
                     <h6>School/College Name: {{form.school_name}}</h6>
                     <h6>School/College Address: {{form.school_address}}</h6>
+                    <a href="{% url 'delete_form' form_id=form.id %}" class="delete-form text-decoration-none text-danger">Delete</a>
                 </div>
             </div>
         </div>

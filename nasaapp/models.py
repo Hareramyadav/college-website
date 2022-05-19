@@ -26,6 +26,8 @@ class Menu(models.Model):
     menu_name = models.CharField(max_length=300, null=True, blank=True)
     menu_link = models.CharField(max_length=500, null=True, blank=True)
     menu_position = models.CharField(max_length=200, null=True, blank=True)
+    menu_type = models.CharField(max_length=200, null=True, blank=True)
+    menu_index = models.CharField(max_length=200, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -38,7 +40,10 @@ class Menu(models.Model):
 class SubMenu(models.Model):
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     sub_menu_name = models.CharField(max_length=300, null=True, blank=True)
-    sub_menu_link = models.CharField(max_length=500, null=True, blank=True)
+    link_name = models.CharField(max_length=200, null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to="static/images")
+    short_content = models.TextField(max_length=5000, null=True, blank=True)
+    long_content = models.TextField(max_length=10000, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

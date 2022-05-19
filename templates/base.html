@@ -24,46 +24,29 @@
         <nav class="navbar navbar-expand-md navbar-light bottom-navbar">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="topHeader">
-                    <ul class="navbar-nav m-auto mb-2 mb-lg-0">
-                        {% for t in top_header %}
+                    <ul class="navbar-nav m-auto mb-2 mb-lg-0 top-header">
+                        <!-- {% for t in top_header %}
                         <li class="nav-item">
-                            <a class="nav-link bottom-nav-link text-capitalize" aria-current="page" href="{{ t.menu_link }}">
+                            <a class="nav-link bottom-nav-link text-capitalize" aria-current="page"
+                                href="{{ t.menu_link }}">
                                 {{ t.menu_name }}</a>
                         </li>
-                        {% endfor %}
+                        {% endfor %} -->
+                        <li class="nav-item"></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <nav class="navbar navbar-expand-lg navbar-light top-navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/"><img src="./static/images/nasa-logo.png" alt=""></a>
+                <a class="navbar-brand" href="/"><img src="{% static 'images/nasa-logo.png' %}" alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topHeader"
                     aria-controls="topHeader" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand logo-second" href="/"><img src="./static/images/nasa-logo-2.jpeg" alt=""></a>
-                <div class="collapse navbar-collapse" id="topHeader">
-                    <ul class="navbar-nav">
-                        {% for b in bottom_header %}
-                        <!-- <li class="nav-item dropdown">
-                            <a class="nav-link bottom-nav-link dropdown-toggle" id="dropdown" data-bs-toggle="dropdown"
-                                aria-expanded="false" href="{{b.menu_link}}">
-                                {{b.menu_name}}
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdown">
-                                {% for sub in sub_menu %}
-                                <li><a class="dropdown-item" href="#">{{ sub.sub_menu_name }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </li> -->
-                        <li class="nav-item">
-                            <a class="nav-link bottom-nav-link text-capitalize" aria-current="page" href="{{ b.menu_link }}">
-                                {{ b.menu_name }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
+                <a class="navbar-brand logo-second" href="/"><img src="{% static 'images/nasa-logo-2.jpeg' %}"
+                        alt=""></a>
+                <div class="collapse navbar-collapse bottom-header" id="topHeader"></div>
                 <a class="navbar-brand logo-second-desktop" href="/"><img src="./static/images/nasa-logo-2.jpeg"
                         alt=""></a>
             </div>

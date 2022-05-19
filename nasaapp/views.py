@@ -1,13 +1,11 @@
 from datetime import date
-from email.policy import HTTP
 import os
-import site
-from tkinter.messagebox import NO
-from turtle import heading, tilt, update
-from xxlimited import foo
 from .models import *
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from rest_framework.status import *
+from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 import math
 from math import ceil
@@ -50,6 +48,8 @@ def index(request):
 
 def header_footer_view(request):
     menu_lists = Menu.objects.all().order_by('created_at')
+    dropdown_menu = [d for d in menu_lists if d.menu_type == 'dropdown']
+    link_menu = [l for l in menu_lists if l.menu_type == 'link']
     sub_menu_lists = SubMenu.objects.all()
     top_header = [m for m in menu_lists if m.menu_position == 'topheader']
     bottom_header = [
@@ -65,10 +65,13 @@ def header_footer_view(request):
     return ({
         'top_header': top_header,
         'bottom_header': bottom_header,
+        'menu_list':menu_lists,
+        'dropdown_menu':dropdown_menu,
+        'link_menu':link_menu,
         'sub_menu': sub_menu_lists,
         'footer_first': footer_first,
         'footer_second': footer_second,
-        'footer_third': footer_third
+        'footer_third': footer_third,
     })
 
 
@@ -180,9 +183,11 @@ def create_menu(request):
         menu_name = request.POST.get('menu_name')
         menu_link = request.POST.get('menu_link')
         menu_position = request.POST.getlist('menu_position')[0]
+        menu_type = request.POST.get('menu_type')
+        menu_index = request.POST.get('menu_index')
 
         data = dict(menu_name=menu_name, menu_link=menu_link,
-                    menu_position=menu_position)
+                    menu_position=menu_position, menu_type=menu_type, menu_index=menu_index)
         Menu.objects.create(**data)
         return HttpResponseRedirect('/create_menu')
     header_footer = header_footer_view(request)
@@ -463,7 +468,53 @@ def delete_form(request, form_id):
     AdmissionForm.objects.filter(id=int(form_id)).delete()
     return redirect('/inquiry_form')
 
-# client pages
+# client pages.....................
+# ......................
+# ..............................
+# ....................
+
+@api_view(['GET'])
+def get_menu(request):
+    menu = Menu.objects.all()
+    # print("Menu list:", menu)
+    data = []
+    
+    for m in menu:
+        data.append(
+            {
+                'id':m.id,
+                'menu_name':m.menu_name,
+                'menu_link':m.menu_link,
+                'menu_position':m.menu_position,
+                'menu_type':m.menu_type,
+                'menu_index':m.menu_index,
+            }
+        )
+    return JsonResponse({'success':True, 'data':data})
+
+
+@api_view(['GET'])
+def get_sub_menu(request):
+    # sub_menu = SubMenu.objects.get(id=int(menu_id))
+    sub_menu = SubMenu.objects.all()
+    data = []
+
+    for sm in sub_menu:
+        image = request.META['HTTP_HOST'] + '/' + \
+            sm.image.url if sm.image else None
+        data.append(
+            {
+                'id':sm.id,
+                'sub_menu_name':sm.sub_menu_name,
+                'link_name':sm.link_name,
+                'short_content':sm.short_content,
+                'long_content':sm.long_content,
+                'image':image,
+                'menu_id':sm.menu.id,
+                'menu_type':sm.menu.menu_type,
+            }
+        )
+    return JsonResponse({'success':True, 'data':data})
 
 def sidebar(request):
     news = News.objects.all().order_by('created_at')[:2]
@@ -588,3 +639,14 @@ def admission_from(request):
         return redirect('/')
     header_footer = header_footer_view(request)
     return render(request, 'client/admission_from.html', header_footer)
+
+def sub_menu(request, sub_menu_id):
+    sub_menu = SubMenu.objects.get(id=int(sub_menu_id))
+    print("sub menu link", sub_menu.link_name)
+    print("sub menu desc", sub_menu.short_content)
+    data = {
+        'sub_menu_data':sub_menu
+    }
+    header_footer = header_footer_view(request)
+    data.update(header_footer)
+    return render(request, 'client/sub_menu.html', data)
