@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'nasaapp',
-    'rest_framework'
+    'rest_framework',
+    'ckeditor',
+    'django.forms',
 ]
 
 MIDDLEWARE = [

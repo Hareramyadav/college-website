@@ -15,6 +15,7 @@ from math import ceil
 
 def index(request):
     banner = Banner.objects.all().order_by('created_at')
+    menu = Menu.objects.all()
     about = AboutSection.objects.all().order_by('created_at')[:1]
     news = News.objects.all().order_by('created_at')
     messages = Message.objects.all().order_by('created_at')[:4]
@@ -28,9 +29,12 @@ def index(request):
     testimonial_no = len(testimonial)
     testimonial_slide = testimonial_no // 3 + \
         ceil((testimonial_no / 3) - (testimonial_no // 3))
+    testimonial_mobile_silde = testimonial_no // 1 + \
+        ceil((testimonial_no / 1) - (testimonial_no // 1))
     header_footer = header_footer_view(request)
     data = {
         'banner': banner,
+        'menu':menu,
         'about': about,
         'main_news': main_news,
         'side_news': side_news,
@@ -41,12 +45,26 @@ def index(request):
         'testimonial': testimonial,
         'testimonial_slide': testimonial_slide,
         'range': range(testimonial_slide),
+        'testimonial_mobile_silde':testimonial_mobile_silde,
+        'range_mobile':range(testimonial_mobile_silde),
     }
     data.update(header_footer)
     return render(request, 'index.html', data)
 
 
+def menu_info_content(request, menu_id):
+    menu = Menu.objects.get(id=int(menu_id))
+    data = {
+        'menu_data':menu
+    }
+    header_footer = header_footer_view(request)
+    sidebars = sidebar(request)
+    data.update(header_footer)
+    data.update(sidebars)
+    return render(request, 'client/info.html', data)
+
 def header_footer_view(request):
+    site_identity = SiteIdentity.objects.all().order_by('created_at')
     menu_lists = Menu.objects.all().order_by('created_at')
     dropdown_menu = [d for d in menu_lists if d.menu_type == 'dropdown']
     link_menu = [l for l in menu_lists if l.menu_type == 'link']
@@ -72,6 +90,7 @@ def header_footer_view(request):
         'footer_first': footer_first,
         'footer_second': footer_second,
         'footer_third': footer_third,
+        'site_identity':site_identity,
     })
 
 
@@ -180,7 +199,7 @@ def delete_footer(request, footer_id):
 
 def create_menu(request):
     if request.method == 'POST':
-        menu_name = request.POST.get('menu_name')
+        menu_name = request.POST.get('menu_name').lower()
         menu_link = request.POST.get('menu_link')
         menu_position = request.POST.getlist('menu_position')[0]
         menu_type = request.POST.get('menu_type')
@@ -642,8 +661,8 @@ def admission_from(request):
 
 def sub_menu(request, sub_menu_id):
     sub_menu = SubMenu.objects.get(id=int(sub_menu_id))
-    print("sub menu link", sub_menu.link_name)
-    print("sub menu desc", sub_menu.short_content)
+    # print("sub menu link", sub_menu.link_name)
+    # print("sub menu desc", sub_menu.short_content)
     data = {
         'sub_menu_data':sub_menu
     }

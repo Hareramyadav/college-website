@@ -24,171 +24,54 @@ body {
 .button {
     background-color: var(--logo-color-fourth) !important;
     color: var(--white) !important;
-    font-size: 20px !important;
-    font-weight: bold !important;
+    font-size: 14px !important;
 }
 
 .button:focus {
     box-shadow: none !important;
 }
 
-/* Contact section........... */
+/* All sections.........................
+....................................
+..............................
+....................
+*/
 
-
-/* Blog Section................ */
-.blogs-page {
-    /* display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px 20px; */
-}
-
-/* Single Blog Section................ */
-
-/* Gallery Section.............. */
-
-/* Admission / Inquiry form & display section............ */
-.admission-form{
-    background-image: linear-gradient(45deg, var(--logo-color-third), var(--black), var(--logo-color-third));
-}
-.admission-form-display {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px 20px;
-}
-
-.navbar-collapse {
-    flex-grow: 0 !important;
-}
-
-.bottom-navbar {
-    background: var(--logo-color-third);
-}
-
-.bottom-navbar-mobile {
-    display: none !important;
-}
-
-.top-navbar .nav-item .nav-link {
-    color: var(--black) !important;
-}
-
-.nav-item .bottom-nav-link {
-    color: #ffffff !important;
-}
-
-.botton-navbar .nav-item .nav-link {
-    padding-left: 15px !important;
-    padding-right: 15px !important;
-}
-
-.nav-item .nav-link:hover {
-    background-color: rgba(0, 0, 0, 0.2) !important;
-    border-bottom-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
+/* Header section................. */
 .navbar-brand img {
-    width: 100px;
-    height: 70px;
+    width: 80px;
+    height: 50px;
 }
 
-.logo-second {
+.top-navbar {
     display: none;
 }
 
-.top-navbar .dropdown .dropdown-menu li {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3) !important;
+.navbar.top-navbar-mobile,
+.navbar.top-navbar {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
 }
 
-.top-navbar .dropdown .dropdown-menu li:last-child {
-    border-bottom: 0 !important;
+.logo-second-desktop {
+    display: none;
 }
 
-.top-navbar .dropdown .dropdown-menu .dropdown-item:hover {
-    background: none !important;
-    color: var(--dark) !important;
+.top-header li a {
+    color: var(--black) !important;
 }
 
-@media screen and (max-width:768px) {
-    .bottom-navbar.navbar {
-        padding-top: 0px !important;
-        padding-bottom: 0px !important;
-    }
-
-    .bottom-navbar {
-        background: transparent;
-    }
-
-    .nav-item .nav-link {
-        color: var(--dark) !important;
-    }
-
-    .bottom-navbar {
-        display: none !important;
-    }
-
-    .bottom-navbar-mobile {
-        display: block !important;
-    }
-
-    .logo-second {
-        display: block;
-    }
-
-    .logo-second-desktop {
-        display: none;
-    }
+.bottom-header .nav-item button {
+    background: none;
+    border: 0;
+    color: var(--black);
 }
 
-.footer {
-    background: var(--black);
+.top-navbar-mobile {
+    padding-left: 1rem !important;
 }
 
-.footer-heading {
-    color: var(--light);
-    display: flex;
-}
-
-.footer-heading hr {
-    height: 2px !important;
-    width: 100px;
-    background-color: var(--light) !important;
-    opacity: 0.5 !important;
-    margin-left: 10px;
-}
-
-.link-details ul {
-    padding-left: 0px !important;
-}
-
-@media screen and (max-width:768px) {
-    .footer-heading hr {
-        display: none;
-    }
-}
-
-@media screen and (max-width:426px) {
-    .footer .d-flex {
-        flex-direction: column;
-        margin-bottom: 20px;
-    }
-
-    .footer-first,
-    .footer-second,
-    .footer-third {
-        width: 100% !important;
-    }
-}
-
-.college-name {
-    color: var(--white);
-}
-
-.icon {
-    color: var(--light);
-}
-
-/* Carousel Section */
+/* Carousel Section........................... */
 .carousel-indicators [data-bs-target] {
     width: 10px !important;
 }
@@ -201,11 +84,22 @@ body {
     opacity: 0.4;
 }
 
-.nasa-info {
-    margin-top: 50px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    background-color: var(--light);
+.main-banner .carousel-control-next,
+.main-banner .carousel-control-prev {
+    height: 20%;
+    top: 15%;
+}
+
+.main-banner .carousel-control-next-icon,
+.main-banner .carousel-control-prev-icon {
+    width: 2rem;
+    height: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Nasa info section...................... */
+.nasa-info a {
+    text-decoration: none;
 }
 
 .nasa-info h3 {
@@ -213,6 +107,12 @@ body {
     font-weight: bold;
     text-align: center;
     font-family: 'Poppins', sans-serif;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+.nasa-info div {
+    color: var(--black);
 }
 
 .nasa-info-heading {
@@ -224,64 +124,14 @@ body {
 }
 
 .nasa-info .card {
-    min-height: 250px;
-    min-width: 200px;
+    height: 250px;
+    width: 100%;
     text-align: center;
     margin-left: 10px;
     margin-right: 10px;
-    padding-top: 40px;
+    padding-top: 20px;
+    overflow: hidden;
     box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
-}
-
-.main-slider-content.carousel-caption {
-    top: 45%;
-}
-
-@media screen and (max-width:768px) {
-    .main-slider-content.carousel-caption {
-        top: 40%;
-    }
-
-    .main-slider-content h5 {
-        font-size: 18px;
-    }
-}
-
-@media screen and (max-width:426px) {
-    .main-slider-content.carousel-caption {
-        top: 30%;
-    }
-
-    .main-slider-content h5 {
-        font-size: 14px;
-    }
-
-    .main-slider-content .button {
-        font-size: 14px !important;
-    }
-}
-
-.nasa-info .card:hover {
-    transform: translateY(20px);
-    transition: transform .3s ease-in-out;
-    border-right: 5px solid var(--logo-color-third);
-    border-left: 5px solid var(--logo-color-third);
-}
-
-@media screen and (max-width:768px) {
-    .nasa-info h3 {
-        font-size: 20px;
-    }
-}
-
-@media screen and (max-width:426px) {
-    .nasa-info {
-        flex-direction: column !important;
-    }
-
-    .nasa-info .card {
-        margin-bottom: 20px;
-    }
 }
 
 /* About Section........... */
@@ -290,6 +140,8 @@ body {
     opacity: 0.7;
 }
 
+.info-page h3,
+.sub-menu-page h3,
 .admission-form h3,
 .contactus-page h3,
 .aboutus-page h3 {
@@ -297,121 +149,58 @@ body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bold;
     text-decoration: underline;
+    text-transform: capitalize;
 }
 
-.about-nasa {
-    margin-top: 50px;
+/* Footer Section...................... */
+.footer {
+    background: var(--black);
 }
 
-.about-nasa-heading {
-    color: var(--logo-color-third);
-    font-weight: bold;
-    font-size: 30px;
-    font-family: 'Poppins', sans-serif;
+.footer hr {
+    opacity: 0.4;
+    margin: 0px auto !important;
+    background-color: var(--white) !important;
 }
 
-.nasa-news {
-    margin-top: 50px;
-    background-color: var(--light);
+/* Testimonial section................... */
+.testimonial-desktop {
+    display: none;
 }
 
-.nasa-news .main-news img {
-    width: 100%;
+.student-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
 }
 
-.nasa-news .side-news img {
-    width: 100%;
+.student-image img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
 }
 
-
-@media screen and (max-width:768px) {
-    .about-image img {
-        max-width: 300px;
-        max-height: 400px;
-    }
-
-    .about-nasa-heading {
-        font-size: 20px;
-    }
-
-    .about-text {
-        max-height: 350px;
-        overflow: hidden;
-    }
-
-    .about-text .button {
-        font-size: 18px !important;
-    }
-
-    /* nasa news section.............. */
-    .main-news img {
-        max-height: 400px;
-    }
-
-    .side-news img {
-        max-height: 90px;
-    }
+.testimonial-desktop .carousel-indicators [data-bs-target] {
+    background-color: var(--black) !important;
 }
 
-@media screen and (max-width:426px) {
-    .about-nasa {
-        flex-direction: column !important;
-    }
-
-    .about-image img {
-        max-width: 100%;
-    }
-
-    .about-nasa-heading {
-        font-size: 20px;
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
-
-    .about-content {
-        width: 100% !important;
-    }
-
-    .about-content.pe-5 {
-        padding-right: 0 !important;
-    }
-
-    /* Nasa news section */
-    .nasa-news-content {
-        flex-direction: column !important;
-    }
-
-    .main-news {
-        width: 100% !important;
-    }
-
-    .main-news.pe-5 {
-        padding-right: 0 !important;
-    }
-
-    .main-news img {
-        max-height: 200px;
-    }
-
-    .main-news-heading a {
-        font-size: 20px;
-    }
-
-    .side-news {
-        width: 100% !important;
-        margin-top: 20px;
-    }
-
-    .side-news.ps-5 {
-        padding-left: 0 !important;
-    }
+.testimonial-desktop .carousel-item-next,
+.testimonial-desktop .carousel-item-prev,
+.testimonial-desktop .carousel-item.active {
+    display: flex !important;
 }
 
-.messages {
-    /* background-color: var(--light); */
-    padding-top: 30px;
+.testimonial-desktop .carousel-control-next,
+.testimonial-desktop .carousel-control-prev {
+    width: 50px !important;
 }
 
+.testimonial-desktop .carousel-indicators {
+    bottom: -50px;
+}
+
+/* Message section.................... */
 .message-provider {
     position: absolute;
     background-color: var(--white);
@@ -427,43 +216,6 @@ body {
 .message-provider p {
     margin-bottom: 0 !important;
 }
-
-.main-message-content .card {
-    width: 250px;
-    height: 300px;
-    box-shadow: 3px 3px rgba(0, 0, 0, 0.2);
-}
-
-.main-message-content img {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-@media screen and (max-width:768px) {
-    .message-provider h6 {
-        font-size: 12px !important;
-    }
-
-    .message-provider p {
-        font-size: 10px;
-    }
-}
-
-@media screen and (max-width:426px) {
-    .main-message-content {
-        flex-direction: column !important;
-    }
-
-    .main-message-content .card {
-        margin-top: 20px !important;
-    }
-
-    .main-message-content .card.mx-5 {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-    }
-}
-
 .modal .modal-header a {
     text-decoration: none;
     font-size: 30px;
@@ -488,112 +240,24 @@ body {
     font-weight: bold;
 }
 
-.nasa-gallery {
-    margin-top: 50px;
-    background-color: var(--light);
-    padding-top: 30px;
-    padding-bottom: 50px;
+/* Admission / Inquiry form & display section............ */
+.admission-form {
+    background-image: linear-gradient(45deg, var(--logo-color-third), var(--black), var(--logo-color-third));
 }
 
-.nasa-gallery h3 {
-    color: var(--logo-color-third);
-    margin-left: 15px;
-}
-
-.nasa-gallery .card {
-    max-width: 600px;
-    min-height: 300px;
-    box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
-    ;
-}
-
-@media screen and (max-width:768px) {
-    .video-gallery iframe {
-        max-width: 100%;
-    }
-}
-
-@media screen and (max-width:426px) {
-    .nasa-gallery-content {
-        flex-direction: column !important;
-    }
-
-    .nasa-gallery-content .card {
-        margin-top: 20px;
-    }
-
-    .image-gallery {
-        min-height: 200px !important;
-    }
-
-    .nasa-gallery-content .card.mx-3 {
-        margin-right: 0 !important;
-        margin-left: 0 !important;
-    }
-}
-
-.color {
-    background-color: #FEF4E2;
-    height: 200px;
-    margin-top: -100px;
-}
-
-.about-text {
-    text-align: justify;
-}
-
-.testimonial {
-    padding-top: 30px;
-}
-
-.testimonial-mobile {
-    display: none;
-}
-
-.testimonial .carousel-indicators [data-bs-target] {
-    background-color: var(--black) !important;
-}
-
-.testimonial .carousel-item-next,
-.testimonial .carousel-item-prev,
-.testimonial .carousel-item.active {
-    display: flex !important;
-}
-
-.testimonial .carousel-control-next,
-.testimonial .carousel-control-prev {
-    width: 50px !important;
-}
-
-.testimonial .carousel-indicators {
-    bottom: -50px;
-}
-
-@media screen and (max-width:426px) {
-    .testimonial {
-        display: none;
-    }
-
-    .testimonial-mobile {
-        display: block;
-    }
-}
-
-.student-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 20px;
-}
-
-.student-image img {
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
+.admission-form-display {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
 }
 
 
-/* Media Queries.................. */
+/* Media Queries............................
+....................................
+...........................................
+........................ 
+*/
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
 
@@ -607,10 +271,114 @@ body {
 }
 
 /* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {}
+@media (min-width: 768px) {
+
+    /* header section.............. */
+    .top-navbar {
+        display: block;
+        background-color: var(--logo-color-third);
+    }
+
+    .nav-link {
+        padding-left: 0px !important;
+        padding-right: 10px !important;
+    }
+
+    .top-navbar ul li a {
+        color: var(--white) !important;
+    }
+
+    .top-navbar-mobile {
+        display: none;
+    }
+
+    /* carousel section.................. */
+    .main-slider-content.carousel-caption {
+        top: 40%;
+    }
+
+    .main-banner .carousel-control-next,
+    .main-banner .carousel-control-prev {
+        top: 40%;
+    }
+
+    /* nasa info section..................... */
+    .nasa-info-content {
+        height: 200px;
+        overflow: hidden;
+    }
+
+    /* About section..................... */
+    .about-nasa .about-image img {
+        height: 400px;
+    }
+
+    .button {
+        font-size: 18px !important;
+    }
+
+    /* nasa news section................. */
+    .main-news img {
+        height: 350px;
+    }
+
+    .side-news img {
+        height: 150px;
+    }
+
+    /* message section.................. */
+    .main-message-content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 20px;
+    }
+
+    /* Blog section................. */
+    .blog-content {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 10px 20px;
+    }
+
+    /* footer section................... */
+    .footer .container-fluid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 20px;
+    }
+}
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+
+    /* header section.............. */
+    .logo-second-desktop {
+        display: block;
+    }
+
+    .logo-second-mobile {
+        display: none;
+    }
+
+    .navbar-expand-lg .bottom-header {
+        display: grid !important;
+        grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+        gap: 0px 5px !important;
+        justify-content: center;
+    }
+
+    /* carousel section.............. */
+    .main-banner .carousel-control-next,
+    .main-banner .carousel-control-prev {
+        top: 30%;
+    }
+
+    .main-banner .carousel-control-next-icon,
+    .main-banner .carousel-control-prev-icon {
+        width: 4rem;
+        height: 4rem;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
 
     /* Contact section........... */
     .contact-map iframe {
@@ -623,10 +391,50 @@ body {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px 20px;
     }
+
+    /* message section.................. */
+    .main-message-content {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        gap: 10px 20px;
+        justify-content: center;
+    }
+
+    /* testimonial section.................. */
+    .testimonial-mobile {
+        display: none;
+    }
+
+    .testimonial-desktop {
+        display: block;
+    }
+
+    /* nasa info section....................... */
+    .nasa-info .card {
+        height: 200px;
+    }
+
+    /* About section..................... */
+    .button {
+        font-size: 25px !important;
+    }
+
+    /* footer section................... */
+    .footer .container-fluid {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        column-gap: 20px;
+    }
 }
 
 /* X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+    /* carousel section.............. */
+    .main-banner .carousel-control-next,
+    .main-banner .carousel-control-prev {
+        top: 50%;
+    }
+}
 
 /* XX-Large devices (larger desktops, 1400px and up) */
 @media (min-width: 1400px) {

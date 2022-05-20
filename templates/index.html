@@ -3,7 +3,7 @@
 
 {% block content %}
 <!-- Banner section........... -->
-<div class="">
+<div class="main-banner">
     <div id="carousel" class="carousel slide" data-ride="carousel">
         <!-- <ol class="carousel-indicators">
             <li data-bs-target="#carousel" data-bs-slide-to="0" class="active"></li>
@@ -12,14 +12,6 @@
             {% endfor %}
         </ol> -->
         <div class="carousel-inner">
-            <!-- <div class="carousel-item active">
-                <div class="overlay"></div>
-                <img class="d-block w-100" src="../static/images/slider-1.png" alt="First slide">
-                <div class="main-slider-content carousel-caption d-md-block">
-                    <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </h5>
-                    <button type="button" class="btn button">Read More</button>
-                </div>
-            </div> -->
             {% for slider in banner %}
             {% if forloop.counter == 1 %}
             <div class="carousel-item active">
@@ -37,37 +29,81 @@
                 {% endfor %}
             </div>
         </div>
-        <!-- <a class="carousel-control-prev" href="#carousel" role="button" data-bs-slide="prev">
+        <a class="carousel-control-prev" href="#carousel" role="button" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         </a>
         <a class="carousel-control-next" href="#carousel" role="button" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </a> -->
+        </a>
+    </div>
+</div>
+
+<!-- Nasa Info section............................... -->
+<div class="container-fluid nasa-info mt-3 py-5 bg-light">
+    <div class="container d-md-flex">
+        {% for menu_content in menu %}
+        {% if menu_content.menu_name == "school" %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <a href="{% url 'menu_info_content' menu_id=menu_content.id %}">
+                    <h3 class="">{{menu_content.menu_name}}</h3>
+                    <div class="nasa-info-content">{{menu_content.short_content}}</div>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% for menu_content in menu %}
+        {% if menu_content.menu_name == "bachelor" %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <a href="{% url 'menu_info_content' menu_id=menu_content.id %}">
+                    <h3 class="">{{menu_content.menu_name}}</h3>
+                    <div>{{menu_content.short_content}}</div>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% for menu_content in menu %}
+        {% if menu_content.menu_name == "higher secondary" %}
+        <div class="card">
+            <div class="card-body">
+                <a href="{% url 'menu_info_content' menu_id=menu_content.id %}">
+                    <h3 class="">{{menu_content.menu_name}}</h3>
+                    <div>{{menu_content.short_content}}</div>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 </div>
 
 <!-- About section........... -->
-<div class="about-nasa d-flex justify-content-between container">
+<div class="about-nasa mt-3">
     {% for a in about %}
-    <div class="about-image pe-5">
-        <img src="{{a.about_image.url}}" alt="" srcset="" height="400" width="500">
-    </div>
-    <div class="about-content">
-        <h3 class="about-nasa-heading">Why Nasa International College?</h3>
-        <p class="about-text">{{a.short_desc}}</p>
-        <a href="{{a.about_link}}" class="btn button text-decoration-none">Read More</a>
+    <div class="container d-lg-flex">
+        <div class="about-image mb-3 mb-lg-0 col-lg-6 pe-lg-4">
+            <img src="{{a.about_image.url}}" alt="" srcset="" height="250" width="100%">
+        </div>
+        <div class="about-content col-lg-6">
+            <h3 class="about-nasa-heading">Why Nasa International College?</h3>
+            <p class="about-text">{{a.short_desc}}</p>
+            <a href="{{a.about_link}}" class="btn button text-decoration-none">Read More</a>
+        </div>
     </div>
     {% endfor %}
 </div>
 
 <!-- News section.................. -->
-<div class="nasa-news container-fluid">
-    <h3 class="nasa-info-heading container pt-3">News/Notices</h3>
-    <div class="d-flex mt-3 container nasa-news-content">
-        <div class="main-news col-8 pe-5 pe-md-2">
+<div class="nasa-news bg-light mt-3 py-3">
+    <h3 class="nasa-info-heading container py-3">News/Notices</h3>
+    <div class="container nasa-news-content d-md-flex">
+        <div class="main-news col-md-7">
             {% for m in main_news %}
             <a href="{{m.news_link}}">
-                <img src="{{m.news_image.url}}" alt="" srcset="" height="500">
+                <img src="{{m.news_image.url}}" alt="" srcset="" width="100%" height="200">
             </a>
             <h3 class="mt-3 main-news-heading">
                 <a href="{% url 'news' news_id=m.id %}" class="text-decoration-none text-dark">{{m.title}}</a>
@@ -75,15 +111,15 @@
             <h6 class="mt-2">{{m.created_at}}</h6>
             {% endfor %}
         </div>
-        <div class="side-news col-4 ps-5">
+        <div class="side-news col-md-5 ps-md-3">
             {% for s in side_news %}
-            <div class="news-one">
+            <div class="news-one mt-4 mt-md-0 mb-md-3">
                 <a href="{{s.news_link}}">
-                    <img src="{{s.news_image.url}}" alt="" srcset="" height="120">
+                    <img src="{{s.news_image.url}}" alt="" srcset="" width="100%" height="200">
                 </a>
-                <h6 class="mt-2">
+                <h5 class="mt-2">
                     <a href="{% url 'news' news_id=s.id %}" class="text-decoration-none text-dark">{{s.title}}</a>
-                </h6>
+                </h5>
                 <h6 class="mt-2">{{s.created_at}}</h6>
             </div>
             {% endfor %}
@@ -92,16 +128,16 @@
 </div>
 
 <!-- Message Section............ -->
-<div class="messages container-fluid">
+<div class="messages mt-3 container">
     <h3 class="nasa-info-heading container">Message</h3>
-    <div class="main-message-content d-flex container justify-content-center align-items-center">
+    <div class="main-message-content">
         {% for m in messages %}
-        <div class="card mx-5">
-            <img src="{{m.image.url}}" class="message-image" alt="" srcset="" height="300">
+        <div class="card mb-3">
+            <img src="{{m.image.url}}" class="message-image" alt="" srcset="" width="100%" height="400">
             <div class="card-body message-provider text-center">
                 <a type="button" class="text-decoration-none text-dark" data-bs-toggle="modal"
                     data-bs-target="#modelone">
-                    <h6 class="">{{m.name}}</h6>
+                    <h5 class="">{{m.name}}</h5>
                     <p>{{m.position}}</p>
                 </a>
             </div>
@@ -131,10 +167,10 @@
 </div>
 
 <!-- gallery section........... -->
-<div class="nasa-gallery container-fluid">
+<div class="nasa-gallery bg-light mt-3 py-3">
     <h3 class="mb-3 nasa-info-heading">Nasa Gallery</h3>
-    <div class="d-flex justify-content-between container nasa-gallery-content">
-        <div class="card mx-3 image-gallery">
+    <div class="container nasa-gallery-content d-lg-flex">
+        <div class="card image-gallery mb-3 mb-lg-0 col-lg-6 me-lg-2">
             <a href="#" class="text-decoration-none ms-auto p-2">View all<i class="fas fa-angle-right ms-2"></i></a>
             <div class="card-body">
                 <div id="imagecarousel" class="carousel slide" data-bs-ride="imagecarousel">
@@ -150,7 +186,7 @@
                         </div>
                         {% for i in image %}
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="{{i.media.url}}" alt="slide">
+                            <img class="d-block" src="{{i.media.url}}" alt="slide" width="100%" height="300">
                         </div>
                         {% endfor %}
                     </div>
@@ -163,7 +199,7 @@
                 </div>
             </div>
         </div>
-        <div class="card video-gallery">
+        <div class="card video-gallery col-lg-6 ms-lg-2">
             <a href="#" class="text-decoration-none ms-auto p-2">Watch More<i class="fas fa-angle-right ms-2"></i></a>
             <div class="card-body">
                 <div id="videocarousel" class="carousel slide" data-bs-ride="videocarousel">
@@ -175,12 +211,12 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <iframe width="600" height="265" src="https://www.youtube.com/embed/4w1SOYYFreU"
+                            <iframe width="100%" height="265" src="https://www.youtube.com/embed/4w1SOYYFreU"
                                 allowfullscreen></iframe>
                         </div>
                         {% for v in video %}
                         <div class="carousel-item">
-                            <iframe width="600" height="265" src="{{v.video_url}}" allowfullscreen></iframe>
+                            <iframe width="100%" height="265" src="{{v.video_url}}" allowfullscreen></iframe>
                         </div>
                         {% endfor %}
                     </div>
@@ -197,19 +233,21 @@
 </div>
 
 <!-- Blog section................ -->
-<div class="container-fluid blog mt-5">
-    <a href="{% url 'blogs' %}" class="text-decoration-none ms-auto">Read all<i class="fas fa-angle-right ms-2"></i></a>
-    <div class="d-flex">
+<div class="container blog mt-5">
+    <h3 class="nasa-info-heading container mb-1">Blogs</h3>
+    <a href="{% url 'blogs' %}" class="text-decoration-none d-flex justify-content-end align-items-center mb-1">Read
+        all<i class="fas fa-angle-right ms-2"></i></a>
+    <div class="blog-content">
         {% for b in blog %}
-        <div class="card d-flex flex-row justify-content-between px-2 py-2 me-3 align-items-center">
-            <div class="card-text">
+        <div class="card mb-3 py-3 px-2 mb-md-0 flex-lg-row mb-lg-0">
+            <div class="card-text col-lg-7">
                 <h3>{{b.blog_title}}</h3>
                 <p>{{b.created_at}}</p>
-                <p>{{b.short_desc}}</p>
+                <p class="my-0">{{b.short_desc}}</p>
                 <a href="{% url 'blogs' blog_id=b.id %}">Continue Reading</a>
             </div>
-            <div class="card-image">
-                <img src="{{b.blog_image.url}}" alt="" srcset="" height="200">
+            <div class="card-image mt-3 col-lg-5 mt-lg-0">
+                <img src="{{b.blog_image.url}}" alt="" srcset="" width="100%" height="200">
             </div>
         </div>
         {% endfor %}
@@ -217,9 +255,55 @@
 </div>
 
 <!-- Testimonial section................. -->
-<div class="testimonial">
-    <h3 class="nasa-info-heading container mb-3">Testimonial</h3>
-    <a href="{% url 'testimonials' %}" class="text-decoration-none container m-auto">View all<i class="fas fa-angle-right ms-2"></i></a>
+<div class="testimonial-mobile bg-light mt-3 py-3">
+    <h3 class="nasa-info-heading container mb-1">Testimonial</h3>
+    <a href="{% url 'testimonials' %}"
+        class="text-decoration-none container d-flex justify-content-end align-items-center mb-1">View all<i
+            class="fas fa-angle-right"></i></a>
+    <div id="testimonialMobile" class="carousel slide" data-bs-ride="testimonialMobile">
+        <!-- <ol class="carousel-indicators">
+            {% for t in range_mobile %}
+            <li data-bs-target="#testimonial" data-bs-slide-to="{{t}}" class="active"></li>
+            {% endfor %}
+        </ol> -->
+        <div class="carousel-inner container">
+            <div class="carousel-item active">
+                {% for t in testimonial|slice:":" %}
+                <div class="card">
+                    <div class="card-body testimonial-container">
+                        <div class="student-detail">
+                            <div class="student-image d-flex flex-column">
+                                <img class="" src="{{t.student_image.url}}" alt="First slide">
+                                <h5 class="student-name">{{t.student_name}}</h5>
+                            </div>
+                            <p class="text-center">{{t.short_message}} <a class="text-decoration-none"
+                                    href="{% url 'testimonials' test_id=t.id %}">Read
+                                    More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:1 and forloop.counter > 0 and not forloop.last %}
+            </div>
+            <div class="carousel-item">
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#testimonialMobile" role="button" data-bs-slide="prev">
+            <span><i class="fas fa-angle-left text-dark fs-1"></i></span>
+        </a>
+        <a class="carousel-control-next" href="#testimonialMobile" role="button" data-bs-slide="next">
+            <span><i class="fas fa-angle-right text-dark fs-1"></i></span>
+        </a>
+    </div>
+</div>
+
+<div class="testimonial-desktop bg-light mt-3 py-3">
+    <h3 class="nasa-info-heading container mb-1">Testimonial</h3>
+    <a href="{% url 'testimonials' %}"
+        class="text-decoration-none container d-flex justify-content-end align-items-center mb-1">View all<i
+            class="fas fa-angle-right"></i></a>
     <div id="testimonial" class="carousel slide" data-bs-ride="testimonial">
         <ol class="carousel-indicators">
             {% for t in range %}
@@ -229,14 +313,15 @@
         <div class="carousel-inner container">
             <div class="carousel-item active">
                 {% for t in testimonial|slice:":" %}
-                <div class="card mx-2">
-                    <div class="card-body d-flex justify-content-center align-items-center testimonial-container">
+                <div class="card me-2">
+                    <div class="card-body testimonial-container">
                         <div class="student-detail">
                             <div class="student-image d-flex flex-column">
                                 <img class="" src="{{t.student_image.url}}" alt="First slide">
                                 <h5 class="student-name">{{t.student_name}}</h5>
                             </div>
-                            <p class="text-center">{{t.short_message}} <a class="text-decoration-none" href="{% url 'testimonials' test_id=t.id %}">Read
+                            <p class="text-center">{{t.short_message}} <a class="text-decoration-none"
+                                    href="{% url 'testimonials' test_id=t.id %}">Read
                                     More</a>
                             </p>
                         </div>

@@ -6,6 +6,7 @@ from statistics import mode
 from urllib import request
 from django.db import models
 from django.core.exceptions import ValidationError
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -28,6 +29,9 @@ class Menu(models.Model):
     menu_position = models.CharField(max_length=200, null=True, blank=True)
     menu_type = models.CharField(max_length=200, null=True, blank=True)
     menu_index = models.CharField(max_length=200, null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to="static/images")
+    short_content = models.TextField(max_length=5000, null=True, blank=True)
+    long_content = models.TextField(max_length=10000, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -71,8 +75,8 @@ class Banner(models.Model):
 class AboutSection(models.Model):
     about_image = models.ImageField(
         blank=True, null=True, upload_to="static/images")
-    short_desc = models.TextField(max_length=3000, blank=True, null=True)
-    long_desc = models.TextField(max_length=5000, blank=True, null=True)
+    short_desc = RichTextField(blank=True, null=True)
+    long_desc = RichTextField(blank=True, null=True)
     about_link = models.CharField(max_length=500, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
