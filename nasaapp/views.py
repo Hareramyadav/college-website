@@ -1,5 +1,8 @@
 from datetime import date
 import os
+from tkinter.messagebox import NO
+
+from numpy import imag
 from .models import *
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -204,9 +207,13 @@ def create_menu(request):
         menu_position = request.POST.getlist('menu_position')[0]
         menu_type = request.POST.get('menu_type')
         menu_index = request.POST.get('menu_index')
+        image = request.FILES.get('image')
+        short_content = request.POST.get('short_content')
+        long_content = request.POST.get('long_content')
 
         data = dict(menu_name=menu_name, menu_link=menu_link,
-                    menu_position=menu_position, menu_type=menu_type, menu_index=menu_index)
+                    menu_position=menu_position, menu_type=menu_type, 
+                    menu_index=menu_index, image=image, short_content=short_content, long_content=long_content)
         Menu.objects.create(**data)
         return HttpResponseRedirect('/create_menu')
     header_footer = header_footer_view(request)
@@ -222,9 +229,17 @@ def edit_menu(request, menu_id):
         menu_name = request.POST.get('menu_name')
         menu_link = request.POST.get('menu_link')
         menu_position = request.POST.getlist('menu_position')
+        image = request.FILES.get('image', None)
+        short_content = request.POST.get('short_content')
+        long_content = request.POST.get('long_content')
 
         menu.menu_name = menu_name
         menu.menu_link = menu_link
+        menu.short_content = short_content
+        menu.long_content = long_content
+
+        if image is not None:
+            menu.image =image
 
         menu.save()
         return redirect('/create_menu')
@@ -235,6 +250,51 @@ def delete_menu(request, menu_id):
     Menu.objects.filter(id=int(menu_id)).delete()
     return redirect('/create_menu')
 
+def create_sub_menu(request):
+    menu_names = Menu.objects.all().values('menu_name').distinct()
+    if request.method == 'POST':
+        sub_menu_name = request.POST.get('sub_menu_name').lower()
+        link_name = request.POST.get('menu_link')
+        image = request.FILES.get('image')
+        short_content = request.POST.get('short_content')
+        long_content = request.POST.get('long_content')
+        menu_value = request.POST.getlist('menu')[0]
+        menu_id = Menu.objects.filter(menu_name=menu_value)[0].id
+
+        data = dict(sub_menu_name=sub_menu_name,link_name=link_name,
+                    image=image, short_content=short_content, long_content=long_content, menu_id=int(menu_id))
+        SubMenu.objects.create(**data)
+        return redirect('/create_sub_menu')
+    header_footer = header_footer_view(request)
+    sub_menu = SubMenu.objects.all().order_by('created_at')
+    data = {'sub_menu': sub_menu, 'menu_names':menu_names}
+    data.update(header_footer)
+    return render(request, 'admin/create_sub_menu.html', data)
+
+def edit_sub_menu(request, sub_menu_id):
+    sub_menu = SubMenu.objects.get(id=int(sub_menu_id))
+    if request.method == 'POST':
+        sub_menu_name = request.POST.get('sub_menu_name').lower()
+        link_name = request.POST.get('menu_link')
+        image = request.FILES.getlist('image', None)
+        short_content = request.POST.get('short_content')
+        long_content = request.POST.get('long_content')
+
+        sub_menu.sub_menu_name = sub_menu_name
+        sub_menu.link_name = link_name
+        sub_menu.short_content = short_content
+        sub_menu.long_content = long_content
+
+        if image is not None:
+            sub_menu.image = image
+        
+        sub_menu.save()
+        return redirect('/create_sub_menu')
+    return render(request, 'admin/edit_sub_menu.html', {'sub_menu_id':sub_menu_id, 'sub_menu':sub_menu})
+
+def delete_sub_menu(request, sub_menu_id):
+    SubMenu.objects.filter(id=int(sub_menu_id)).delete()
+    return redirect('/create_sub_menu')
 
 def create_banner(request):
     if request.method == 'POST':

@@ -59,6 +59,11 @@ $(document).ready(function () {
             return false;
         }
     });
+    $('.delete_sub_menu').click(function () {
+        if (!confirm("Are you sure you want to delete?")) {
+            return false;
+        }
+    });
 
     // API call for Menu..................................
     // ......................................
@@ -100,4 +105,15 @@ $(document).ready(function () {
         console.log("new menu", mainMenu);
         console.log("new sub menu", subMenuList);
     });
+
+    // Input based on selected value....................
+    var linkContent = $('.link-content').hide();
+    $('#menu-type').change(function(){
+        var val = $(this).val();
+        if(val === 'link'){
+            linkContent.show();
+        }else{
+            linkContent.hide();
+        }
+    })
 });
