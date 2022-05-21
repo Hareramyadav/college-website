@@ -1,5 +1,7 @@
 from datetime import date
+import imp
 import os
+from telnetlib import LOGOUT
 from tkinter.messagebox import NO
 
 from numpy import imag
@@ -12,9 +14,34 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 import math
 from math import ceil
+from .verify_request import *
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
+def login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        admin_user = User.objects.filter(email=email)
+        admin_username = admin_user[0].username if len(admin_user ) > 0 else None
+        print('username', admin_username)
+        is_admin = authenticate(username=admin_username, password=password)
+
+        if is_admin is None:
+            error = "User email or password does not match"
+            messages.info(request, error)
+            return HttpResponseRedirect('/admin_login')
+        else:
+            request.session['user'] = email
+            request.session['islogin'] = True
+            return redirect('/admin_dashboard')
+    return render(request, 'admin/login.html')
+    
+def admin_logout(request):
+    logout(request)
+    return redirect('/admin_login')
 
 def index(request):
     banner = Banner.objects.all().order_by('created_at')
@@ -96,11 +123,11 @@ def header_footer_view(request):
         'site_identity':site_identity,
     })
 
-
+@validate_request_for_admin
 def admin_dashboard(request):
     return render(request, 'admin/admin_dashboard.html')
 
-
+@validate_request_for_admin
 def site_identity(request):
     if request.method == 'POST':
         site_name = request.POST.get('site_name')
@@ -121,7 +148,7 @@ def site_identity(request):
     site_identity = SiteIdentity.objects.all().order_by('created_at')
     return render(request, 'admin/site_identity.html', {'site_identity': site_identity})
 
-
+@validate_request_for_admin
 def edit_identity(request, site_id):
     site_identity = SiteIdentity.objects.get(id=int(site_id))
     if request.method == 'POST':
@@ -143,7 +170,7 @@ def edit_identity(request, site_id):
         return redirect('/site_identity')
     return render(request, 'admin/edit_identity.html', {'site_identity': site_identity, 'site_id': site_id})
 
-
+@validate_request_for_admin
 def create_footer(request):
     if request.method == 'POST':
         heading = request.POST.get('heading')
@@ -167,7 +194,7 @@ def create_footer(request):
     data.update(header_footer)
     return render(request, 'admin/create_footer.html', data)
 
-
+@validate_request_for_admin
 def edit_footer(request, footer_id):
     footer = Footer.objects.get(id=int(footer_id))
     if request.method == 'POST':
@@ -194,12 +221,12 @@ def edit_footer(request, footer_id):
     data.update(header_footer)
     return render(request, 'admin/edit_footer.html', data)
 
-
+@validate_request_for_admin
 def delete_footer(request, footer_id):
     Footer.objects.filter(id=int(footer_id)).delete()
     return redirect('/create_footer')
 
-
+@validate_request_for_admin
 def create_menu(request):
     if request.method == 'POST':
         menu_name = request.POST.get('menu_name').lower()
@@ -222,7 +249,7 @@ def create_menu(request):
     data.update(header_footer)
     return render(request, 'admin/create_menu.html', data)
 
-
+@validate_request_for_admin
 def edit_menu(request, menu_id):
     menu = Menu.objects.get(id=int(menu_id))
     if request.method == 'POST':
@@ -245,11 +272,12 @@ def edit_menu(request, menu_id):
         return redirect('/create_menu')
     return render(request, 'admin/edit_menu.html', {'menu': menu, 'menu_id': menu_id})
 
-
+@validate_request_for_admin
 def delete_menu(request, menu_id):
     Menu.objects.filter(id=int(menu_id)).delete()
     return redirect('/create_menu')
 
+@validate_request_for_admin
 def create_sub_menu(request):
     menu_names = Menu.objects.all().values('menu_name').distinct()
     if request.method == 'POST':
@@ -271,6 +299,7 @@ def create_sub_menu(request):
     data.update(header_footer)
     return render(request, 'admin/create_sub_menu.html', data)
 
+@validate_request_for_admin
 def edit_sub_menu(request, sub_menu_id):
     sub_menu = SubMenu.objects.get(id=int(sub_menu_id))
     if request.method == 'POST':
@@ -292,10 +321,12 @@ def edit_sub_menu(request, sub_menu_id):
         return redirect('/create_sub_menu')
     return render(request, 'admin/edit_sub_menu.html', {'sub_menu_id':sub_menu_id, 'sub_menu':sub_menu})
 
+@validate_request_for_admin
 def delete_sub_menu(request, sub_menu_id):
     SubMenu.objects.filter(id=int(sub_menu_id)).delete()
     return redirect('/create_sub_menu')
 
+@validate_request_for_admin
 def create_banner(request):
     if request.method == 'POST':
         banner_image = request.FILES.get('banner_image')
@@ -309,7 +340,7 @@ def create_banner(request):
     banner = Banner.objects.all().order_by('created_at')
     return render(request, 'admin/create_banner.html', {'banner': banner})
 
-
+@validate_request_for_admin
 def edit_banner(request, banner_id):
     banner = Banner.objects.get(id=int(banner_id))
     if request.method == 'POST':
@@ -330,12 +361,12 @@ def edit_banner(request, banner_id):
     data.update(header_footer)
     return render(request, 'admin/edit_banner.html', data)
 
-
+@validate_request_for_admin
 def delete_banner(request, banner_id):
     Banner.objects.filter(id=int(banner_id)).delete()
     return HttpResponseRedirect('/create_banner')
 
-
+@validate_request_for_admin
 def create_about(request):
     if request.method == 'POST':
         about_image = request.FILES.get('about_image')
@@ -349,7 +380,7 @@ def create_about(request):
     about = AboutSection.objects.all().order_by('created_at')
     return render(request, 'admin/create_about.html', {'about': about})
 
-
+@validate_request_for_admin
 def edit_about(request, about_id):
     about = AboutSection.objects.get(id=int(about_id))
     if request.method == 'POST':
@@ -367,12 +398,12 @@ def edit_about(request, about_id):
         return redirect('/create_about')
     return render(request, 'admin/edit_about.html', {'about': about, 'about_id': about_id})
 
-
+@validate_request_for_admin
 def delete_about(request, about_id):
     AboutSection.objects.filter(id=int(about_id))
     return redirect('/create_about')
 
-
+@validate_request_for_admin
 def create_news(request):
     if request.method == 'POST':
         news_image = request.FILES.get('news_image')
@@ -387,12 +418,12 @@ def create_news(request):
     news = News.objects.all().order_by('created_at')
     return render(request, 'admin/create_news.html', {'news': news})
 
-
+@validate_request_for_admin
 def delete_news(request, news_id):
     News.objects.filter(id=int(news_id)).delete()
     return redirect('/create_news')
 
-
+@validate_request_for_admin
 def create_gallery(request):
     if request.method == 'POST':
         media = request.FILES.get('media')
@@ -404,7 +435,7 @@ def create_gallery(request):
     gallery = Gallery.objects.all().order_by('created_at')
     return render(request, 'admin/create_gallery.html', {'gallery': gallery})
 
-
+@validate_request_for_admin
 def edit_gallery(request, gallery_id):
     gallery = Gallery.objects.get(id=int(gallery_id))
     if request.method == 'POST':
@@ -418,12 +449,12 @@ def edit_gallery(request, gallery_id):
         return redirect('/edit_gallery')
     return render(request, 'admin/edit_gallery.html', {'gallery': gallery, 'gallery_id': gallery_id})
 
-
+@validate_request_for_admin
 def delete_gallery(request, gallery_id):
     Gallery.objects.filter(id=int(gallery_id)).delete()
     return redirect('/create_gallery')
 
-
+@validate_request_for_admin
 def create_blog(request):
     if request.method == 'POST':
         blog_image = request.FILES.get('blog_image')
@@ -439,7 +470,7 @@ def create_blog(request):
     blog = Blog.objects.all().order_by('created_at')
     return render(request, 'admin/create_blog.html', {'blog': blog})
 
-
+@validate_request_for_admin
 def edit_blog(request, blog_id):
     blog = Blog.objects.get(id=int(blog_id))
     if request.method == 'POST':
@@ -459,12 +490,12 @@ def edit_blog(request, blog_id):
         return redirect('/create_blog')
     return render(request, 'admin/edit_blog.html', {'blog': blog, 'blog_id': blog_id})
 
-
+@validate_request_for_admin
 def delete_blog(request, blog_id):
     Blog.objects.filter(id=int(blog_id)).delete()
     return redirect('/create_blog')
 
-
+@validate_request_for_admin
 def create_testimonial(request):
     if request.method == 'POST':
         student_image = request.FILES.get('student_image')
@@ -479,7 +510,7 @@ def create_testimonial(request):
     testimonial = Testimonial.objects.all().order_by('created_at')
     return render(request, 'admin/create_testimonial.html', {'testimonial': testimonial})
 
-
+@validate_request_for_admin
 def edit_testimonial(request, test_id):
     testimonial = Testimonial.objects.get(id=int(test_id))
     if request.method == 'POST':
@@ -499,12 +530,12 @@ def edit_testimonial(request, test_id):
         return redirect('/create_testimonial')
     return render(request, 'admin/edit_testimonial.html', {'testimonial': testimonial, 'test_id': test_id})
 
-
+@validate_request_for_admin
 def delete_testimonial(request, test_id):
     Testimonial.objects.filter(id=int(test_id)).delete()
     return redirect('/create_testimonial')
 
-
+@validate_request_for_admin
 def create_popup(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -517,7 +548,7 @@ def create_popup(request):
     popup = Popup.objects.all().order_by('created_at')
     return render(request, 'admin/create_popup.html', {'popup': popup})
 
-
+@validate_request_for_admin
 def edit_popup(request, popup_id):
     popup = Popup.objects.get(id=int(popup_id))
     if request.method == 'POST':
@@ -534,18 +565,21 @@ def edit_popup(request, popup_id):
         return redirect('/create_popup')
     return render(request, 'admin/edit_popup.html', {'popup': popup, 'popup_id': popup_id})
 
-
+@validate_request_for_admin
 def delete_popup(request, popup_id):
     Popup.objects.filter(id=int(popup_id)).delete()
     return redirect('/create_popup')
 
+@validate_request_for_admin
 def inquiry_forms(request):
     inquiry_form = AdmissionForm.objects.all().order_by('created_at')
     return render(request, 'admin/inquiry_form.html', {'inquiry_form':inquiry_form})
 
+@validate_request_for_admin
 def delete_form(request, form_id):
     AdmissionForm.objects.filter(id=int(form_id)).delete()
     return redirect('/inquiry_form')
+
 
 # client pages.....................
 # ......................
