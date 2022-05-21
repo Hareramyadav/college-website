@@ -3,6 +3,11 @@
 {% block content %}
 <div class="container">
     <h3>Create Popup Section</h3>
+    {% if messages %}
+    {% for message in messages %}
+    <h4 class="text-danger text-capitalize">{{ message }}</h4>
+    {% endfor %}
+    {% endif %}
     <div class="popup-form">
         <form method="POST" action="{% url 'create_popup' %}" enctype="multipart/form-data">
             {% csrf_token %}
@@ -35,7 +40,8 @@
                     <td>{{p.title}}</td>
                     <td>
                         <a href="{% url 'edit_popup' popup_id=p.id %}"><i class="fas fa-edit text-info"></i></a>
-                        <a href="{% url 'delete_popup' popup_id=p.id %}" class="delete_popup text-danger"><i class="fas fa-trash"></i></a>
+                        <a href="{% url 'delete_popup' popup_id=p.id %}" class="delete_popup text-danger"><i
+                                class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 {% endfor %}

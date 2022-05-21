@@ -65,6 +65,8 @@ $(document).ready(function () {
         }
     });
 
+    $('#popup').modal('show');
+
     // API call for Menu..................................
     // ......................................
     // var menuIdInSubMenu = [];

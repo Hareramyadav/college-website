@@ -46,6 +46,7 @@ def admin_logout(request):
 def index(request):
     banner = Banner.objects.all().order_by('created_at')
     menu = Menu.objects.all()
+    popup = Popup.objects.all()
     about = AboutSection.objects.all().order_by('created_at')[:1]
     news = News.objects.all().order_by('created_at')
     messages = Message.objects.all().order_by('created_at')[:4]
@@ -65,6 +66,7 @@ def index(request):
     data = {
         'banner': banner,
         'menu':menu,
+        'popup':popup,
         'about': about,
         'main_news': main_news,
         'side_news': side_news,
@@ -543,6 +545,9 @@ def create_popup(request):
         message = request.POST.get('message')
 
         data = dict(title=title, file=file, message=message)
+        if(Popup.objects.all().count() >= 1):
+            messages.warning(request, "You can create only one popup")
+            return HttpResponseRedirect('/create_popup')
         Popup.objects.create(**data)
         return redirect('/create_popup')
     popup = Popup.objects.all().order_by('created_at')
