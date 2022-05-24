@@ -49,9 +49,11 @@ def index(request):
     popup = Popup.objects.all()
     about = AboutSection.objects.all().order_by('created_at')[:1]
     news = News.objects.all().order_by('created_at')
+    main_news = News.objects.all().order_by('-created_at')[0:1]
+    side_news = News.objects.all().order_by('-created_at')[1:3]
     messages = Message.objects.all().order_by('created_at')[:4]
-    main_news = [m for m in news if m.news_position == 'main_news'][:1]
-    side_news = [s for s in news if s.news_position == 'side_news'][:3]
+    # main_news = [m for m in news if m.news_position == 'main_news'][:1]
+    # side_news = [s for s in news if s.news_position == 'side_news'][:3]
     blogs = Blog.objects.all().order_by('created_at')[:2]
     gallery = Gallery.objects.all().order_by('created_at')
     image = [i for i in gallery if i.media_type == 'image']
