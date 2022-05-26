@@ -1,8 +1,6 @@
 from datetime import date
 import imp
 import os
-from telnetlib import LOGOUT
-from tkinter.messagebox import NO
 
 from numpy import imag
 from .models import *
