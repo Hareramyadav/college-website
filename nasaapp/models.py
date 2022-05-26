@@ -3,6 +3,7 @@ import email
 from pyexpat import model
 from re import T
 from statistics import mode
+from tkinter.tix import Balloon
 from urllib import request
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -169,6 +170,7 @@ class Footer(models.Model):
     youtube = models.URLField(max_length=3000, blank=True, null=True)
     footer_position = models.CharField(max_length=200, null=True, blank=True)
     quick_links = models.CharField(max_length=3000, null=True, blank=True)
+    copyright = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

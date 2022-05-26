@@ -136,6 +136,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-USERNAME = 'nasacollege'
-EMAIL = 'info@nasacollege.edu.np'
-PASSWORD = 'Nasa123@#$'
+USERNAME = 'nasacollege, hiring'
+EMAIL = 'info@nasacollege.edu.np, hiring@gmail.com'
+PASSWORD = 'Nasa123@#$, hiring@123'
