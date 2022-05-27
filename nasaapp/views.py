@@ -1,4 +1,5 @@
 from datetime import date
+from hashlib import new
 import imp
 import os
 from telnetlib import LOGOUT
@@ -48,9 +49,9 @@ def index(request):
     menu = Menu.objects.all()
     popup = Popup.objects.all()
     about = AboutSection.objects.all().order_by('created_at')[:1]
-    news = News.objects.all().order_by('created_at')
-    main_news = News.objects.all().order_by('-created_at')[0:1]
-    side_news = News.objects.all().order_by('-created_at')[1:3]
+    news = News.objects.all().order_by('created_at')[:8]
+    news_identity = [identity for identity in news if identity.news_position == 'news_identity'][:1]
+    newss = [n for n in news if n.news_position == 'news'][:8]
     messages = Message.objects.all().order_by('created_at')[:4]
     blogs = Blog.objects.all().order_by('created_at')[:2]
     gallery = Gallery.objects.all().order_by('created_at')
@@ -68,8 +69,6 @@ def index(request):
         'menu':menu,
         'popup':popup,
         'about': about,
-        'main_news': main_news,
-        'side_news': side_news,
         'messages': messages,
         'blog': blogs,
         'image': image,
@@ -79,6 +78,8 @@ def index(request):
         'range': range(testimonial_slide),
         'testimonial_mobile_silde':testimonial_mobile_silde,
         'range_mobile':range(testimonial_mobile_silde),
+        'news':newss,
+        'news_identity':news_identity,
     }
     data.update(header_footer)
     return render(request, 'index.html', data)
@@ -112,6 +113,7 @@ def header_footer_view(request):
         s for s in footer if s.footer_position == 'footer_second'][:1]
     footer_third = [
         t for t in footer if t.footer_position == 'footer_third'][:1]
+    copyright = [c for c in footer if c.footer_position == 'copyright'][:1]
     return ({
         'top_header': top_header,
         'bottom_header': bottom_header,
@@ -123,6 +125,7 @@ def header_footer_view(request):
         'footer_second': footer_second,
         'footer_third': footer_third,
         'site_identity':site_identity,
+        'copyright':copyright,
     })
 
 @validate_request_for_admin
@@ -180,13 +183,21 @@ def create_footer(request):
         phone_number = request.POST.get('phone_number')
         email = request.POST.get('email')
         footer_position = request.POST.get('footer_position')
+        facebook = request.POST.get('facebook')
+        instagram = request.POST.get('instagram')
+        twitter = request.POST.get('twitter')
+        youtube = request.POST.get('youtube')
+        tiktok = request.POST.get('tiktok')
+        license_no = request.POST.get('license_no')
         quick_links = request.POST.get('quick_links')
-        social_links = request.POST.get('social_links')
+        copyright = request.POST.get('copyright')
 
         data = dict(heading=heading, address=address, phone_number=phone_number, email=email,
-                    footer_position=footer_position, quick_links=quick_links, social_links=social_links)
-        if(Footer.objects.all().count() >= 3):
-            messages.warning(request, "You can create only 3 footers")
+        facebook=facebook, instagram=instagram, twitter=twitter, youtube=youtube, tiktok=tiktok,
+        license_no=license_no, copyright=copyright,
+                    footer_position=footer_position, quick_links=quick_links)
+        if(Footer.objects.all().count() >= 4):
+            messages.warning(request, "You can create only 4 footers")
             return HttpResponseRedirect('/create_footer')
         Footer.objects.create(**data)
         return HttpResponseRedirect('/create_footer')
@@ -372,10 +383,15 @@ def delete_banner(request, banner_id):
 def create_about(request):
     if request.method == 'POST':
         about_image = request.FILES.get('about_image')
+        image_two = request.FILES.get('image_two')
+        image_three = request.FILES.get('image_three')
         short_desc = request.POST.get('short_desc')
         long_desc = request.POST.get('long_desc')
+        title = request.POST.get('title')
+        tagline = request.POST.get('tagline')
         about_link = request.POST.get('about_link')
         data = dict(about_image=about_image, short_desc=short_desc,
+        title=title, tagline=tagline, image_three=image_three, image_two=image_two,
                     long_desc=long_desc, about_link=about_link)
         AboutSection.objects.create(**data)
         return redirect('/create_about')
@@ -390,10 +406,18 @@ def edit_about(request, about_id):
         short_desc = request.POST.get('short_desc')
         long_desc = request.POST.get('long_desc')
         about_link = request.POST.get('about_link')
+        title = request.POST.get('title')
+        tagline = request.POST.get('tagline')
+        image_two = request.FILES.get('image_two')
+        image_three = request.FILES.get('image_three')
 
+        about.title = title
+        about.tagline = tagline
         about.short_desc = short_desc
         about.long_desc = long_desc
         about.about_link = about_link
+        about.image_two =image_two
+        about.image_three = image_three
         if about_image is not None:
             about.about_image = about_image
         about.save()
@@ -408,17 +432,43 @@ def delete_about(request, about_id):
 @validate_request_for_admin
 def create_news(request):
     if request.method == 'POST':
-        news_image = request.FILES.get('news_image')
         title = request.POST.get('title')
+        tagline = request.POST.get('tagline')
+        heading = request.POST.get('heading')
+        news_image = request.FILES.get('news_image')
         long_desc = request.POST.get('long_desc')
+        short_desc = request.POST.get('short_desc')
         news_position = request.POST.get('news_position')
 
-        data = dict(news_image=news_image, title=title,
-                    long_desc=long_desc, news_position=news_position)
+        data = dict(news_image=news_image, title=title,tagline=tagline, heading=heading,
+                    news_position=news_position, long_desc=long_desc, short_desc=short_desc)
         News.objects.create(**data)
         return redirect('/create_news')
     news = News.objects.all().order_by('created_at')
     return render(request, 'admin/create_news.html', {'news': news})
+
+@validate_request_for_admin
+def edit_news(request, news_id):
+    news = News.objects.get(id=int(news_id))
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        tagline = request.POST.get('tagline')
+        heading = request.POST.get('heading')
+        news_image = request.FILES.get('news_image', None)
+        short_content = request.POST.get('short_content')
+        long_desc = request.POST.get('long_desc')
+
+        news.title = title 
+        news.tagline = tagline
+        news.heading = heading
+        news.short_content = short_content
+        news.long_desc = long_desc
+        if news_image is None:
+             news.news_image = news_image
+        
+        news.save()
+        return redirect('/create_news')
+    return render(request, 'admin/edit_news.html', {'news': news, 'news_id':news_id})
 
 @validate_request_for_admin
 def delete_news(request, news_id):

@@ -3,46 +3,46 @@
 
 {% block content %}
 <!-- Banner section........... -->
-<div class="main-banner">
-    <div id="carousel" class="carousel slide" data-ride="carousel">
-        <!-- <ol class="carousel-indicators">
-            <li data-bs-target="#carousel" data-bs-slide-to="0" class="active"></li>
-            {% for slider in banner %}
-            <li data-bs-target="#carousel" data-bs-slide-to="{{slider.id}}"></li>
-            {% endfor %}
-        </ol> -->
-        <div class="carousel-inner">
-            {% for slider in banner %}
-            {% if forloop.counter == 1 %}
-            <div class="carousel-item active">
-                {% else %}
-                <div class="carousel-item">
-                    {% endif %}
-                    <div class="overlay"></div>
-                    <img class="d-block w-100" src="{{slider.banner_image.url}}" alt="Second slide">
-                    <div class="main-slider-content carousel-caption d-md-block">
-                        <h5>{{slider.banner_text}}</h5>
-                        <a type="button" href="{{slider.banner_link}}" class="btn button text-decoration-none">Read
-                            More</a>
-                    </div>
+<!-- Swiper Slider -->
+<div class="swiper mySwiper w-full h-px">
+    <div class="swiper-wrapper">
+        {% for slider in banner %}
+        <div class="swiper-slide bg-no-repeat bg-center object-cover w-full"
+            style="background-image: url({{slider.banner_image.url}})">
+            <div class="flex flex-col mb-16 sm:text-center sm:mb-0">
+                <div class="w-full max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+                    <h2
+                        class="max-w-lg mb-6 font-sans text-3xl font-extrabold leading-none tracking-tight text-white sm:text-5xl md:mx-auto">
+                        <span class="relative inline-block">
+                            <span class="relative uppercase animate__fadeInUp">{{slider.banner_text}}
+                                <!-- <span class="text-orange-400">Deam Job</span> Today</span> -->
+                            </span>
+                    </h2>
+                    <p class="text-base text-gray-50 md:text-lg">
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                        accusantium doloremque rem aperiam, eaque ipsa quae.
+                    </p>
                 </div>
-                {% endfor %}
+                <div>
+                    <a href="/"
+                        class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">
+                        Get started
+                    </a>
+                </div>
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carousel" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </a>
-        <a class="carousel-control-next" href="#carousel" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </a>
+        {% endfor %}
     </div>
+    <div class="swiper-button-next py-7 px-7 bg-white rounded-full"></div>
+    <div class="swiper-button-prev py-7 px-7 bg-white rounded-full"></div>
+    <div class="swiper-pagination"></div>
 </div>
 
 <!-- Popup section...................... -->
 <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#popup">
     Launch demo modal
 </button> -->
-<div class="modal fade" id="popup" tabindex="-1" aria-labelledby="popuplabel" aria-hidden="true">
+<!-- <div class="modal fade" id="popup" tabindex="-1" aria-labelledby="popuplabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             {% for pop in popup %}
@@ -61,65 +61,149 @@
             {% endfor %}
         </div>
     </div>
-</div>
+</div> -->
 
-<!-- Nasa Info section............................... -->
-<div class="container-fluid nasa-info mt-3 py-5 bg-light">
-    <div class="container d-md-flex">
-        {% for menu_content in menu %}
-        {% if menu_content.menu_name == "school" %}
-        <div class="card mb-3">
-            <div class="card-body">
-                <a href="{% url 'menu_info_content' menu_id=menu_content.id %}">
-                    <h3 class="">{{menu_content.menu_name}}</h3>
-                    <div class="nasa-info-content">{{menu_content.short_content}}</div>
-                </a>
+<!-- 3 Column Hero -->
+<div class="relative px-4 sm:px-0 md:-mt-10 z-10">
+    <div class="absolute inset-0 h-1/2"></div>
+    <div
+        class="relative grid mx-auto overflow-hidden bg-white divide-y rounded shadow sm:max-w-screen-sm sm:grid-cols-3 lg:max-w-screen-md">
+        <div
+            class="inline-block p-8 text-center hover:scale-110 transition-all transform ease-in-out duration-300 cursor-pointer bg-blue-600">
+            <div class="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-full bg-blue-50">
+                <svg class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
             </div>
+            <p class="font-bold tracking-wide text-white">Trusted</p>
         </div>
-        {% endif %}
-        {% endfor %}
-        {% for menu_content in menu %}
-        {% if menu_content.menu_name == "bachelor" %}
-        <div class="card mb-3">
-            <div class="card-body">
-                <a href="{% url 'menu_info_content' menu_id=menu_content.id %}">
-                    <h3 class="">{{menu_content.menu_name}}</h3>
-                    <div>{{menu_content.short_content}}</div>
-                </a>
+        <div
+            class="inline-block p-8 text-center hover:scale-110 transform transition-all ease-in-out duration-300 cursor-pointer bg-blue-400">
+            <div class="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-full bg-blue-50">
+                <svg class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                        d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                </svg>
             </div>
+            <p class="font-bold tracking-wide text-white">Free Counselling</p>
         </div>
-        {% endif %}
-        {% endfor %}
-        {% for menu_content in menu %}
-        {% if menu_content.menu_name == "higher secondary" %}
-        <div class="card">
-            <div class="card-body">
-                <a href="{% url 'menu_info_content' menu_id=menu_content.id %}">
-                    <h3 class="">{{menu_content.menu_name}}</h3>
-                    <div>{{menu_content.short_content}}</div>
-                </a>
+        <div
+            class="inline-block p-8 text-center hover:scale-110 transition-all ease-in-out duration-300 cursor-pointer">
+            <div class="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-full bg-blue-50">
+                <svg class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
             </div>
+            <p class="font-bold tracking-wide text-gray-800">Support</p>
         </div>
-        {% endif %}
-        {% endfor %}
     </div>
 </div>
 
-<!-- About section........... -->
-<div class="about-nasa mt-3">
-    {% for a in about %}
-    <div class="container d-lg-flex">
-        <div class="about-image mb-3 mb-lg-0 col-lg-6 pe-lg-4">
-            <img src="{{a.about_image.url}}" alt="" srcset="" height="250" width="100%">
+<!-- Hero Section -->
+<section>
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        {% for a in about %}
+        <div class="grid gap-10 lg:grid-cols-2">
+            <div class="flex flex-col md:pr-8 xl:pr-0 lg:max-w-lg">
+                {% if a.title %}
+                <h2 class="font-semibold py-6 text-orange-400">{{a.title}}</h2>
+                {% else %}
+                <h2 class="font-semibold py-6 text-orange-400">About us</h2>
+                {% endif %}
+                <div class="max-w-xl mb-6">
+                    <h2
+                        class="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-20">
+                        {{a.tagline}}
+                    </h2>
+                    <p class="text-base text-gray-700 md:text-lg">
+                        {{a.short_desc}}
+                    </p>
+                </div>
+                <div>
+                    <a href="/about" aria-label=""
+                        class="inline-flex items-center font-semibold transition-colors duration-200 text-blue-400 hover:text-blue-800">
+                        Learn More
+                        <svg class="inline-block w-3 ml-2" fill="currentColor" viewBox="0 0 12 12">
+                            <path
+                                d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="flex items-center justify-center -mx-4 lg:pl-8">
+                <div class="flex flex-col items-end px-3">
+                    {% if a.image_two %}
+                    <img class="object-cover mb-6 rounded shadow-lg h-28 sm:h-48 xl:h-56 w-28 sm:w-48 xl:w-56"
+                        src="{{a.image_two.url}}" alt="" />
+                    {% endif %}
+                    {% if a.image_three %}
+                    <img class="object-cover w-20 h-20 rounded shadow-lg sm:h-32 xl:h-40 sm:w-32 xl:w-40"
+                        src="{{a.image_three.url}}" alt="" />
+                    {% endif %}
+                </div>
+                {% if a.about_image %}
+                <div class="px-3">
+                    <img class="object-cover w-40 h-40 rounded sm:h-64 xl:h-80 sm:w-64 xl:w-80"
+                        src="{{a.about_image.url}}" alt="" />
+                </div>
+                {% endif %}
+            </div>
         </div>
-        <div class="about-content col-lg-6">
-            <h3 class="about-nasa-heading">Why Nasa International College?</h3>
-            <p class="about-text">{{a.short_desc}}</p>
-            <a href="{{a.about_link}}" class="btn button text-decoration-none">Read More</a>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Our Services -->
+<section>
+    <div class="px-4 py-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-16">
+        {% for i in news_identity %}
+        <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+            <h2
+                class="max-w-lg mb-6 text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+                <span class="relative inline-block">
+                    <span class="relative">{{i.title}}</span>
+                </span>
+            </h2>
+            <p class="text-base text-gray-700 md:text-lg">
+                {{i.tagline}}
+            </p>
+        </div>
+        {% endfor %}
+        <div class="services relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {% for n in news %}
+            <div
+                class="">
+                <div class="">
+                    <div
+                        class="flex flex-col justify-between overflow-hidden transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
+                        <div class="p-5 cursor-pointer">
+                            <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-blue-50">
+                                <img class="w-12 h-12" src="{{n.news_image}}" />
+                            </div>
+                            <p class="mb-2 font-bold">{{n.heading}}</p>
+                            <p class="text-sm leading-5 text-gray-900">
+                                {{n.short_desc}}
+                            </p>
+                        </div>
+                        <div
+                            class="w-full h-1 ml-auto duration-300 origin-left transform scale-x-0 bg-red-500 group-hover:scale-x-100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <a href="/"
+                class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-blue-600 hover:bg-blue-800 focus:shadow-outline focus:outline-none">
+                Learn more
+            </a>
         </div>
     </div>
-    {% endfor %}
-</div>
+</section>
 
 <!-- News section.................. -->
 <div class="nasa-news bg-light mt-3 py-3">

@@ -2,28 +2,44 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <h3>Create News/Notices</h3>
+    <h3>Create Our Services</h3>
     <div class="banner-form">
         <form method="POST" action="{% url 'create_news' %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group mb-3">
-                <label for="news_image">Image</label>
-                <input type="file" name="news_image" class="form-control" id="" placeholder="">
-            </div>
-            <div class="form-group mb-3">
-                <label for="title">Title</label>
-                <input type="text" name="title" class="form-control" id="" placeholder="">
-            </div>
-            <div class="form-group mb-3">
-                <label for="long_desc">Description</label>
-                <input type="text" name="long_desc" class="form-control" id="" placeholder="">
-            </div>
-            <div class="form-group mb-3">
                 <label for="menu_position">News Position</label>
-                <select class="form-select" name="news_position" id="">
-                    <option value="side_news" selected>Side News</option>
-                    <option value="main_news">Main News</option>
+                <select class="form-select" name="news_position" id="news_position">
+                    <option value="news" selected>News</option>
+                    <option value="news_identity">News Identity</option>
                 </select>
+            </div>
+            <div class="news-identity">
+                <div class="form-group mb-3">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" class="form-control" id="" placeholder="">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="tagline">Tagline</label>
+                    <input type="text" name="tagline" class="form-control" id="" placeholder="">
+                </div>
+            </div>
+            <div class="news">
+                <div class="form-group mb-3">
+                    <label for="heading">News Heading</label>
+                    <input type="text" name="heading" class="form-control" id="" placeholder="">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="news_image">Image</label>
+                    <input type="file" name="news_image" class="form-control" id="" placeholder="">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="short_desc">Short Description</label>
+                    <textarea rows="3" name="short_desc" class="form-control" id="" placeholder=""></textarea>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="long_desc">Long Description</label>
+                    <textarea rows="5" name="long_desc" class="form-control" id="" placeholder=""></textarea>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
@@ -39,9 +55,16 @@
             <tbody>
                 {% for n in news %}
                 <tr>
+                    {% if n.title %}
                     <td>{{n.title}}</td>
+                    {% elif n.heading %}
+                    <td>{{n.heading}}</td>
+                    {% endif %}
                     <td>
-                        <a href="{% url 'delete_news' news_id=n.id %}" class="delete_news text-danger"><i class="fas fa-trash"></i></a>
+                        <a href="{% url 'edit_news' news_id=n.id %}" class="text-info"><i
+                            class="fas fa-edit"></i></a>
+                        <a href="{% url 'delete_news' news_id=n.id %}" class="delete_news text-danger"><i
+                                class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 {% endfor %}

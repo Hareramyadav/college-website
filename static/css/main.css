@@ -13,11 +13,7 @@ body {
     --light: #F8F9FA;
     --danger: #DD3444;
     --dark: #343A3F;
-    --logo-color-first: #02CD69;
-    --logo-color-second: #fa636d;
-    --logo-color-third: #01388B;
-    --logo-color-third-opac: #01388b77;
-    --logo-color-fourth: #50BA9C;
+    --theme-color:#1E40AF;
     --black: #000000;
 }
 
@@ -44,7 +40,14 @@ body {
 }
 
 .top-navbar {
-    display: none;
+   background-color: var(--theme-color) !important;
+}
+
+.header-icon{
+    border: 2px solid #ffffff;
+    padding: 7px;
+    border-radius: 50%;
+    color: var(--white);
 }
 
 .navbar.top-navbar-mobile,
@@ -425,6 +428,12 @@ body {
         grid-template-columns: auto auto auto;
         column-gap: 20px;
     }
+    /* news section....... */
+    /* .services{
+        display: grid !important;
+        grid-template-columns: repeat(4, 1rf);
+        gap: 10px 20px !important;
+    } */
 }
 
 /* X-Large devices (large desktops, 1200px and up) */

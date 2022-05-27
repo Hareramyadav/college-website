@@ -76,8 +76,14 @@ class Banner(models.Model):
 class AboutSection(models.Model):
     about_image = models.ImageField(
         blank=True, null=True, upload_to="static/images")
-    short_desc = RichTextField(blank=True, null=True)
-    long_desc = RichTextField(blank=True, null=True)
+    image_two = models.ImageField(
+        blank=True, null=True, upload_to="static/images")
+    image_three = models.ImageField(
+        blank=True, null=True, upload_to="static/images")
+    short_desc = models.TextField(blank=True, null=True)
+    title = models.CharField(max_length=200, null=True, blank=True)
+    tagline = models.CharField(max_length=200, null=True, blank=True)
+    long_desc = models.TextField(blank=True, null=True)
     about_link = models.CharField(max_length=500, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -89,10 +95,13 @@ class AboutSection(models.Model):
 
 
 class News(models.Model):
+    title = models.CharField(max_length=300, blank=True, null=True)
+    tagline = models.CharField(max_length=300, blank=True, null=True)
+    heading = models.CharField(max_length=500, blank=True, null=True)
     news_image = models.ImageField(
         blank=True, null=True, upload_to="static/news")
-    title = models.CharField(max_length=1000, blank=True, null=True)
-    long_desc = models.TextField(max_length=5000, null=True, blank=True)
+    short_desc = models.TextField(max_length=2000, null=True, blank=True)
+    long_desc = models.TextField(null=True, blank=True)
     news_link = models.CharField(max_length=300, blank=True, null=True)
     news_position = models.CharField(max_length=200, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -164,12 +173,14 @@ class Footer(models.Model):
     address = models.CharField(max_length=200, null=True, blank=True)
     phone_number = models.CharField(max_length=200, null=True, blank=True)
     email = models.CharField(max_length=200, null=True, blank=True)
-    facebook = models.URLField(max_length=3000, blank=True, null=True)
-    instagram = models.URLField(max_length=3000, blank=True, null=True)
-    twitter = models.URLField(max_length=3000, blank=True, null=True)
-    youtube = models.URLField(max_length=3000, blank=True, null=True)
+    facebook = models.URLField(max_length=300, blank=True, null=True)
+    instagram = models.URLField(max_length=300, blank=True, null=True)
+    twitter = models.URLField(max_length=300, blank=True, null=True)
+    youtube = models.URLField(max_length=300, blank=True, null=True)
+    tiktok = models.URLField(max_length=300, blank=True, null=True)
     footer_position = models.CharField(max_length=200, null=True, blank=True)
     quick_links = models.CharField(max_length=3000, null=True, blank=True)
+    license_no = models.CharField(max_length=200, blank=True, null=True)
     copyright = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

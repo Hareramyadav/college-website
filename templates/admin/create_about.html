@@ -7,8 +7,24 @@
         <form method="POST" action="{% url 'create_about' %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group mb-3">
-                <label for="about_image">Image</label>
+                <label for="title">Title</label>
+                <input type="text" name="title" class="form-control" id="" placeholder="">
+            </div>
+            <div class="form-group mb-3">
+                <label for="tagline">Tagline</label>
+                <input type="text" name="tagline" class="form-control" id="" placeholder="">
+            </div>
+            <div class="form-group mb-3">
+                <label for="about_image">Main Image</label>
                 <input type="file" name="about_image" class="form-control" id="" placeholder="">
+            </div>
+            <div class="form-group mb-3">
+                <label for="image_two">Second Image</label>
+                <input type="file" name="image_two" class="form-control" id="" placeholder="">
+            </div>
+            <div class="form-group mb-3">
+                <label for="image_three">Third Image</label>
+                <input type="file" name="image_three" class="form-control" id="" placeholder="">
             </div>
             <div class="form-group mb-3">
                 <label for="short_desc">Short Description</label>
@@ -32,7 +48,7 @@
             <tbody>
                 {% for a in about %}
                 <tr>
-                    <td>{{a.short_desc}}</td>
+                    <td>{{a.title}}</td>
                     <td>
                         <a href="{% url 'edit_about' about_id=a.id %}" class="text-info"><i
                                 class="fas fa-edit"></i></a>

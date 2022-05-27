@@ -1,0 +1,48 @@
+{% extends 'admin/admin_dashboard.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h3>Edit Our Services</h3>
+    <div class="banner-form">
+        <form method="POST" action="{% url 'edit_news' news_id=news_id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                <label for="menu_position">News Position</label>
+                <select class="form-select" name="news_position" id="news_position">
+                    <option value="news" selected>News</option>
+                    <option value="news_identity">News Identity</option>
+                </select>
+            </div>
+            <div class="news-identity">
+                <div class="form-group mb-3">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" class="form-control" id="" placeholder="" value="{{news.title}}">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="tagline">Tagline</label>
+                    <input type="text" name="tagline" class="form-control" id="" placeholder="" value="{{news.tagline}}">
+                </div>
+            </div>
+            <div class="news">
+                <div class="form-group mb-3">
+                    <label for="heading">News Heading</label>
+                    <input type="text" name="heading" class="form-control" id="" placeholder="" value="{{news.heading}}">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="news_image">Image</label>
+                    <input type="file" name="news_image" class="form-control" id="" placeholder="">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="short_desc">Short Description</label>
+                    <textarea rows="3" name="short_desc" class="form-control" id="" placeholder="">{{news.short_desc}}</textarea>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="long_desc">Long Description</label>
+                    <textarea rows="5" name="long_desc" class="form-control" id="" placeholder="">{{news.long_desc}}</textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
