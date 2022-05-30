@@ -671,8 +671,70 @@ def delete_category(request, category_id):
     JobCategory.objects.filter(id=int(category_id)).delete()
     return redirect('/create_category')
 
+def create_service(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        image = request.FILES.get('image')
+        short_desc = request.POST.get('short_desc')
+        long_desc = request.POST.get('long_desc')
+
+        data = dict(title=title, image=image, short_desc=short_desc, long_desc=long_desc)
+        Service.objects.create(**data)
+        return redirect('/create_service')
+    service = Service.objects.all().order_by('created_at')
+    return render(request, 'admin/create_service.html', {'service':service})
+
+def edit_service(request, service_id):
+    service = Service.objects.get(id=int(service_id))
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        image = request.FILES.get('image', None)
+        short_desc = request.POST.get('short_desc')
+        long_desc = request.POST.get('long_desc')
+
+        service.title = title
+        service.short_desc = short_desc
+        service.long_desc = long_desc
+
+        if image is not None:
+            service.image = image
+        service.save()
+        return redirect('/create_service')
+    return render(request, 'admin/edit_service.html', {'service':service, 'service_id':service_id})
 
 
+def delete_service(request, service_id):
+    Service.objects.filter(id=int(service_id)).delete()
+    return redirect('/create_service')
+
+def create_destination(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        image = request.FILES.get('image')
+
+        data = dict(title=title, image=image)
+        Destination.objects.create(**data)
+        return redirect('/create_destination')
+    destination = Destination.objects.all().order_by('created_at')
+    return render(request, 'admin/create_destination.html', {'destination':destination})
+
+def edit_destination(request, destination_id):
+    destination = Destination.objects.get(id=int(destination_id))
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        image = request.FILES.get('image', None)
+
+        destination.title = title
+
+        if image is not None:
+            destination.image = image
+        destination.save()
+        return redirect('/create_destination')
+    return render(request, 'admin/edit_destination.html', {'destination':destination, 'destination_id':destination_id})
+
+def delete_destination(request, destination_id):
+    Destination.objects.filter(id=int(destination_id)).delete()
+    return redirect('/create_destination')
 # client pages.....................
 # ......................
 # ..............................

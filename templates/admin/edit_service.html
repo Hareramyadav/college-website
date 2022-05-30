@@ -1,0 +1,29 @@
+{% extends 'admin/admin_dashboard.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="menu-form">
+        <h3>Create Job Category</h3>
+        <form method="POST" action="{% url 'edit_service' service_id=service_id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                <label for="title">Service Title</label>
+                <input type="text" name="title" class="form-control" id="" placeholder="" value="{{service.title}}">
+            </div>
+            <div class="form-group mb-3">
+                <label for="image">Service Image</label>
+                <input type="file" name="image" class="form-control" id="" placeholder="">
+            </div>
+            <div class="form-group mb-3">
+                <label for="short_desc">Short Description</label>
+                <textarea rows="3" name="short_desc" class="form-control" id="" placeholder=""></textarea>
+            </div>
+            <div class="form-group mb-3">
+                <label for="long_desc">Long Description</label>
+                <textarea rows="5" name="long_desc" class="form-control" id="" placeholder=""></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

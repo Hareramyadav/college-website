@@ -57,6 +57,12 @@ urlpatterns = [
     path('create_category', views.create_category, name='create_category'),
     path('edit_category/<int:category_id>', views.edit_category, name='edit_category'),
     path('delete_category/<int:category_id>', views.delete_category, name='delete_category'),
+    path('create_service', views.create_service, name='create_service'),
+    path('edit_service/<int:service_id>', views.edit_service, name='edit_service'),
+    path('delete_service/<int:service_id>', views.delete_service, name='delete_service'),
+    path('create_destination', views.create_destination, name='create_destination'),
+    path('edit_destination/<int:destination_id>', views.edit_destination, name='edit_destination'),
+    path('delete_destination/<int:destination_id>', views.delete_destination, name='delete_destination'),
 
     # client pages
     path('contact', views.contact, name="contact"),
