@@ -1,11 +1,4 @@
-from datetime import date
-from hashlib import new
-import imp
-import os
-from telnetlib import LOGOUT
-from tkinter.messagebox import NO
 
-from numpy import imag
 from .models import *
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -130,7 +123,8 @@ def header_footer_view(request):
 
 @validate_request_for_admin
 def admin_dashboard(request):
-    return render(request, 'admin/admin_dashboard.html')
+    site_identity = SiteIdentity.objects.all().order_by('created_at')
+    return render(request, 'admin/admin_dashboard.html', {'site_identity':site_identity})
 
 @validate_request_for_admin
 def site_identity(request):
@@ -428,6 +422,7 @@ def edit_about(request, about_id):
 def delete_about(request, about_id):
     AboutSection.objects.filter(id=int(about_id))
     return redirect('/create_about')
+
 
 @validate_request_for_admin
 def create_news(request):

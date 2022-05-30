@@ -1,13 +1,5 @@
-from distutils.command.upload import upload
-import email
-from pyexpat import model
-from re import T
-from statistics import mode
-from tkinter.tix import Balloon
-from urllib import request
 from django.db import models
 from django.core.exceptions import ValidationError
-from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -72,6 +64,56 @@ class Banner(models.Model):
     def __str__(self):
         return str(self.banner_text)
 
+class Service(models.Model):
+    image = models.ImageField(blank=True, null=True, upload_to="static/images")
+    title = models.CharField(max_length=300, null=True, blank=True)
+    short_desc = models.TextField(blank=True, null=True)
+    long_desc = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'Service'
+
+    def __str__(self):
+        return str(self.title)
+
+class Destination(models.Model):
+    image = models.ImageField(blank=True, null=True, upload_to="static/images")
+    title = models.CharField(max_length=300, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'destination'
+
+    def __str__(self):
+        return str(self.title)
+
+class JobCategory(models.Model):
+    image = models.ImageField(blank=True, null=True, upload_to="static/images")
+    title = models.CharField(max_length=300, null=True, blank=True)
+    short_desc = models.TextField(blank=True, null=True)
+    long_desc = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'JobCategory'
+
+    def __str__(self):
+        return str(self.title)
+
+class JobListing(models.Model):
+    category = models.ForeignKey(JobCategory, on_delete=models.CASCADE)
+    image = models.ImageField(blank=True, null=True, upload_to="static/images")
+    title = models.CharField(max_length=300, null=True, blank=True)
+    short_desc = models.TextField(blank=True, null=True)
+    long_desc = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'JobListing'
+
+    def __str__(self):
+        return str(self.title)
 
 class AboutSection(models.Model):
     about_image = models.ImageField(
@@ -94,6 +136,7 @@ class AboutSection(models.Model):
         return str(self.about_link)
 
 
+# Job category.........
 class News(models.Model):
     title = models.CharField(max_length=300, blank=True, null=True)
     tagline = models.CharField(max_length=300, blank=True, null=True)

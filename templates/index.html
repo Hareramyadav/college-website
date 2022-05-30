@@ -174,8 +174,7 @@
         {% endfor %}
         <div class="services relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {% for n in news %}
-            <div
-                class="">
+            <div class="">
                 <div class="">
                     <div
                         class="flex flex-col justify-between overflow-hidden transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
@@ -205,36 +204,67 @@
     </div>
 </section>
 
-<!-- News section.................. -->
-<div class="nasa-news bg-light mt-3 py-3">
-    <h3 class="nasa-info-heading container py-3">News/Notices</h3>
-    <div class="container nasa-news-content d-md-flex">
-        <div class="main-news col-md-7">
-            {% for m in main_news %}
-            <a href="{{m.news_link}}">
-                <img src="{{m.news_image.url}}" alt="" srcset="" width="100%" height="200">
-            </a>
-            <h3 class="mt-3 main-news-heading">
-                <a href="{% url 'news' news_id=m.id %}" class="text-decoration-none text-dark">{{m.title}}</a>
-            </h3>
-            <h6 class="mt-2">{{m.created_at}}</h6>
-            {% endfor %}
-        </div>
-        <div class="side-news col-md-5 ps-md-3">
-            {% for s in side_news %}
-            <div class="news-one mt-4 mt-md-0 mb-md-3">
-                <a href="{{s.news_link}}">
-                    <img src="{{s.news_image.url}}" alt="" srcset="" width="100%" height="200">
-                </a>
-                <h5 class="mt-2">
-                    <a href="{% url 'news' news_id=s.id %}" class="text-decoration-none text-dark">{{s.title}}</a>
-                </h5>
-                <h6 class="mt-2">{{s.created_at}}</h6>
+<!-- Why Choose Us -->
+<section class="grid grid-cols-1 gap-0 bg-white md:grid-cols-2">
+    <div class="flex flex-col items-start px-4 py-12 lg:px-20">
+        <span class="mb-3 text-white bg-blue-600 badge py-2 px-3 rounded-full">WHY CHOOSE US</span>
+        <h1 class="mb-6 text-4xl font-bold leading-tight text-blue-900 md:text-4xl lg:text-5xl">
+            A right choice that makes the difference to others
+        </h1>
+        <p class="mb-5 text-base text-gray-500 md:text-lg">
+            Today every company needs apps to engage their customers and run their
+            businesses. Step up your ability to build, manage, and deploy great
+            apps at scale with us.
+        </p>
+        <!-- Progress Bar 1-->
+        <div class="w-full mx-auto">
+            <div class="flex flex-row items-stretch justify-between mx-auto max-w-7xl lg:flex-row sm:items-center">
+                <div>
+                    <h2 class="pt-2 sm:pt-5 text-blue-900 py-2 font-extrabold">
+                        Progress Bar 1
+                    </h2>
+                </div>
+                <div>
+                    <h2 class="font-semibold text-orange-400">70%</h2>
+                </div>
             </div>
-            {% endfor %}
+
+            <div class="bg-gray-200 h-1 flex items-center justify-between">
+                <div class="w-1/3 bg-indigo-700 h-1 flex items-center"></div>
+                <div class="w-1/3 flex justify-between bg-indigo-700 h-1 items-center relative"></div>
+                <div class="w-1/3 flex justify-end">
+                    <div class="bg-white h-6 w-6 rounded-full shadow"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Progress Bar 2-->
+        <div class="w-full mx-auto">
+            <div class="flex flex-row items-stretch justify-between mx-auto max-w-7xl lg:flex-row sm:items-center">
+                <div>
+                    <h2 class="pt-2 sm:pt-5 text-blue-900 py-2 font-extrabold">
+                        Progress Bar 2
+                    </h2>
+                </div>
+                <div>
+                    <h2 class="font-semibold text-orange-400">80%</h2>
+                </div>
+            </div>
+
+            <div class="bg-gray-200 h-1 flex items-center justify-between">
+                <div class="w-1/3 bg-indigo-700 h-1 flex items-center"></div>
+                <div class="w-1/3 flex justify-between bg-indigo-700 h-1 items-center relative"></div>
+                <div class="w-1/3 flex justify-between bg-indigo-700 h-1 items-center relative"></div>
+                <div class="w-1/3 flex justify-end">
+                    <div class="bg-white h-6 w-6 rounded-full shadow"></div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+    <div>
+        <img src="https://images.unsplash.com/photo-1531548731165-c6ae86ff6491?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80"
+            alt="3 women looking at a laptop" class="object-cover w-full h-64 bg-gray-100 md:h-full" loading="lazy" />
+    </div>
+</section>
 
 <!-- Message Section............ -->
 <div class="messages mt-3 container">

@@ -6,7 +6,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nasa International College Dashboard</title>
+    {% for identity in site_identity %}
+    <title>{{identity.site_name}}</title>
+    <link rel="icon" href="/{{identity.favicon}}">
+    {% endfor %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -26,21 +29,45 @@
                 <hr>
                 <div class="sidebar-list">
                     <ul>
-                        <a href="{% url 'admin_dashboard' %}"><li class=""><i class="fa-solid fa-gauge me-2"></i>Dashboard</li></a>
-                        <a href="{% url 'inquiry_form' %}"><li class=""><i class="fa-brands fa-wpforms me-2"></i>Admission Forms</li></a>
-                        <a href="{% url 'site_identity' %}"><li><i class="fa-solid fa-sitemap me-2"></i>Site Identity</li></a>
+                        <a href="{% url 'admin_dashboard' %}">
+                            <li class=""><i class="fa-solid fa-gauge me-2"></i>Dashboard</li>
+                        </a>
+                        <a href="{% url 'inquiry_form' %}">
+                            <li class=""><i class="fa-brands fa-wpforms me-2"></i>Admission Forms</li>
+                        </a>
+                        <a href="{% url 'site_identity' %}">
+                            <li><i class="fa-solid fa-sitemap me-2"></i>Site Identity</li>
+                        </a>
                         <a href="{% url 'create_menu' %}">
                             <li class=""><i class="fa-solid fa-bars me-2"></i>Menu</li>
                         </a>
-                        <a href="{% url 'create_sub_menu' %}"><li class=""><i class="fa-solid fa-bars me-2"></i>SubMenu</li></a>
-                        <a href="{% url 'create_banner' %}"><li class=""><i class="fa-solid fa-sliders me-2"></i>Banner</li></a>
-                        <a href="{% url 'create_about' %}"><li class=""><i class="fa-solid fa-address-card me-2"></i>About</li></a>
-                        <a href="{% url 'create_news' %}"><li class=""><i class="fa-solid fa-newspaper me-2"></i>News</li></a>
-                        <a href="{% url 'create_gallery' %}"><li class=""><i class="fa-solid fa-photo-film me-2"></i>Gallery</li></a>
-                        <a href="{% url 'create_blog' %}"><li class=""><i class="fa-solid fa-blog me-2"></i>Blog</li></a>
-                        <a href="{% url 'create_testimonial' %}"><li class=""><i class="fa-solid fa-message me-2"></i>Testimonial</li></a>
-                        <a href="{% url 'create_popup' %}"><li class=""><i class="fa-solid fa-poop me-2"></i>Create Popup</li></a>
-                        <a href="{% url 'create_footer' %}"><li class=""><i class="fa-solid fa-file-contract me-2"></i>Footer</li></a>
+                        <a href="{% url 'create_sub_menu' %}">
+                            <li class=""><i class="fa-solid fa-bars me-2"></i>SubMenu</li>
+                        </a>
+                        <a href="{% url 'create_banner' %}">
+                            <li class=""><i class="fa-solid fa-sliders me-2"></i>Banner</li>
+                        </a>
+                        <a href="{% url 'create_about' %}">
+                            <li class=""><i class="fa-solid fa-address-card me-2"></i>About</li>
+                        </a>
+                        <a href="{% url 'create_news' %}">
+                            <li class=""><i class="fa-solid fa-newspaper me-2"></i>News</li>
+                        </a>
+                        <a href="{% url 'create_gallery' %}">
+                            <li class=""><i class="fa-solid fa-photo-film me-2"></i>Gallery</li>
+                        </a>
+                        <a href="{% url 'create_blog' %}">
+                            <li class=""><i class="fa-solid fa-blog me-2"></i>Blog</li>
+                        </a>
+                        <a href="{% url 'create_testimonial' %}">
+                            <li class=""><i class="fa-solid fa-message me-2"></i>Testimonial</li>
+                        </a>
+                        <a href="{% url 'create_popup' %}">
+                            <li class=""><i class="fa-solid fa-poop me-2"></i>Create Popup</li>
+                        </a>
+                        <a href="{% url 'create_footer' %}">
+                            <li class=""><i class="fa-solid fa-file-contract me-2"></i>Footer</li>
+                        </a>
                     </ul>
                 </div>
             </div>
