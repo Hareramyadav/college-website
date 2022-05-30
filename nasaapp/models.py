@@ -89,8 +89,8 @@ class Destination(models.Model):
         return str(self.title)
 
 class JobCategory(models.Model):
-    image = models.ImageField(blank=True, null=True, upload_to="static/images")
     title = models.CharField(max_length=300, null=True, blank=True)
+    image = models.ImageField(blank=True, null=True, upload_to="static/images")
     short_desc = models.TextField(blank=True, null=True)
     long_desc = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -53,6 +53,11 @@ urlpatterns = [
     path('inquiry_form', views.inquiry_forms, name="inquiry_form"),
     path('delete_form/<int:form_id>', views.delete_form, name="delete_form"),
 
+    # For Manpower website..............
+    path('create_category', views.create_category, name='create_category'),
+    path('edit_category/<int:category_id>', views.edit_category, name='edit_category'),
+    path('delete_category/<int:category_id>', views.delete_category, name='delete_category'),
+
     # client pages
     path('contact', views.contact, name="contact"),
     path('admission-from', views.admission_from, name="admission-from"),

@@ -1,0 +1,29 @@
+{% extends 'admin/admin_dashboard.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="menu-form">
+        <h3>Edit Job Category</h3>
+        <form method="POST" action="{% url 'edit_category' category_id=category_id%}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                <label for="title">Category Name</label>
+                <input type="text" name="" class="form-control" id="" placeholder="" value="{{category.title}}">
+            </div>
+            <div class="form-group mb-3">
+                <label for="image">Category Image</label>
+                <input type="file" name="image" class="form-control" id="" placeholder="">
+            </div>
+            <div class="form-group mb-3">
+                <label for="short_desc">Short Description</label>
+                <textarea rows="3" name="short_desc" class="form-control" id="" placeholder=""></textarea>
+            </div>
+            <div class="form-group mb-3">
+                <label for="long_desc">Long Description</label>
+                <textarea rows="5" name="long_desc" class="form-control" id="" placeholder=""></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,4 +1,6 @@
 
+from webbrowser import get
+from numpy import imag
 from .models import *
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -629,6 +631,46 @@ def inquiry_forms(request):
 def delete_form(request, form_id):
     AdmissionForm.objects.filter(id=int(form_id)).delete()
     return redirect('/inquiry_form')
+
+# Manpower site extra views................
+#............................
+#................................
+
+def create_category(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        image = request.FILES.get('image')
+        short_desc = request.POST.get('short_desc')
+        long_desc = request.POST.get('long_desc')
+
+        data = dict(title=title, image=image, short_desc=short_desc, long_desc=long_desc)
+        JobCategory.objects.create(**data)
+        return redirect('/create_category')
+    category = JobCategory.objects.all().order_by('created_at')
+    return render(request, 'admin/create_category.html', {'category':category})
+
+def edit_category(request, category_id):
+    category = JobCategory.objects.get(id=int(category_id))
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        image = request.FILES.get('image', None)
+        short_desc = request.POST.get('short_desc')
+        long_desc = request.POST.get('long_desc')
+
+        category.title = title
+        category.short_desc = short_desc
+        category.long_desc = long_desc
+
+        if image is not None:
+            category.image = image
+        category.save()
+        return redirect('/create_category')
+    return render(request, 'admin/edit_category.html', {'category':category, 'category_id':category_id})
+
+def delete_category(request, category_id):
+    JobCategory.objects.filter(id=int(category_id)).delete()
+    return redirect('/create_category')
+
 
 
 # client pages.....................
