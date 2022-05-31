@@ -29,11 +29,8 @@
                 <hr>
                 <div class="sidebar-list">
                     <ul>
-                        <a href="{% url 'admin_dashboard' %}">
+                        <a href="{% url 'contact_forms' %}">
                             <li class=""><i class="fa-solid fa-gauge me-2"></i>Dashboard</li>
-                        </a>
-                        <a href="{% url 'inquiry_form' %}">
-                            <li class=""><i class="fa-brands fa-wpforms me-2"></i>Admission Forms</li>
                         </a>
                         <a href="{% url 'site_identity' %}">
                             <li><i class="fa-solid fa-sitemap me-2"></i>Site Identity</li>
@@ -50,21 +47,27 @@
                         <a href="{% url 'create_about' %}">
                             <li class=""><i class="fa-solid fa-address-card me-2"></i>About</li>
                         </a>
+                        <a href="{% url 'create_service' %}">
+                            <li class=""><i class="fa-brands fa-wpforms me-2"></i>Services</li>
+                        </a>
+                        <a href="{% url 'create_joblisting' %}">
+                            <li class=""><i class="fa-brands fa-wpforms me-2"></i>Open Jobs</li>
+                        </a>
+                        <a href="{% url 'create_destination' %}">
+                            <li class=""><i class="fa-brands fa-wpforms me-2"></i>Top Destinations</li>
+                        </a>
                         <a href="{% url 'create_news' %}">
                             <li class=""><i class="fa-solid fa-newspaper me-2"></i>News</li>
                         </a>
                         <a href="{% url 'create_gallery' %}">
                             <li class=""><i class="fa-solid fa-photo-film me-2"></i>Gallery</li>
                         </a>
-                        <a href="{% url 'create_blog' %}">
-                            <li class=""><i class="fa-solid fa-blog me-2"></i>Blog</li>
+                        <a href="{% url 'create_client' %}">
+                            <li class=""><i class="fa-solid fa-blog me-2"></i>Clients</li>
                         </a>
                         <a href="{% url 'create_testimonial' %}">
                             <li class=""><i class="fa-solid fa-message me-2"></i>Testimonial</li>
-                        </a>
-                        <a href="{% url 'create_popup' %}">
-                            <li class=""><i class="fa-solid fa-poop me-2"></i>Create Popup</li>
-                        </a>
+                        </a> 
                         <a href="{% url 'create_footer' %}">
                             <li class=""><i class="fa-solid fa-file-contract me-2"></i>Footer</li>
                         </a>

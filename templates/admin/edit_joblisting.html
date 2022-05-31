@@ -1,0 +1,37 @@
+{% extends 'admin/admin_dashboard.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="menu-form">
+        <h3>Edit Job</h3>
+        <form method="POST" action="{% url 'edit_joblisting' joblisting_id=joblisting_id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                <label for="title">Job Title</label>
+                <input type="text" name="title" class="form-control" id="" placeholder="" value="{{joblisting.title}}">
+            </div>
+            <div class="form-group mb-3">
+                <label for="image">Image</label>
+                <input type="file" name="image" class="form-control" id="" placeholder="">
+            </div>
+            <div class="form-group mb-3">
+                <label for="company_name">Company Name</label>
+                <input type="text" name="company_name" class="form-control" id="" placeholder="" value="{{joblisting.company_name}}">
+            </div>
+            <div class="form-group mb-3">
+                <label for="country">Country</label>
+                <input type="text" name="country" class="form-control" id="" placeholder="" value="{{joblisting.country}}">
+            </div>
+            <div class="form-group mb-3">
+                <label for="short_desc">Short Description</label>
+                <textarea rows="3" name="short_desc" class="form-control" id="" placeholder="">{{joblisting.short_desc}}</textarea>
+            </div>
+            <div class="form-group mb-3">
+                <label for="long_desc">Long Description</label>
+                <textarea rows="5" name="long_desc" class="form-control" id="" placeholder="">{{joblisting.long_desc}}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -52,6 +52,8 @@ urlpatterns = [
     path('delete_popup/<int:popup_id>', views.delete_popup, name="delete_popup"),
     path('inquiry_form', views.inquiry_forms, name="inquiry_form"),
     path('delete_form/<int:form_id>', views.delete_form, name="delete_form"),
+    path('contact_forms', views.contact_forms, name="contact_forms"),
+    path('delete_contact/<int:contact_id>', views.delete_contact, name="delete_contact"),
 
     # For Manpower website..............
     path('create_category', views.create_category, name='create_category'),
@@ -63,11 +65,25 @@ urlpatterns = [
     path('create_destination', views.create_destination, name='create_destination'),
     path('edit_destination/<int:destination_id>', views.edit_destination, name='edit_destination'),
     path('delete_destination/<int:destination_id>', views.delete_destination, name='delete_destination'),
+    path('create_joblisting', views.create_joblisting, name='create_joblisting'),
+    path('edit_joblisting/<int:joblisting_id>', views.edit_joblisting, name='edit_joblisting'),
+    path('delete_joblisting/<int:joblisting_id>', views.delete_joblisting, name='delete_joblisting'),
+    path('create_client', views.create_client, name='create_client'),
+    path('delete_client/<int:client_id>', views.delete_client, name='delete_client'),
 
     # client pages
+    path('shalmani/<int:page_id>', views.pages, name="pages"),
     path('contact', views.contact, name="contact"),
     path('admission-from', views.admission_from, name="admission-from"),
+    path('contact_form', views.contact_form, name="contact_form"),
     path('sub_menu/<int:sub_menu_id>', views.sub_menu, name="sub_menu"),
     path('get_menu', views.get_menu, name="get_menu"),
     path('get_sub_menu', views.get_sub_menu, name="get_sub_menu"),
+
+    # for manpower site additional client pages................
+    path('destinations', views.destinations, name="destinations"),
+    path('services', views.services, name="services"),
+    path('services/<int:service_id>', views.service, name="services"),
+    path('jobs', views.jobs, name="jobs"),
+    path('jobs/<int:job_id>', views.job, name="jobs"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -97,7 +97,7 @@ $(document).ready(function () {
                     })
                 } else {
                     $('.bottom-header').append(
-                        `<a class="nav-link text-capitalize bottom-nav-link text-dark" href="${a.menu_link}">`
+                        `<a class="nav-link text-capitalize bottom-nav-link text-dark" href="http://127.0.0.1:8000/shalmani/${a.id}">`
                         + a.menu_name +
                         '</a>'
                     )
@@ -110,11 +110,11 @@ $(document).ready(function () {
 
     // main menu based on selected value....................
     var linkContent = $('.link-content').hide();
-    $('#menu-type').change(function(){
+    $('#menu-type').change(function () {
         var val = $(this).val();
-        if(val === 'link'){
+        if (val === 'link') {
             linkContent.show();
-        }else{
+        } else {
             linkContent.hide();
         }
     })
@@ -123,13 +123,13 @@ $(document).ready(function () {
     var footerFirst = $('.footer-first').show();
     var socialLinks = $('.social-links').hide();
     var copyright = $('.copyright').hide();
-    $('#footer_position').change(function(){
+    $('#footer_position').change(function () {
         var val = $(this).val();
-        if(val === 'footer_third'){
+        if (val === 'footer_third') {
             footerFirst.hide();
             socialLinks.show();
         }
-        if(val === 'copyright'){
+        if (val === 'copyright') {
             copyright.show();
             footerFirst.hide();
             socialLinks.hide();
@@ -138,12 +138,12 @@ $(document).ready(function () {
     // news based on selected value
     var newsIdentity = $('.news-identity').hide();
     var news = $('.news').show();
-    $('#news_position').change(function(){
+    $('#news_position').change(function () {
         var val = $(this).val();
-        if(val === 'news_identity'){
+        if (val === 'news_identity') {
             newsIdentity.show();
             news.hide();
-        }else{
+        } else {
             newsIdentity.hide();
             news.show();
         }

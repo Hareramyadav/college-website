@@ -104,6 +104,8 @@ class JobCategory(models.Model):
 class JobListing(models.Model):
     category = models.ForeignKey(JobCategory, on_delete=models.CASCADE)
     image = models.ImageField(blank=True, null=True, upload_to="static/images")
+    company_name = models.CharField(max_length=200, null=True, blank=True)
+    country = models.CharField(max_length=100, null=True, blank=True)
     title = models.CharField(max_length=300, null=True, blank=True)
     short_desc = models.TextField(blank=True, null=True)
     long_desc = models.TextField(blank=True, null=True)
@@ -114,6 +116,30 @@ class JobListing(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+class Client(models.Model):
+    image = models.ImageField(blank=True, null=True, upload_to="static/images")
+    title = models.CharField(max_length=300, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'client'
+
+    def __str__(self):
+        return str(self.title)
+
+class Contact(models.Model):
+    name = models.CharField(max_length=500, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=100, blank=True, null=True)
+    message = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'contact'
+
+    def __str__(self):
+        return str(self.name)
 
 class AboutSection(models.Model):
     about_image = models.ImageField(

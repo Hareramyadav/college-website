@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid blogs-page">
+    {% for service in services %}
+    <div class="card px-2 py-2 flex-md-row mb-4 mb-lg-0">
+        <div class="card-text mb-3 mb-lg-0">
+            <h3>{{service.title}}</h3>
+            <p>{{service.short_desc}}</p>
+            <a href="{% url 'services' service_id=service.id %}">View Details</a>
+        </div>
+        <div class="card-image">
+            {% if service.image %}
+            <img src="{{service.image.url}}" alt="" srcset="" height="200" width="250">
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

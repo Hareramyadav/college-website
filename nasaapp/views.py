@@ -1,4 +1,5 @@
 
+from unicodedata import category
 from webbrowser import get
 from numpy import imag
 from .models import *
@@ -671,6 +672,53 @@ def delete_category(request, category_id):
     JobCategory.objects.filter(id=int(category_id)).delete()
     return redirect('/create_category')
 
+def create_joblisting(request):
+    job_category = JobCategory.objects.all().values('title').distinct()
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        image = request.FILES.get('image')
+        company_name = request.POST.get('company_name')
+        country = request.POST.get('country')
+        short_desc = request.POST.get('short_desc')
+        long_desc = request.POST.get('long_desc')
+
+        category_value = request.POST.getlist('category')[0]
+        category_id = JobCategory.objects.filter(title=category_value)[0].id
+
+        data = dict(title=title, image=image, short_desc=short_desc, company_name=company_name,
+        country=country, long_desc=long_desc, category_id=int(category_id))
+        JobListing.objects.create(**data)
+        return redirect('/create_joblisting')
+    joblisting = JobListing.objects.all().order_by('created_at')
+    return render(request, 'admin/create_joblisting.html', {'joblisting':joblisting, 'job_category':job_category})
+
+def edit_joblisting(request, joblisting_id):
+    joblisting = JobListing.objects.get(id=int(joblisting_id))
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        image = request.FILES.get('image', None)
+        company_name = request.POST.get('company_name')
+        country = request.POST.get('country')
+        short_desc = request.POST.get('short_desc')
+        long_desc = request.POST.get('long_desc')
+
+        joblisting.title = title
+        joblisting.company_name = company_name
+        joblisting.country = country
+        joblisting.short_desc = short_desc
+        joblisting.long_desc = long_desc
+
+        if image is not None:
+            joblisting.image = image
+        joblisting.save()
+        return redirect('/create_joblisting')
+    return render(request, 'admin/edit_joblisting.html', {'joblisting':joblisting, 'joblisting_id':joblisting_id})    
+
+def delete_joblisting(request, joblisting_id):
+    JobListing.objects.filter(id=int(joblisting_id)).delete()
+    return redirect('/create_joblisting')
+
+
 def create_service(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -735,6 +783,41 @@ def edit_destination(request, destination_id):
 def delete_destination(request, destination_id):
     Destination.objects.filter(id=int(destination_id)).delete()
     return redirect('/create_destination')
+
+def create_client(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        image = request.FILES.get('image')
+
+        data = dict(title=title, image=image)
+        Client.objects.create(**data)
+        return redirect('/create_client')
+    client = Client.objects.all().order_by('created_at')
+    return render(request, 'admin/create_client.html', {'clients':client})
+
+def delete_client(request, client_id):
+    Client.objects.filter(id=int(client_id)).delete()
+    return redirect('/create_client')
+
+def contact_form(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone  = request.POST.get('phone ')
+        message = request.POST.get('message')
+
+        data = dict(name=name, email=email, phone=phone, message=message)
+        Contact.objects.create(**data)
+        return redirect('/')
+    return render(request, 'admin/main_page.html')
+
+def contact_forms(request):
+    forms = Contact.objects.all().order_by('created_at')
+    return render(request, 'admin/contact_forms.html', {'forms':forms})
+
+def delete_contact(request, contact_id):
+    Contact.objects.filter(id=int(contact_id)).delete()
+    return redirect('/contact_forms')
 # client pages.....................
 # ......................
 # ..............................
@@ -829,7 +912,7 @@ def gallery(request):
     data = {'image': image, 'video': video}
     header_footer = header_footer_view(request)
     data.update(header_footer)
-    return render(request, 'client/gallery.html', data)
+    return render(request, 'client/main_page.html', data)
 
 
 def testimonials(request):
@@ -917,3 +1000,61 @@ def sub_menu(request, sub_menu_id):
     header_footer = header_footer_view(request)
     data.update(header_footer)
     return render(request, 'client/sub_menu.html', data)
+
+
+# Client pages for manpower site..........
+def pages(request, page_id):
+    datas = Menu.objects.get(id=int(page_id))
+    job = JobListing.objects.all().order_by('created_at')
+    data = {
+        'data': datas,
+        'jobs': job,
+    }
+    header_footer = header_footer_view(request)
+    data.update(header_footer)
+    return render(request, 'client/main_page.html', data)
+
+def destinations(request):
+    destination = Destination.objects.all().order_by('created_at')
+    data = {
+        'destinations': destination
+    }
+    header_footer = header_footer_view(request)
+    data.update(header_footer)
+    return render(request, 'client/destinations.html', data)
+
+def services(request):
+    service = Service.objects.all().order_by('created_at')
+    data = {
+        'services': service
+    }
+    header_footer = header_footer_view(request)
+    data.update(header_footer)
+    return render(request, 'client/services.html', data)
+
+def service(request, service_id):
+    service = Service.objects.get(id=int(service_id))
+    data = {
+        'service': service
+    }
+    header_footer = header_footer_view(request)
+    data.update(header_footer)
+    return render(request, 'client/service.html', data)
+
+def jobs(request):
+    job = JobListing.objects.all().order_by('created_at')
+    data = {
+        'jobs': job
+    }
+    header_footer = header_footer_view(request)
+    data.update(header_footer)
+    return render(request, 'client/jobs.html', data)
+
+def job(request, job_id):
+    job = JobListing.objects.get(id=int(job_id))
+    data = {
+        'job': job
+    }
+    header_footer = header_footer_view(request)
+    data.update(header_footer)
+    return render(request, 'client/job.html', data)
