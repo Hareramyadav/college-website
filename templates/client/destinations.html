@@ -2,18 +2,24 @@
 {% load static %}
 
 {% block content %}
-<div class="container-fluid blogs-page">
-    {% for d in destinations %}
-    <div class="card px-2 py-2 flex-md-row mb-4 mb-lg-0">
-        <div class="card-text mb-3 mb-lg-0">
-            <h3>{{d.title}}</h3>
-        </div>
-        <div class="card-image">
-            {% if d.image %}
-            <img src="{{d.image.url}}" alt="" srcset="" height="200" width="250">
-            {% endif %}
+<section>
+    <div class="px-4 py-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-16">
+        <div class="grid gap-6 row-gap-5 lg:grid-cols-3">
+            {% for destination in destinations %}
+            <div>
+                {% if destination.image %}
+                <img class="object-cover w-full h-64 mb-6 rounded shadow-lg lg:h-64 xl:h-64" src="{{destination.image}}"
+                    alt="" />
+                {% else %}
+                <img class="object-cover w-full h-64 mb-6 rounded shadow-lg lg:h-64 xl:h-64"
+                    src="{% static 'images/place.jpeg' %}" alt="" />
+                {% endif %}
+                <h5 class="text-center mb-2 text-xl font-bold leading-none sm:text-2xl">
+                    {{destination.title}}
+                </h5>
+            </div>
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
-</div>
+</section>
 {% endblock %}

@@ -9,7 +9,11 @@
             <p>{{testimonial.long_message}}</p>
         </div>
         <div class="card-image">
+            {% if t.student_image %}
             <img src="{{blog.blog_image.url}}" alt="" srcset="" height="200">
+            {% else %}
+            <img class="" src="{% static 'images/place.jpeg' %}" alt="First slide">
+            {% endif %}
         </div>
     </div>
 </div>

@@ -159,32 +159,37 @@
 <!-- Our Services -->
 <section>
     <div class="px-4 py-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-16">
-        {% for i in news_identity %}
         <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
             <h2
                 class="max-w-lg mb-6 text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
                 <span class="relative inline-block">
-                    <span class="relative">{{i.title}}</span>
+                    <span class="relative">Services We Offer</span>
                 </span>
             </h2>
             <p class="text-base text-gray-700 md:text-lg">
-                {{i.tagline}}
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                accusantium doloremque rem aperiam, eaque ipsa quae.
             </p>
         </div>
-        {% endfor %}
         <div class="services relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {% for n in news %}
+            {% for service in services %}
             <div class="">
                 <div class="">
                     <div
                         class="flex flex-col justify-between overflow-hidden transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
                         <div class="p-5 cursor-pointer">
                             <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-blue-50">
-                                <img class="w-12 h-12" src="{{n.news_image}}" />
+                                {% if service.image %}
+                                <img class="w-12 h-12 rounded" src="{{service.image.url}}" />
+                                {% else %}
+                                <img class="w-12 h-12 rounded" src="{% static 'images/place.jpeg' %}" />
+                                {% endif %}
                             </div>
-                            <p class="mb-2 font-bold">{{n.heading}}</p>
+                            <p class="mb-2 font-bold">{{service.title}}</p>
                             <p class="text-sm leading-5 text-gray-900">
-                                {{n.short_desc}}
+                                <a href="{% url 'services' service_id=service.id %}">
+                                    {{service.short_desc}}
+                                </a>
                             </p>
                         </div>
                         <div
@@ -196,7 +201,7 @@
             {% endfor %}
         </div>
         <div class="text-center">
-            <a href="/"
+            <a href="{% url 'services' %}"
                 class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-blue-600 hover:bg-blue-800 focus:shadow-outline focus:outline-none">
                 Learn more
             </a>
@@ -263,6 +268,227 @@
     <div>
         <img src="https://images.unsplash.com/photo-1531548731165-c6ae86ff6491?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80"
             alt="3 women looking at a laptop" class="object-cover w-full h-64 bg-gray-100 md:h-full" loading="lazy" />
+    </div>
+</section>
+
+<!-- Job Openings -->
+<section>
+    <section class="text-gray-600 body-font">
+        <div class="container px-4 py-6 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-8">
+            <div class="flex flex-col text-center w-full mb-20">
+                <h1 class="sm:text-4xl text-3xl font-bold title-font mb-4 text-gray-900">
+                    Job Openings
+                </h1>
+                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+                    posuere leo at venenatis vehicula. Nulla ac ullamcorper metus.
+                    Morbi vulputate venenatis enim, non tristique ex volutpat eu.
+                </p>
+            </div>
+            <div class="flex flex-wrap -m-4">
+                {% for job in jobs %}
+                <div class="lg:w-1/3 sm:w-1/2 p-4">
+                    <div class="flex relative">
+                        {% if job.image %}
+                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center"
+                            src="{{job.image.url}}" />
+                        {% else %}
+                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center"
+                            src="{% static 'images/jobs.webp' %}" />
+                        {% endif %}
+                        <div
+                            class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white text-center opacity-0 hover:opacity-100 transition-all ease-in-out cursor-pointer duration-300">
+                            <h1 class="title-font text-lg font-bold text-gray-900 mb-3">
+                                {{job.title}}
+                            </h1>
+                            <p class="leading-relaxed">
+                                {{job.short_desc}}
+                            </p>
+                            <a class="text-blue-700 font-bold inline-flex items-center md:mb-2 lg:mb-0 py-2"
+                                href="{% url 'jobs' job_id=job.id %}">View Job
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</section>
+
+<!-- Destinations -->
+<section>
+    <div class="px-4 py-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-16">
+        <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+            <h2
+                class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+                <span class="relative inline-block">
+                    <span class="relative">Top</span>
+                </span>
+                Job Destination
+            </h2>
+            <p class="text-base text-gray-700 md:text-lg">
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                accusantium doloremque rem aperiam, eaque ipsa quae.
+            </p>
+        </div>
+        <div class="grid gap-6 row-gap-5 lg:grid-cols-3">
+            {% for destination in destinations %}
+            <div>
+                {% if destination.image %}
+                <img class="object-cover w-full h-64 mb-6 rounded shadow-lg lg:h-64 xl:h-64" src="{{destination.image}}"
+                    alt="" />
+                {% else %}
+                <img class="object-cover w-full h-64 mb-6 rounded shadow-lg lg:h-64 xl:h-64"
+                    src="{% static 'images/place.jpeg' %}" alt="" />
+                {% endif %}
+                <h5 class="text-center mb-2 text-xl font-bold leading-none sm:text-2xl">
+                    {{destination.title}}
+                </h5>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center py-8">
+            <a href="{% url 'destinations' %}"
+                class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-blue-600 hover:bg-blue-700 focus:shadow-outline focus:outline-none">
+                Learn more
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Blog -->
+<section>
+    <div class="px-4 py-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-8">
+        <div class="flex flex-wrap justify-center -mx-4">
+            <div class="w-full px-4">
+                <div class="text-center mx-auto mb-8 lg:mb-20 max-w-[510px]">
+                    <h2 class="font-bold text-3xl sm:text-4xl md:text-[40px] text-dark mb-4">
+                        Our Recent News
+                    </h2>
+                    <p class="text-base text-body-color">
+                        There are many variations of passages of Lorem Ipsum available
+                        but the majority have suffered alteration in some form.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
+            {% for blog in blogs %}
+            <div class="overflow-hidden transition-shadow duration-300 bg-white rounded shadow-sm">
+                {% if blog.blog_image %}
+                <img src="{{blog.blog_image.url}}" class="object-cover w-full h-64" alt="" />
+                {% else %}
+                <img src="{% static 'images/place.jpeg' %}" class="object-cover w-full h-64" alt="" />
+                {% endif %}
+                <div class="p-5 border border-t-0">
+                    <p class="mb-3 text-xs font-semibold tracking-wide uppercase">
+                        <a href="/" class="transition-colors duration-200 text-blue-gray-900 hover:text-blue-900"
+                            aria-label="Category" title="traveling">traveling</a>
+                        <span class="text-gray-600">— {{blog.created_at}}</span>
+                    </p>
+                    <a href="{% url 'blogs' blog_id=blog.id %}" aria-label="Category" title=""
+                        class="inline-block mb-3 text-2xl font-bold leading-22 transition-colors duration-200 hover:text-blue-900">
+                        {{blog.blog_title}}</a>
+                    <p class="mb-2 text-gray-700">
+                        {{blog.short_desc}}
+                    </p>
+                    <a href="{% url 'blogs' blog_id=blog.id %}" aria-label=""
+                        class="inline-flex items-center font-semibold transition-colors duration-200 text-blue-600 hover:text-blue-900">Learn
+                        more</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="text-center py-8">
+        <a href="{% url 'blogs' %}"
+            class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-blue-600 hover:bg-blue-700 focus:shadow-outline focus:outline-none">
+            Learn more
+        </a>
+    </div>
+</section>
+
+<!-- Testimonials -->
+
+<section class="flex items-center justify-center py-16 bg-gray-100 min-w-screen">
+    <div class="max-w-6xl px-12 mx-auto bg-gray-100 md:px-16 xl:px-10">
+        <div class="flex flex-col items-center lg:flex-row">
+            <div class="flex flex-col items-start justify-center w-full h-full pr-8 mb-10 lg:mb-0 lg:w-1/2">
+                <h2
+                    class="text-4xl font-extrabold leading-10 tracking-tight text-gray-900 sm:text-5xl sm:leading-none md:text-6xl lg:text-5xl xl:text-6xl">
+                    Testimonials
+                </h2>
+                <p class="my-6 text-lg text-gray-600">
+                    Don't just take our word for it, read from our extensive list of
+                    case studies and customer testimonials.
+                </p>
+                <a href="{% url 'testimonials' %}"
+                    class="flex items-center justify-center px-8 py-3 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-blue-600 border border-transparent rounded-md shadow hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue md:py-4 md:text-lg md:px-10">View
+                    More
+                </a>
+            </div>
+            <div class="w-full lg:w-1/2">
+                {% for testimonial in testimonial %}
+                <blockquote
+                    class="flex items-center justify-between mb-3 w-full col-span-1 p-6 bg-white rounded-lg hover:shadow-lg hover:cursor-pointer transition-all duration-300">
+                    <div class="flex flex-col pr-8">
+                        <div class="relative pl-12">
+                            <svg class="absolute left-0 w-10 h-10 text-blue-500 fill-current"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125">
+                                <path
+                                    d="M30.7 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2C12.7 83.1 5 72.6 5 61.5c0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S30.7 31.6 30.7 42zM82.4 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2-11.8 0-19.5-10.5-19.5-21.6 0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S82.4 31.6 82.4 42z">
+                                </path>
+                            </svg>
+                            <p class="mt-2 text-sm text-gray-600 sm:text-base lg:text-sm xl:text-base">
+                                <a href="{% url 'testimonials' test_id=testimonial.id %}">
+                                    {{testimonial.short_message}}
+                                </a>
+                            </p>
+                        </div>
+
+                        <h3
+                            class="pl-12 mt-3 text-sm font-medium leading-5 text-gray-800 truncate sm:text-base lg:text-sm">
+                            {{testimonial.student_name}}
+                            <!-- <span class="mt-1 text-sm leading-5 text-gray-500 truncate">- CEO SomeCompany</span> -->
+                        </h3>
+                    </div>
+                    {% if testimonial.student_image %}
+                    <img class="flex-shrink-0 w-20 h-20 bg-gray-300 rounded-full xl:w-24 xl:h-24"
+                        src="{{testimonial.student_image}}" alt="" />
+                    {% else %}
+                    <img class="flex-shrink-0 w-20 h-20 bg-gray-300 rounded-full xl:w-24 xl:h-24"
+                        src="{% static 'images/place.jpeg' %}" alt="" />
+                    {% endif %}
+                </blockquote>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Clients -->
+<section class="px-4 py-24 mx-auto max-w-7xl">
+    <h1 class="mb-3 text-3xl font-bold leading-tight text-center text-gray-900 md:text-4xl">
+        Our Clients
+    </h1>
+    <h2 class="mb-12 text-sm tracking-wide text-center text-gray-800 uppercase">
+        We're proud to have played a part in these amazing journeys.
+    </h2>
+    <div class="grid grid-cols-2 gap-2 text-center lg:grid-cols-6">
+        {% for client in clients %}
+        <div class="flex items-center justify-center p-6 bg-opacity-25 bg-primary-light">
+            {% if client.image %}
+            <img src="{{client.image}}" alt="Todoist Logo" class="block object-contain h-16" />
+            {% else %}
+            <img src="{% static 'images/place.jpeg' %}" alt="Todoist Logo" class="block object-contain h-16 rounded" />
+            {% endif %}
+        </div>
+        {% endfor %}
     </div>
 </section>
 

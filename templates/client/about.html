@@ -21,7 +21,11 @@
                     <a href="{% url 'news' news_id=n.id %}">View Details</a>
                 </div>
                 <div class="card-image">
+                    {% if n.news_image %}
                     <img src="{{n.news_image.url}}" alt="" srcset="" height="150" width="200">
+                    {% else %}
+                    <img src="{% static 'images/place.jpeg' %}" alt="" srcset="" height="150" width="200">
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

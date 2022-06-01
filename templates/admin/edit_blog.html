@@ -12,19 +12,19 @@
             </div>
             <div class="form-group mb-3">
                 <label for="blog_title">Title</label>
-                <input type="text" name="blog_title" class="form-control" id="" placeholder="">
+                <input type="text" name="blog_title" class="form-control" id="" placeholder="" value="{{blog.blog_title}}">
             </div>
             <div class="form-group mb-3">
                 <label for="blog_author">Author</label>
-                <input type="text" name="blog_author" class="form-control" id="" placeholder="">
+                <input type="text" name="blog_author" class="form-control" id="" placeholder="" value="{{blog.blog_author}}">
             </div>
             <div class="form-group mb-3">
                 <label for="short_desc">Short Description</label>
-                <input type="text" name="short_desc" class="form-control" id="" placeholder="">
+                <textarea rows="3" name="short_desc" class="form-control" id="" placeholder="">{{blog.short_desc}}</textarea>
             </div>
             <div class="form-group mb-3">
                 <label for="long_desc">Long Description</label>
-                <input type="text" name="long_desc" class="form-control" id="" placeholder="">
+                <textarea rows="5" name="long_desc" class="form-control" id="" placeholder="">{{blog.long_desc}}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>

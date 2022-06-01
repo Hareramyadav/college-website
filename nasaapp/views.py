@@ -41,19 +41,23 @@ def admin_logout(request):
     return redirect('/admin_login')
 
 def index(request):
+    jobs = JobListing.objects.all().order_by('-created_at')[:6]
+    destinations = Destination.objects.all().order_by('-created_at')[:6]
+    clients = Client.objects.all().order_by('-created_at')[:6]
+    services = Service.objects.all().order_by('-created_at')[:8]
     banner = Banner.objects.all().order_by('created_at')
     menu = Menu.objects.all()
     popup = Popup.objects.all()
     about = AboutSection.objects.all().order_by('created_at')[:1]
-    news = News.objects.all().order_by('created_at')[:8]
+    news = News.objects.all().order_by('-created_at')[:3]
     news_identity = [identity for identity in news if identity.news_position == 'news_identity'][:1]
     newss = [n for n in news if n.news_position == 'news'][:8]
     messages = Message.objects.all().order_by('created_at')[:4]
-    blogs = Blog.objects.all().order_by('created_at')[:2]
+    blogs = Blog.objects.all().order_by('-created_at')[:3]
     gallery = Gallery.objects.all().order_by('created_at')
     image = [i for i in gallery if i.media_type == 'image']
     video = [v for v in gallery if v.media_type == 'video']
-    testimonial = Testimonial.objects.all()[:6]
+    testimonial = Testimonial.objects.all().order_by('-created_at')[:3]
     testimonial_no = len(testimonial)
     testimonial_slide = testimonial_no // 3 + \
         ceil((testimonial_no / 3) - (testimonial_no // 3))
@@ -66,7 +70,7 @@ def index(request):
         'popup':popup,
         'about': about,
         'messages': messages,
-        'blog': blogs,
+        'blogs': blogs,
         'image': image,
         'video': video,
         'testimonial': testimonial,
@@ -76,6 +80,10 @@ def index(request):
         'range_mobile':range(testimonial_mobile_silde),
         'news':newss,
         'news_identity':news_identity,
+        'jobs':jobs,
+        'destinations':destinations,
+        'clients':clients,
+        'services':services,
     }
     data.update(header_footer)
     return render(request, 'index.html', data)
@@ -1058,3 +1066,12 @@ def job(request, job_id):
     header_footer = header_footer_view(request)
     data.update(header_footer)
     return render(request, 'client/job.html', data)
+
+def clients(request):
+    clients = Client.objects.all().order_by('-created_at')
+    data = {
+        'clients': clients
+    }
+    header_footer = header_footer_view(request)
+    data.update(header_footer)
+    return render(request, 'client/clients.html', data)
