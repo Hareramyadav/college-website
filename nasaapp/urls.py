@@ -70,6 +70,9 @@ urlpatterns = [
     path('delete_joblisting/<int:joblisting_id>', views.delete_joblisting, name='delete_joblisting'),
     path('create_client', views.create_client, name='create_client'),
     path('delete_client/<int:client_id>', views.delete_client, name='delete_client'),
+    path('create_team', views.create_team, name='create_team'),
+    path('edit_team/<int:team_id>', views.edit_team, name='edit_team'),
+    path('delete_team/<int:team_id>', views.delete_team, name='delete_team'),
 
     # client pages
     path('shalmani/<int:page_id>', views.pages, name="pages"),
@@ -86,4 +89,6 @@ urlpatterns = [
     path('services/<int:service_id>', views.service, name="services"),
     path('jobs', views.jobs, name="jobs"),
     path('jobs/<int:job_id>', views.job, name="jobs"),
+    path('clients', views.clients, name="clients"),
+    path('teams', views.teams, name="teams"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

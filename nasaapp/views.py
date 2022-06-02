@@ -52,7 +52,7 @@ def index(request):
     news = News.objects.all().order_by('-created_at')[:3]
     news_identity = [identity for identity in news if identity.news_position == 'news_identity'][:1]
     newss = [n for n in news if n.news_position == 'news'][:8]
-    messages = Message.objects.all().order_by('created_at')[:4]
+    teams = Message.objects.all().order_by('created_at')[:4]
     blogs = Blog.objects.all().order_by('-created_at')[:3]
     gallery = Gallery.objects.all().order_by('created_at')
     image = [i for i in gallery if i.media_type == 'image']
@@ -69,7 +69,7 @@ def index(request):
         'menu':menu,
         'popup':popup,
         'about': about,
-        'messages': messages,
+        'teams': teams,
         'blogs': blogs,
         'image': image,
         'video': video,
@@ -763,6 +763,41 @@ def delete_service(request, service_id):
     Service.objects.filter(id=int(service_id)).delete()
     return redirect('/create_service')
 
+def create_team(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        image = request.FILES.get('image')
+        position = request.POST.get('position')
+        long_desc = request.POST.get('long_desc')
+
+        data = dict(name=name, image=image, position=position, long_desc=long_desc)
+        Message.objects.create(**data)
+        return redirect('/create_team')
+    teams = Message.objects.all().order_by('created_at')
+    return render(request, 'admin/create_team.html', {'teams':teams})
+
+def edit_team(request, team_id):
+    team = Message.objects.get(id=int(team_id))
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        image = request.FILES.get('image', None)
+        position = request.POST.get('position')
+        long_desc = request.POST.get('long_desc')
+
+        team.name = name
+        team.position = position
+        team.long_desc = long_desc
+
+        if image is not None:
+            team.image = image
+        team.save()
+        return redirect('/create_team')
+    return render(request, 'admin/edit_team.html', {'team':team, 'team_id':team_id})
+
+def delete_team(request, team_id):
+    Message.objects.filter(id=int(team_id)).delete()
+    return redirect('/create_team')
+
 def create_destination(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -1075,3 +1110,12 @@ def clients(request):
     header_footer = header_footer_view(request)
     data.update(header_footer)
     return render(request, 'client/clients.html', data)
+
+def teams(request):
+    teams = Message.objects.all().order_by('-created_at')
+    data = {
+        'teams': teams
+    }
+    header_footer = header_footer_view(request)
+    data.update(header_footer)
+    return render(request, 'client/teams.html', data)
