@@ -585,6 +585,7 @@ def delete_form(request, form_id):
     AdmissionForm.objects.filter(id=int(form_id)).delete()
     return redirect('/inquiry_form')
 
+@validate_request_for_admin
 def create_team(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -598,6 +599,7 @@ def create_team(request):
     teams = Message.objects.all().order_by('created_at')
     return render(request, 'admin/create_team.html', {'teams':teams})
 
+@validate_request_for_admin
 def edit_team(request, team_id):
     team = Message.objects.get(id=int(team_id))
     if request.method == 'POST':
@@ -616,6 +618,7 @@ def edit_team(request, team_id):
         return redirect('/create_team')
     return render(request, 'admin/edit_team.html', {'team':team, 'team_id':team_id})
 
+@validate_request_for_admin
 def delete_team(request, team_id):
     Message.objects.filter(id=int(team_id)).delete()
     return redirect('/create_team')
