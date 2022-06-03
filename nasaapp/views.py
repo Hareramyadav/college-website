@@ -585,6 +585,40 @@ def delete_form(request, form_id):
     AdmissionForm.objects.filter(id=int(form_id)).delete()
     return redirect('/inquiry_form')
 
+def create_team(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        image = request.FILES.get('image')
+        position = request.POST.get('position')
+        long_desc = request.POST.get('long_desc')
+
+        data = dict(name=name, image=image, position=position, long_desc=long_desc)
+        Message.objects.create(**data)
+        return redirect('/create_team')
+    teams = Message.objects.all().order_by('created_at')
+    return render(request, 'admin/create_team.html', {'teams':teams})
+
+def edit_team(request, team_id):
+    team = Message.objects.get(id=int(team_id))
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        image = request.FILES.get('image', None)
+        position = request.POST.get('position')
+        long_desc = request.POST.get('long_desc')
+
+        team.name = name
+        team.position = position
+        team.long_desc = long_desc
+
+        if image is not None:
+            team.image = image
+        team.save()
+        return redirect('/create_team')
+    return render(request, 'admin/edit_team.html', {'team':team, 'team_id':team_id})
+
+def delete_team(request, team_id):
+    Message.objects.filter(id=int(team_id)).delete()
+    return redirect('/create_team')
 
 # client pages.....................
 # ......................

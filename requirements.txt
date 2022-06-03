@@ -2,12 +2,10 @@ asgiref==3.5.1
 certifi==2022.5.18.1
 charset-normalizer==2.0.12
 Django==3.0.2
-django-ckeditor==6.3.2
 django-cors-headers==3.2.1
 django-js-asset==2.0.0
 djangorestframework==3.10.2
 gunicorn==20.0.0
-idna==3.3
 mysqlclient @ file:///opt/concourse/worker/volumes/live/a00baea8-7042-4e61-5922-65c2a6fb6552/volume/mysqlclient_1609786256659/work
 numpy==1.21.6
 pandas==1.3.5

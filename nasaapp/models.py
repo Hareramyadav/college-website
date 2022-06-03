@@ -1,12 +1,5 @@
-from distutils.command.upload import upload
-import email
-from pyexpat import model
-from re import T
-from statistics import mode
-from urllib import request
 from django.db import models
 from django.core.exceptions import ValidationError
-from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -75,8 +68,8 @@ class Banner(models.Model):
 class AboutSection(models.Model):
     about_image = models.ImageField(
         blank=True, null=True, upload_to="static/images")
-    short_desc = RichTextField(blank=True, null=True)
-    long_desc = RichTextField(blank=True, null=True)
+    short_desc = models.TextField(blank=True, null=True)
+    long_desc = models.TextField(blank=True, null=True)
     about_link = models.CharField(max_length=500, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

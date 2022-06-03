@@ -51,6 +51,9 @@ urlpatterns = [
     path('delete_popup/<int:popup_id>', views.delete_popup, name="delete_popup"),
     path('inquiry_form', views.inquiry_forms, name="inquiry_form"),
     path('delete_form/<int:form_id>', views.delete_form, name="delete_form"),
+    path('create_team', views.create_team, name='create_team'),
+    path('edit_team/<int:team_id>', views.edit_team, name='edit_team'),
+    path('delete_team/<int:team_id>', views.delete_team, name='delete_team'),
 
     # client pages
     path('contact', views.contact, name="contact"),
