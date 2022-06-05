@@ -3,9 +3,17 @@
 
 {% block content %}
 <div class="sub-menu-page bg-light py-3">
+    {% if menu.image %}
+    <div class="image" style="background: url(/{{menu.image.url}}); background-repeat: no-repeat; background-size: cover; max-height: 100%;">
+        <h3 class="container">{{menu.menu_name}}</h3>
+    </div>
+    {% else %}
+    <div class="image" style="background: url('../../static/images/slider-2.png'); background-repeat: no-repeat; background-size: cover; max-height: 100%;">
+        <h3 class="container">{{menu.menu_name}}</h3>
+    </div>
+    {% endif %}
     <div class="container">
-        <h3>{{menu.menu_name}}</h3>
-        <p>{{menu.short_desc}}</p>
+        <div>{{menu.long_content}}</div>
     </div>
 </div>
 {% endblock %}

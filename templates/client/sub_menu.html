@@ -2,10 +2,18 @@
 {% load static %}
 
 {% block content %}
-<div class="sub-menu-page bg-light py-3">
+<div class="sub-menu-page py-3">
+    {% if sub_menu_data.image %}
+    <div class="image" style="background: url(/{{sub_menu_data.image.url}}); background-repeat: no-repeat; background-size: cover; max-height: 100%;">
+        <h3 class="container">{{sub_menu_data.sub_menu_name}}</h3>
+    </div>
+    {% else %}
+    <div class="image" style="background: url('../../static/images/slider-2.png'); background-repeat: no-repeat; background-size: cover; max-height: 100%;">
+        <h3 class="container">{{sub_menu_data.sub_menu_name}}</h3>
+    </div>
+    {% endif %}
     <div class="container">
-        <h3>{{sub_menu_data.sub_menu_name}}</h3>
-        <p>{{sub_menu_data.long_content}}</p>
+        <div>{{sub_menu_data.long_content}}</div>
     </div>
 </div>
 {% endblock %}

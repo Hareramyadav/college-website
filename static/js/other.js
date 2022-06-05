@@ -70,7 +70,7 @@ $(document).ready(function () {
 
     // API call for Menu..................................
     // ......................................
-    // var menuIdInSubMenu = [];
+    // var menuIdInSubMenu = []; 
 
     $.when($.ajax("/get_menu"), $.ajax('/get_sub_menu')).done(function (menu, subMenu) {
         var mainMenu = menu[0].data;

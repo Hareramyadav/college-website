@@ -307,7 +307,7 @@ def edit_sub_menu(request, sub_menu_id):
     if request.method == 'POST':
         sub_menu_name = request.POST.get('sub_menu_name').lower()
         link_name = request.POST.get('menu_link')
-        image = request.FILES.getlist('image', None)
+        image = request.FILES.get('image', None)
         short_content = request.POST.get('short_content')
         long_content = request.POST.get('long_content')
 

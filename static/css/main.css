@@ -251,6 +251,12 @@ body {
     gap: 10px 20px;
 }
 
+/* main page section.................. */
+.sub-menu-page h3{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
 
 /* Media Queries............................
 ....................................
