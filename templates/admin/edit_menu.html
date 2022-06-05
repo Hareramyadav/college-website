@@ -9,21 +9,32 @@
             <label for="menu_name">Menu Name</label>
             <input type="text" name="menu_name" class="form-control" id="" placeholder="" value="{{menu.menu_name}}">
         </div>
-        <!-- <div class="form-group mb-3">
-            <label for="menu_link">Menu Link</label>
-            <input type="text" name="menu_link" class="form-control" id="" placeholder="" value="{{menu.menu_link}}">
-        </div> -->
         <div class="form-group mb-3">
-            <label for="image">Image</label>
-            <input type="file" name="image" class="form-control" id="" placeholder="">
+            <label for="menu_type">Select Menu type</label>
+            <select class="form-select" name="menu_type" id="menu-type">
+                <option selected>Select Menu Type</option>
+                <option value="link">Link</option>
+                <option value="dropdown">Dropdown</option>
+            </select>
         </div>
-        <div class="form-group mb-3">
-            <label for="short_content">Short Message</label>
-            <textarea rows="3" name="short_content" class="form-control" id="" placeholder="">{{menu.short_content}}</textarea>
-        </div>
-        <div class="form-group mb-3">
-            <label for="long_content">Long Message</label>
-            <textarea rows="5" name="long_content" class="form-control" id="" placeholder="">{{menu.long_content}}</textarea>
+        <div class="link-content">
+            <div class="form-group mb-3">
+                <label for="menu_link">Menu Custom Link</label>
+                <input type="text" name="menu_link" class="form-control" id="" placeholder="" value="{{menu.menu_link}}">
+                <small class="text-danger">If you provide custom link. Do not provide other information</small>
+            </div>
+            <div class="form-group mb-3">
+                <label for="image">Image</label>
+                <input type="file" name="image" class="form-control" id="" placeholder="">
+            </div>
+            <div class="form-group mb-3">
+                <label for="short_content">Short Message</label>
+                <textarea rows="3" name="short_content" class="form-control" id="" placeholder="">{{menu.short_content}}</textarea>
+            </div>
+            <div class="form-group mb-3">
+                <label for="long_content">Long Message</label>
+                <textarea rows="5" name="long_content" class="form-control" id="" placeholder="">{{menu.long_content}}</textarea>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>

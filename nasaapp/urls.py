@@ -56,6 +56,7 @@ urlpatterns = [
     path('delete_team/<int:team_id>', views.delete_team, name='delete_team'),
 
     # client pages
+    path('menu/<int:page_id>', views.pages, name="pages"),
     path('contact', views.contact, name="contact"),
     path('admission-from', views.admission_from, name="admission-from"),
     path('sub_menu/<int:sub_menu_id>', views.sub_menu, name="sub_menu"),

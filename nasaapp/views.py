@@ -628,6 +628,15 @@ def delete_team(request, team_id):
 # ..............................
 # ....................
 
+def pages(request, page_id):
+    menu = Menu.objects.get(id=int(page_id))
+    data = {
+        'menu': menu,
+    }
+    header_footer = header_footer_view(request)
+    data.update(header_footer)
+    return render(request, 'client/main_page.html', data)
+
 @api_view(['GET'])
 def get_menu(request):
     menu = Menu.objects.all()
