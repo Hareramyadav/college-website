@@ -18,7 +18,7 @@ class SiteIdentity(models.Model):
 
 class Menu(models.Model):
     menu_name = models.CharField(max_length=300, null=True, blank=True)
-    menu_link = models.CharField(max_length=500, null=True, blank=True)
+    menu_link = models.URLField(max_length=500, null=True, blank=True)
     menu_position = models.CharField(max_length=200, null=True, blank=True)
     menu_type = models.CharField(max_length=200, null=True, blank=True)
     menu_index = models.CharField(max_length=200, null=True, blank=True)
