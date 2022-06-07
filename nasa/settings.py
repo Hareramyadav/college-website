@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'nasa.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hiring',
+        'NAME': 'raki',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
@@ -136,6 +136,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-USERNAME = 'nasacollege, hiring'
-EMAIL = 'info@nasacollege.edu.np, hiring@gmail.com'
-PASSWORD = 'Nasa123@#$, hiring@123'
+USERNAME = 'rakiint'
+EMAIL = 'info@rakiint.com.np'
+PASSWORD = 'Raki123@#$'

@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <div class="menu-form">
-        <h3>Create Team Member</h3>
+        <h3>Write Team Member Messages</h3>
         <form method="POST" action="{% url 'create_team' %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group mb-3">
@@ -17,6 +17,10 @@
             <div class="form-group mb-3">
                 <label for="position">Designation</label>
                 <input type="text" name="position" class="form-control" id="" placeholder="">
+            </div>
+            <div class="form-group mb-3">
+                <label for="short_desc">Short Description</label>
+                <textarea rows="5" name="short_desc" class="form-control" id="" placeholder=""></textarea>
             </div>
             <div class="form-group mb-3">
                 <label for="long_desc">Long Description</label>

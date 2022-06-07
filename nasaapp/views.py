@@ -34,7 +34,8 @@ def login(request):
             request.session['user'] = email
             request.session['islogin'] = True
             return redirect('/admin_dashboard')
-    return render(request, 'admin/login.html')
+    header_footer = header_footer_view(request)
+    return render(request, 'admin/login.html', header_footer)
     
 def admin_logout(request):
     logout(request)
@@ -52,7 +53,7 @@ def index(request):
     news = News.objects.all().order_by('-created_at')[:3]
     news_identity = [identity for identity in news if identity.news_position == 'news_identity'][:1]
     newss = [n for n in news if n.news_position == 'news'][:8]
-    teams = Message.objects.all().order_by('created_at')[:4]
+    teams = Message.objects.all().order_by('created_at')[:1]
     blogs = Blog.objects.all().order_by('-created_at')[:3]
     gallery = Gallery.objects.all().order_by('created_at')
     image = [i for i in gallery if i.media_type == 'image']
@@ -768,9 +769,10 @@ def create_team(request):
         name = request.POST.get('name')
         image = request.FILES.get('image')
         position = request.POST.get('position')
+        short_desc = request.POST.get('short_desc')
         long_desc = request.POST.get('long_desc')
 
-        data = dict(name=name, image=image, position=position, long_desc=long_desc)
+        data = dict(name=name, image=image, position=position, long_desc=long_desc, short_desc=short_desc)
         Message.objects.create(**data)
         return redirect('/create_team')
     teams = Message.objects.all().order_by('created_at')
@@ -782,12 +784,14 @@ def edit_team(request, team_id):
         name = request.POST.get('name')
         image = request.FILES.get('image', None)
         position = request.POST.get('position')
+        short_desc = request.POST.get('short_desc')
         long_desc = request.POST.get('long_desc')
 
         team.name = name
         team.position = position
         team.long_desc = long_desc
-
+        team.short_desc = short_desc
+        
         if image is not None:
             team.image = image
         team.save()
