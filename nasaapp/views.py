@@ -584,6 +584,15 @@ def delete_form(request, form_id):
 # ..............................
 # ....................
 
+def pages(request, page_id):
+    datas = Menu.objects.get(id=int(page_id))
+    data = {
+        'data': datas,
+    }
+    header_footer = header_footer_view(request)
+    data.update(header_footer)
+    return render(request, 'client/main_page.html', data)
+
 @api_view(['GET'])
 def get_menu(request):
     menu = Menu.objects.all()
