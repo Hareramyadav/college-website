@@ -83,7 +83,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'radijmdg_db',
-        'USER':'radijmdg_db',
+        'USER':'radijmdg_user',
         'PASSWORD':'@RfCdHq67ngE',
         'HOST':'localhost',
         'PORT':'3306',
