@@ -90,7 +90,7 @@ def menu_info_content(request, menu_id):
 
 def header_footer_view(request):
     site_identity = SiteIdentity.objects.all().order_by('created_at')
-    menu_lists = Menu.objects.all().order_by('created_at')
+    menu_lists = Menu.objects.all().order_by('-created_at')
     dropdown_menu = [d for d in menu_lists if d.menu_type == 'dropdown']
     link_menu = [l for l in menu_lists if l.menu_type == 'link']
     sub_menu_lists = SubMenu.objects.all()
