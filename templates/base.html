@@ -48,7 +48,9 @@
                 {% for identity in site_identity %}
                 <a class="navbar-brand logo-second-mobile" href="/"><img src="/{{identity.logo_second}}" alt=""></a>
                 {% endfor %}
-                <div class="collapse navbar-collapse bottom-header" id="header"></div>
+                <div class="collapse navbar-collapse bottom-header" id="header">
+                    <a class="nav-link text-capitalize bottom-nav-link text-dark" href="/">Home</a>
+                </div>
                 {% for identity in site_identity %}
                 <a class="navbar-brand logo-second-desktop" href="/"><img src="/{{identity.logo_second}}" alt=""></a>
                 {% endfor %}

@@ -3,6 +3,7 @@
 *.pot
 *.pyc
 nasa/__pycache__
+nasa/settings.py
 nasaapp/__pycache__
 db.sqlite3
 media
