@@ -8,7 +8,7 @@
     <div class="about-contents container d-md-flex justify-content-between">
         <div class="contents col-lg-8 me-md-4">
             {% for a in about %}
-            <p style="text-align:justify;">{{a.long_desc}}</p>
+            <p style="text-align:justify;">{{a.long_desc | safe}}</p>
             {% endfor %}
         </div>
         <div class="sidebar col-lg-4">

@@ -8,7 +8,7 @@
         <div class="card-text mb-3 mb-lg-0">
             <h3>{{b.blog_title}}</h3>
             <p>{{b.created_at}}</p>
-            <p>{{b.short_desc}}</p>
+            <p>{{b.short_desc | safe}}</p>
             <a href="{% url 'blogs' blog_id=b.id %}">View Details</a>
         </div>
         <div class="card-image">

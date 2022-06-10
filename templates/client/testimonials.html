@@ -11,7 +11,7 @@
                     <img class="" src="{{t.student_image.url}}" alt="First slide">
                     <h5 class="student-name">{{t.student_name}}</h5>
                 </div>
-                <p class="text-center">{{t.short_message}} <a class="text-decoration-none" href="{% url 'testimonials' test_id=t.id %}">Read
+                <p class="text-center">{{t.short_message | safe}} <a class="text-decoration-none" href="{% url 'testimonials' test_id=t.id %}">Read
                         More</a>
                 </p>
             </div>

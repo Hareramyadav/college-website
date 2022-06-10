@@ -68,7 +68,7 @@
             <div class="card-body">
                 <a href="{% url 'menu_info_content' menu_id=menu_content.id %}">
                     <h3 class="">{{menu_content.menu_name}}</h3>
-                    <div class="nasa-info-content">{{menu_content.short_content}}</div>
+                    <div class="nasa-info-content">{{menu_content.short_content | safe}}</div>
                 </a>
             </div>
         </div>
@@ -80,7 +80,7 @@
             <div class="card-body">
                 <a href="{% url 'menu_info_content' menu_id=menu_content.id %}">
                     <h3 class="">{{menu_content.menu_name}}</h3>
-                    <div>{{menu_content.short_content}}</div>
+                    <div>{{menu_content.short_content | safe}}</div>
                 </a>
             </div>
         </div>
@@ -92,7 +92,7 @@
             <div class="card-body">
                 <a href="{% url 'menu_info_content' menu_id=menu_content.id %}">
                     <h3 class="">{{menu_content.menu_name}}</h3>
-                    <div>{{menu_content.short_content}}</div>
+                    <div>{{menu_content.short_content | safe}}</div>
                 </a>
             </div>
         </div>
@@ -112,7 +112,7 @@
         {% endif %}
         <div class="about-content col-lg-6">
             <h3 class="about-nasa-heading">Why Nasa International College?</h3>
-            <p class="about-text">{{a.short_desc}}</p>
+            <p class="about-text">{{a.short_desc | safe}}</p>
             <a href="{{a.about_link}}" class="btn button text-decoration-none">Read More</a>
         </div>
     </div>
@@ -276,7 +276,7 @@
             <div class="card-text col-lg-7">
                 <h3>{{b.blog_title}}</h3>
                 <p>{{b.created_at}}</p>
-                <p class="my-0">{{b.short_desc}}</p>
+                <p class="my-0">{{b.short_desc | safe}}</p>
                 <a href="{% url 'blogs' blog_id=b.id %}">Continue Reading</a>
             </div>
             {% if b.blog_image %}
@@ -313,7 +313,7 @@
                                 <h5 class="student-name">{{t.student_name}}</h5>
                             </div>
                             {% endif %}
-                            <p class="text-center">{{t.short_message}} <a class="text-decoration-none"
+                            <p class="text-center">{{t.short_message | safe}} <a class="text-decoration-none"
                                     href="{% url 'testimonials' test_id=t.id %}">Read
                                     More</a>
                             </p>
@@ -359,7 +359,7 @@
                                 <h5 class="student-name">{{t.student_name}}</h5>
                             </div>
                             {% endif %}
-                            <p class="text-center">{{t.short_message}} <a class="text-decoration-none"
+                            <p class="text-center">{{t.short_message | safe}} <a class="text-decoration-none"
                                     href="{% url 'testimonials' test_id=t.id %}">Read
                                     More</a>
                             </p>
