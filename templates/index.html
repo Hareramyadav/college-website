@@ -165,7 +165,7 @@
             {% endif %}
             <div class="card-body message-provider text-center">
                 <a type="button" class="text-decoration-none text-dark" data-bs-toggle="modal"
-                    data-bs-target="#modelone">
+                    data-bs-target="#modelone-{{m.id}}">
                     <h5 class="">{{m.name}}</h5>
                     <p>{{m.position}}</p>
                 </a>
@@ -176,7 +176,7 @@
 
     <!-- Modal -->
     {% for m in messages %}
-    <div class="modal fade" id="modelone" tabindex="-1" role="dialog" aria-labelledby="modeloneTitle"
+    <div class="modal fade" id="modelone-{{m.id}}" tabindex="-1" role="dialog" aria-labelledby="modeloneTitle"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
