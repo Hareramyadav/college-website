@@ -1,10 +1,3 @@
-from datetime import date
-import imp
-import os
-from telnetlib import LOGOUT
-from tkinter.messagebox import NO
-
-from numpy import imag
 from .models import *
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -15,7 +8,7 @@ from django.contrib import messages
 import math
 from math import ceil
 from .verify_request import *
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, logout
 
 # Create your views here.
 
