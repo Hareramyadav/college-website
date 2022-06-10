@@ -1,0 +1,452 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: none !important;
+    font-family: 'Open Sans', sans-serif;
+}
+
+:root {
+    --white: #ffffff;
+    --light: #F8F9FA;
+    --danger: #DD3444;
+    --dark: #343A3F;
+    --logo-color-first: #02CD69;
+    --logo-color-second: #fa636d;
+    --logo-color-third: #01388B;
+    --logo-color-third-opac: #01388b77;
+    --logo-color-fourth: #50BA9C;
+    --black: #000000;
+}
+
+.button {
+    background-color: var(--logo-color-fourth) !important;
+    color: var(--white) !important;
+    font-size: 14px !important;
+}
+
+.button:focus {
+    box-shadow: none !important;
+}
+
+/* All sections.........................
+....................................
+..............................
+....................
+*/
+
+/* Header section................. */
+.navbar-brand img {
+    width: 80px;
+    height: 50px;
+}
+
+.top-navbar {
+    display: none;
+}
+
+.navbar.top-navbar-mobile,
+.navbar.top-navbar {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.logo-second-desktop {
+    display: none;
+}
+
+.top-header li a {
+    color: var(--black) !important;
+}
+
+.bottom-header .nav-item button {
+    background: none;
+    border: 0;
+    color: var(--black);
+}
+
+.top-navbar-mobile {
+    padding-left: 1rem !important;
+}
+
+/* Carousel Section........................... */
+.carousel-indicators [data-bs-target] {
+    width: 10px !important;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--black);
+    opacity: 0.4;
+}
+
+.main-banner .carousel-control-next,
+.main-banner .carousel-control-prev {
+    height: 20%;
+    top: 15%;
+}
+
+.main-banner .carousel-control-next-icon,
+.main-banner .carousel-control-prev-icon {
+    width: 2rem;
+    height: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Nasa info section...................... */
+.nasa-info a {
+    text-decoration: none;
+}
+
+.nasa-info h3 {
+    color: var(--logo-color-third);
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+.nasa-info div {
+    color: var(--black);
+}
+
+.nasa-info-heading {
+    color: var(--logo-color-third);
+    font-weight: bold;
+    text-align: center;
+    font-size: 35px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.nasa-info .card {
+    height: 250px;
+    width: 100%;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 20px;
+    overflow: hidden;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* About Section........... */
+.contactus-page hr,
+.aboutus-page hr {
+    opacity: 0.7;
+}
+
+.info-page h3,
+.sub-menu-page h3,
+.admission-form h3,
+.contactus-page h3,
+.aboutus-page h3 {
+    margin-bottom: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    text-decoration: underline;
+    text-transform: capitalize;
+}
+
+/* Footer Section...................... */
+.footer {
+    background: var(--black);
+}
+
+.footer hr {
+    opacity: 0.4;
+    margin: 0px auto !important;
+    background-color: var(--white) !important;
+}
+
+/* Testimonial section................... */
+.testimonial-desktop {
+    display: none;
+}
+
+.student-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.student-image img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.testimonial-desktop .carousel-indicators [data-bs-target] {
+    background-color: var(--black) !important;
+}
+
+.testimonial-desktop .carousel-item-next,
+.testimonial-desktop .carousel-item-prev,
+.testimonial-desktop .carousel-item.active {
+    display: flex !important;
+}
+
+.testimonial-desktop .carousel-control-next,
+.testimonial-desktop .carousel-control-prev {
+    width: 50px !important;
+}
+
+.testimonial-desktop .carousel-indicators {
+    bottom: -50px;
+}
+
+/* Message section.................... */
+.message-provider {
+    position: absolute;
+    background-color: var(--white);
+    bottom: 5%;
+    width: 100%;
+}
+
+.message-provider h6 {
+    font-weight: bold !important;
+    font-family: 'Poppins', sans-serif;
+}
+
+.message-provider p {
+    margin-bottom: 0 !important;
+}
+.modal .modal-header a {
+    text-decoration: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--black);
+}
+
+.modal-content {
+    background-color: var(--light) !important;
+    border-top-right-radius: 50px !important;
+    border-bottom-left-radius: 50px !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.modal-header {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.modal-title {
+    color: var(--logo-color-third);
+    font-weight: bold;
+}
+
+/* Admission / Inquiry form & display section............ */
+.admission-form {
+    background-image: linear-gradient(45deg, var(--logo-color-third), var(--black), var(--logo-color-third));
+}
+
+.admission-form-display {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+}
+
+/* main page section.................. */
+.sub-menu-page h3{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+
+/* Media Queries............................
+....................................
+...........................................
+........................ 
+*/
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+
+    /* Gallery section........... */
+    .video-container,
+    .image-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 10px 20px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+    /* header section.............. */
+    .top-navbar {
+        display: block;
+        background-color: var(--logo-color-third);
+    }
+
+    .nav-link {
+        padding-left: 0px !important;
+        padding-right: 10px !important;
+    }
+
+    .top-navbar ul li a {
+        color: var(--white) !important;
+    }
+
+    .top-navbar-mobile {
+        display: none;
+    }
+
+    /* carousel section.................. */
+    .main-slider-content.carousel-caption {
+        top: 40%;
+    }
+
+    .main-banner .carousel-control-next,
+    .main-banner .carousel-control-prev {
+        top: 40%;
+    }
+
+    /* nasa info section..................... */
+    .nasa-info-content {
+        height: 200px;
+        overflow: hidden;
+    }
+
+    /* About section..................... */
+    .about-nasa .about-image img {
+        height: 400px;
+    }
+
+    .button {
+        font-size: 18px !important;
+    }
+
+    /* nasa news section................. */
+    .main-news img {
+        height: 350px;
+    }
+
+    .side-news img {
+        height: 150px;
+    }
+
+    /* message section.................. */
+    .main-message-content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 20px;
+    }
+
+    /* Blog section................. */
+    .blog-content {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 10px 20px;
+    }
+
+    /* footer section................... */
+    .footer .container-fluid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 20px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+    /* header section.............. */
+    .logo-second-desktop {
+        display: block;
+    }
+
+    .logo-second-mobile {
+        display: none;
+    }
+
+    .navbar-expand-lg .bottom-header {
+        display: grid !important;
+        grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+        gap: 0px 5px !important;
+        justify-content: center;
+    }
+
+    /* carousel section.............. */
+    .main-banner .carousel-control-next,
+    .main-banner .carousel-control-prev {
+        top: 30%;
+    }
+
+    .main-banner .carousel-control-next-icon,
+    .main-banner .carousel-control-prev-icon {
+        width: 4rem;
+        height: 4rem;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Contact section........... */
+    .contact-map iframe {
+        min-width: 500px;
+    }
+
+    /* Blog Section................ */
+    .blogs-page {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 20px;
+    }
+
+    /* message section.................. */
+    .main-message-content {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        gap: 10px 20px;
+        justify-content: center;
+    }
+
+    /* testimonial section.................. */
+    .testimonial-mobile {
+        display: none;
+    }
+
+    .testimonial-desktop {
+        display: block;
+    }
+
+    /* nasa info section....................... */
+    .nasa-info .card {
+        height: 200px;
+    }
+
+    /* About section..................... */
+    .button {
+        font-size: 25px !important;
+    }
+
+    /* footer section................... */
+    .footer .container-fluid {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        column-gap: 20px;
+    }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    /* carousel section.............. */
+    .main-banner .carousel-control-next,
+    .main-banner .carousel-control-prev {
+        top: 50%;
+    }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+
+    /* Contact section........... */
+    .contact-map iframe {
+        min-width: 800px;
+    }
+}
