@@ -58,4 +58,4 @@ urlpatterns = [
     path('sub_menu/<int:sub_menu_id>', views.sub_menu, name="sub_menu"),
     path('get_menu', views.get_menu, name="get_menu"),
     path('get_sub_menu', views.get_sub_menu, name="get_sub_menu"),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
