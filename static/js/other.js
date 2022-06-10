@@ -97,11 +97,6 @@ $(document).ready(function () {
                         $(`#submenu-${mainMenuId}`).append(`<li><a class="dropdown-item" href="${url}sub_menu/${b.id}">` + b.sub_menu_name + '</a></li>')
                     })
                 } else {
-                    // $('.bottom-header').append(
-                    //     `<a class="nav-link text-capitalize bottom-nav-link text-dark" href="${a.menu_link}">`
-                    //     + a.menu_name +
-                    //     '</a>'
-                    // )
                     if(a.menu_link != ''){
                         $('.bottom-header').append(
                             `<a class="nav-link text-capitalize bottom-nav-link text-dark" href="${url}raki/${a.id}">`
