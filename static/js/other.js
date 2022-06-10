@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    const url = 'http://127.0.0.1:8000/';
     imageDiv = $('#images').show();
     videoDiv = $('#videos').hide();
     $('#image_button').click(function () {
@@ -94,22 +93,14 @@ $(document).ready(function () {
                         '</ul></div>'
                     )
                     filteredSubMenu.map(b => {
-                        $(`#submenu-${mainMenuId}`).append(`<li><a class="dropdown-item" href="${url}sub_menu/${b.id}">` + b.sub_menu_name + '</a></li>')
+                        $(`#submenu-${mainMenuId}`).append(`<li><a class="dropdown-item" href="http://127.0.0.1:8000/sub_menu/${b.id}">` + b.sub_menu_name + '</a></li>')
                     })
                 } else {
-                    if(a.menu_link != ''){
-                        $('.bottom-header').append(
-                            `<a class="nav-link text-capitalize bottom-nav-link text-dark" href="${url}raki/${a.id}">`
-                            + a.menu_name +
-                            '</a>'
-                        )
-                    }else{
-                        $('.bottom-header').append(
-                            `<a class="nav-link text-capitalize bottom-nav-link text-dark" href="${url}${a.menu_link}">`
-                            + a.menu_name +
-                            '</a>'
-                        )
-                    }
+                    $('.bottom-header').append(
+                        `<a class="nav-link text-capitalize bottom-nav-link text-dark" href="${a.menu_link}">`
+                        + a.menu_name +
+                        '</a>'
+                    )
                 }
             }
         })
