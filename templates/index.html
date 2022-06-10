@@ -63,7 +63,52 @@
     </div>
 </div> -->
 
-<!-- Hero Section -->
+<!-- About Us Section -->
+<section>
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        {% for a in about %}
+        <div class="grid gap-10 lg:grid-cols-2">
+            <div class="flex flex-col md:pr-8 xl:pr-0 lg:max-w-lg">
+                {% if a.title %}
+                <h2 class="font-semibold pb-6 text-orange-400">{{a.title}}</h2>
+                {% else %}
+                <h2 class="font-semibold py-6 text-orange-400">About us</h2>
+                {% endif %}
+                <div class="max-w-xl mb-6">
+                    <h2
+                        class="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-20">
+                        {{a.tagline}}
+                    </h2>
+                    <p class="text-base text-gray-700 md:text-lg">
+                        {{a.short_desc}}
+                    </p>
+                </div>
+                <div>
+                    <a href="/about" aria-label=""
+                        class="inline-flex items-center font-semibold transition-colors duration-200 text-blue-400 hover:text-blue-800">
+                        Learn More
+                        <svg class="inline-block w-3 ml-2" fill="currentColor" viewBox="0 0 12 12">
+                            <path
+                                d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="items-center justify-center -mx-4 lg:pl-8">
+                {% if a.about_image %}
+                <div class="px-3">
+                    <img class="object-cover w-full h-40 rounded sm:h-64 xl:h-80 sm:w-full xl:w-full"
+                        src="{{a.about_image.url}}" alt="" />
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Message Section Section -->
 <section>
     <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         {% for team in teams %}
@@ -71,14 +116,14 @@
             <div class="items-center justify-center -mx-4 lg:pl-8">
                 {% if team.image %}
                 <div class="px-3">
-                    <img class="object-cover w-full h-40 rounded sm:h-64 xl:h-80 sm:w-full xl:w-full" src="{{team.image.url}}"
-                        alt="" />
+                    <img class="object-cover w-full h-40 rounded sm:h-64 xl:h-80 sm:w-full xl:w-full"
+                        src="{{team.image.url}}" alt="" />
                 </div>
                 {% endif %}
             </div>
             <div class="flex flex-col md:pr-8 xl:pr-0 lg:max-w-lg">
                 {% if team.position %}
-                <h2 class="font-semibold py-6 text-orange-400">Message From {{team.position}}</h2>
+                <h2 class="font-semibold pb-6 text-orange-400">Message From {{team.position}}</h2>
                 {% else %}
                 <h2 class="font-semibold py-6 text-orange-400">Message From Chairman</h2>
                 {% endif %}
@@ -124,61 +169,6 @@
         </div>
     </div>
     {% endfor %}
-</section>
-
-<!-- Hero Section -->
-<section>
-    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-        {% for a in about %}
-        <div class="grid gap-10 lg:grid-cols-2">
-            <div class="flex flex-col md:pr-8 xl:pr-0 lg:max-w-lg">
-                {% if a.title %}
-                <h2 class="font-semibold py-6 text-orange-400">{{a.title}}</h2>
-                {% else %}
-                <h2 class="font-semibold py-6 text-orange-400">About us</h2>
-                {% endif %}
-                <div class="max-w-xl mb-6">
-                    <h2
-                        class="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-20">
-                        {{a.tagline}}
-                    </h2>
-                    <p class="text-base text-gray-700 md:text-lg">
-                        {{a.short_desc}}
-                    </p>
-                </div>
-                <div>
-                    <a href="/about" aria-label=""
-                        class="inline-flex items-center font-semibold transition-colors duration-200 text-blue-400 hover:text-blue-800">
-                        Learn More
-                        <svg class="inline-block w-3 ml-2" fill="currentColor" viewBox="0 0 12 12">
-                            <path
-                                d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z">
-                            </path>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="flex items-center justify-center -mx-4 lg:pl-8">
-                <div class="flex flex-col items-end px-3">
-                    {% if a.image_two %}
-                    <img class="object-cover mb-6 rounded shadow-lg h-28 sm:h-48 xl:h-56 w-28 sm:w-48 xl:w-56"
-                        src="{{a.image_two.url}}" alt="" />
-                    {% endif %}
-                    {% if a.image_three %}
-                    <img class="object-cover w-20 h-20 rounded shadow-lg sm:h-32 xl:h-40 sm:w-32 xl:w-40"
-                        src="{{a.image_three.url}}" alt="" />
-                    {% endif %}
-                </div>
-                {% if a.about_image %}
-                <div class="px-3">
-                    <img class="object-cover w-40 h-40 rounded sm:h-64 xl:h-80 sm:w-64 xl:w-80"
-                        src="{{a.about_image.url}}" alt="" />
-                </div>
-                {% endif %}
-            </div>
-        </div>
-        {% endfor %}
-    </div>
 </section>
 
 <!-- Our Services -->
