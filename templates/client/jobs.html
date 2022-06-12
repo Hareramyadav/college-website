@@ -17,5 +17,8 @@
         </div>
     </div>
     {% endfor %}
+    {% for job in job_list %}
+    <a href="{% url 'jobs' title=job.title %}">{{job.title}}</a>
+    {% endfor %}
 </div>
 {% endblock %}

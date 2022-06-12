@@ -1,4 +1,5 @@
 
+from turtle import title
 from unicodedata import category
 from webbrowser import get
 from numpy import imag
@@ -64,6 +65,18 @@ def index(request):
         ceil((testimonial_no / 3) - (testimonial_no // 3))
     testimonial_mobile_silde = testimonial_no // 1 + \
         ceil((testimonial_no / 1) - (testimonial_no // 1))
+
+    job_category = JobCategory.objects.all().values('title').distinct()
+    category_data = []
+    for data in job_category:
+        category_id = JobCategory.objects.filter(title=data['title'])[0]
+        count = JobListing.objects.filter(category_id=int(category_id.id)).count()
+        if count > 0:
+            category_data.append({
+                "count":count,
+                "title":data['title']
+            })
+
     header_footer = header_footer_view(request)
     data = {
         'banner': banner,
@@ -85,6 +98,8 @@ def index(request):
         'destinations':destinations,
         'clients':clients,
         'services':services,
+        'category_data':category_data, 
+        'job_category':job_category
     }
     data.update(header_footer)
     return render(request, 'index.html', data)
@@ -1088,10 +1103,29 @@ def service(request, service_id):
     data.update(header_footer)
     return render(request, 'client/service.html', data)
 
-def jobs(request):
-    job = JobListing.objects.all().order_by('created_at')
+def job_category_list(request):
+    job_listings = JobListing.objects.all().order_by('created_at')
+    job_category = JobCategory.objects.all().values('title').distinct()
+    category_data = []
+    for data in job_category:
+        category_id = JobCategory.objects.filter(title=data['title'])[0]
+        count = JobListing.objects.filter(category_id=int(category_id.id)).count()
+        if count > 0:
+            category_data.append({
+                "count":count,
+                "title":data['title']
+            })
+    header_footer = header_footer_view(request)
+    data.update(header_footer)
+    return render(request, 'client/job_category.html', {'category_data':category_data, 'job_category':job_category})
+
+def jobs(request, title):
+    category_id = JobCategory.objects.filter(title=title)[0].id
+    job_listings = JobListing.objects.filter(category_id=category_id)
+    category_names = JobCategory.objects.all().values('title').distinct()
     data = {
-        'jobs': job
+        'job_list':job_listings,
+        'category_names':category_names
     }
     header_footer = header_footer_view(request)
     data.update(header_footer)

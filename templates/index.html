@@ -113,7 +113,7 @@
 <section>
     <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         {% for team in teams %}
-        <div class="grid gap-10 lg:grid-cols-2">
+        <div class="grid gap-10 lg:grid-cols-2 ">
             <div class="items-center justify-center -mx-4 lg:pl-8">
                 {% if team.image %}
                 <div class="px-3">
@@ -174,7 +174,7 @@
 </section>
 
 <!-- Selection process.......... -->
-<section>
+<!-- <section>
     <div class="px-4 py-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div class="grid gap-10 lg:grid-cols-2">
             <div class="flex flex-col md:pr-8 xl:pr-0 lg:max-w-lg">
@@ -230,199 +230,32 @@
             </div>
         </div>
     </div>
-</section>
-
-<!-- Our Services -->
-<section>
-    <div class="px-4 py-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-16">
-        <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-            <h2
-                class="max-w-lg mb-6 text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-                <span class="relative inline-block">
-                    <span class="relative">Services We Offer</span>
-                </span>
-            </h2>
-            <p class="text-base text-gray-700 md:text-lg">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque rem aperiam, eaque ipsa quae.
-            </p>
-        </div>
-        <div class="services relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {% for service in services %}
-            <div class="">
-                <div class="">
-                    <div
-                        class="flex flex-col justify-between overflow-hidden transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
-                        <div class="p-5 cursor-pointer">
-                            <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-blue-50">
-                                {% if service.image %}
-                                <img class="w-12 h-12 rounded" src="{{service.image.url}}" />
-                                {% else %}
-                                <img class="w-12 h-12 rounded" src="{% static 'images/place.jpeg' %}" />
-                                {% endif %}
-                            </div>
-                            <p class="mb-2 font-bold">{{service.title}}</p>
-                            <p class="text-sm leading-5 text-gray-900">
-                                <a href="{% url 'services' service_id=service.id %}">
-                                    {{service.short_desc}}
-                                </a>
-                            </p>
-                        </div>
-                        <div
-                            class="w-full h-1 ml-auto duration-300 origin-left transform scale-x-0 bg-red-500 group-hover:scale-x-100">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        <div class="text-center">
-            <a href="{% url 'services' %}"
-                class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">
-                Learn more
-            </a>
-        </div>
-    </div>
-</section>
+</section> -->
 
 <!-- Job Openings -->
-<section>
-    <section class="text-gray-600 body-font">
-        <div class="container px-4 py-6 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-8">
-            <div class="flex flex-col text-center w-full mb-20">
-                <h1 class="sm:text-4xl text-3xl font-bold title-font mb-4 text-gray-900">
-                    Job Openings
-                </h1>
-                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                    posuere leo at venenatis vehicula. Nulla ac ullamcorper metus.
-                    Morbi vulputate venenatis enim, non tristique ex volutpat eu.
-                </p>
-            </div>
-            <div class="flex flex-wrap -m-4">
-                {% for job in jobs %}
-                <div class="lg:w-1/3 sm:w-1/2 p-4">
-                    <div class="flex relative">
-                        {% if job.image %}
-                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center"
-                            src="{{job.image.url}}" />
-                        {% else %}
-                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center"
-                            src="{% static 'images/jobs.webp' %}" />
-                        {% endif %}
-                        <div
-                            class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white text-center opacity-0 hover:opacity-100 transition-all ease-in-out cursor-pointer duration-300">
-                            <h1 class="title-font text-lg font-bold text-gray-900 mb-3">
-                                {{job.title}}
-                            </h1>
-                            <p class="leading-relaxed">
-                                {{job.short_desc}}
-                            </p>
-                            <a class="text-blue-700 font-bold inline-flex items-center md:mb-2 lg:mb-0 py-2"
-                                href="{% url 'jobs' job_id=job.id %}">View Job
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                </svg>
-                            </a>
-                        </div>
+<section class="text-gray-600 body-font">
+    <div class="container px-4 pt-6 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-8">
+        <div class="flex flex-col text-center w-full mb-20">
+            <h1 class="sm:text-4xl text-3xl font-bold title-font mb-4 text-gray-900">
+                Job Categories
+            </h1>
+        </div>
+        <div class="grid grid-cols-1 gap-3 text-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {% for job in job_category %}
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="card-image rounded hover:md:scale-105 ease-in-out duration-300 transition cursor-pointer" style="background-image: url(../static/images/place.jpeg); background-repeat: no-repeat; background-size: cover; background-position: center; min-width: 280px; height: 320px;">
+                        <div class="card-title bottom-0">{{job.title}}</div>
                     </div>
                 </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-</section>
-
-<!-- Destinations -->
-<section>
-    <div class="px-4 py-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-16">
-        <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-            <h2
-                class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-                <span class="relative inline-block">
-                    <span class="relative">Top</span>
-                </span>
-                Job Destination
-            </h2>
-            <p class="text-base text-gray-700 md:text-lg">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque rem aperiam, eaque ipsa quae.
-            </p>
-        </div>
-        <div class="grid gap-6 row-gap-5 lg:grid-cols-3">
-            {% for destination in destinations %}
-            <div>
-                {% if destination.image %}
-                <img class="object-cover w-full h-64 mb-6 rounded shadow-lg lg:h-64 xl:h-64" src="{{destination.image}}"
-                    alt="" />
-                {% else %}
-                <img class="object-cover w-full h-64 mb-6 rounded shadow-lg lg:h-64 xl:h-64"
-                    src="{% static 'images/place.jpeg' %}" alt="" />
-                {% endif %}
-                <h5 class="text-center mb-2 text-xl font-bold leading-none sm:text-2xl">
-                    {{destination.title}}
-                </h5>
-            </div>
-            {% endfor %}
-        </div>
-        <div class="text-center py-8">
-            <a href="{% url 'destinations' %}"
-                class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">
-                Learn more
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Blog -->
-<section>
-    <div class="px-4 py-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-8">
-        <div class="flex flex-wrap justify-center -mx-4">
-            <div class="w-full px-4">
-                <div class="text-center mx-auto mb-8 lg:mb-20 max-w-[510px]">
-                    <h2 class="font-bold text-3xl sm:text-4xl md:text-[40px] text-dark mb-4">
-                        Our Recent News
-                    </h2>
-                    <p class="text-base text-body-color">
-                        There are many variations of passages of Lorem Ipsum available
-                        but the majority have suffered alteration in some form.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
-            {% for blog in blogs %}
-            <div class="overflow-hidden transition-shadow duration-300 bg-white rounded shadow-sm">
-                {% if blog.blog_image %}
-                <img src="{{blog.blog_image.url}}" class="object-cover w-full h-64" alt="" />
-                {% else %}
-                <img src="{% static 'images/place.jpeg' %}" class="object-cover w-full h-64" alt="" />
-                {% endif %}
-                <div class="p-5 border border-t-0">
-                    <p class="mb-3 text-xs font-semibold tracking-wide uppercase">
-                        <a href="/" class="transition-colors duration-200 text-blue-gray-900 hover:text-blue-900"
-                            aria-label="Category" title="traveling">traveling</a>
-                        <span class="text-gray-600">— {{blog.created_at}}</span>
-                    </p>
-                    <a href="{% url 'blogs' blog_id=blog.id %}" aria-label="Category" title=""
-                        class="inline-block mb-3 text-2xl font-bold leading-22 transition-colors duration-200 hover:text-blue-900">
-                        {{blog.blog_title}}</a>
-                    <p class="mb-2 text-gray-700">
-                        {{blog.short_desc}}
-                    </p>
-                    <a href="{% url 'blogs' blog_id=blog.id %}" aria-label=""
-                        class="inline-flex items-center font-semibold transition-colors duration-200 text-blue-600 hover:text-blue-900">Learn
-                        more</a>
-                </div>
             </div>
             {% endfor %}
         </div>
     </div>
-    <div class="text-center py-8">
-        <a href="{% url 'blogs' %}"
+    <div class="text-center">
+        <a href="{% url 'jobs' %}"
             class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">
-            Learn more
+            View All
         </a>
     </div>
 </section>

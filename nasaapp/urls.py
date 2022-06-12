@@ -87,6 +87,7 @@ urlpatterns = [
     path('destinations', views.destinations, name="destinations"),
     path('services', views.services, name="services"),
     path('services/<int:service_id>', views.service, name="services"),
+    path('job_category', views.job_category_list, name="job_category"),
     path('jobs', views.jobs, name="jobs"),
     path('jobs/<int:job_id>', views.job, name="jobs"),
     path('clients', views.clients, name="clients"),

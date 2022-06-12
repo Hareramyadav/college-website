@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid blogs-page">
+    {% for category in job_category %}
+    <a href="{% url 'jobs' title=category.title %}">
+        {{category.title}}
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
