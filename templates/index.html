@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+
 <!-- Banner section........... -->
 <!-- Swiper Slider -->
 <div class="swiper mySwiper w-full h-px">
@@ -19,14 +20,13 @@
                             </span>
                     </h2>
                     <p class="text-base text-gray-50 md:text-lg">
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                        accusantium doloremque rem aperiam, eaque ipsa quae.
+                        {{slider.banner_text}}
                     </p>
                 </div>
                 <div>
-                    <a href="/"
+                    <a href="{{slider.banner_link}}"
                         class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">
-                        Get started
+                        {{slider.button_text}}
                     </a>
                 </div>
             </div>
@@ -70,10 +70,11 @@
         <div class="grid gap-10 lg:grid-cols-2">
             <div class="flex flex-col md:pr-8 xl:pr-0 lg:max-w-lg">
                 {% if a.title %}
-                <h2 class="font-semibold pb-6 text-orange-400">{{a.title}}</h2>
+                <h2 class="font-semibold pb-2 text-black-400 fs-4">{{a.title}}</h2>
                 {% else %}
-                <h2 class="font-semibold py-6 text-orange-400">About us</h2>
+                <h2 class="font-semibold py-2 text-black-400 fs-4">About us</h2>
                 {% endif %}
+                <hr class="horizontal-line mb-4">
                 <div class="max-w-xl mb-6">
                     <h2
                         class="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-20">
@@ -123,10 +124,11 @@
             </div>
             <div class="flex flex-col md:pr-8 xl:pr-0 lg:max-w-lg">
                 {% if team.position %}
-                <h2 class="font-semibold pb-6 text-orange-400">Message From {{team.position}}</h2>
+                <h2 class="font-semibold pb-2 text-black-400 fs-4">Message From {{team.position}}</h2>
                 {% else %}
-                <h2 class="font-semibold py-6 text-orange-400">Message From Chairman</h2>
+                <h2 class="font-semibold py-2 text-black-400 fs-4">Message From Chairman</h2>
                 {% endif %}
+                <hr class="horizontal-line mb-4">
                 <div class="max-w-xl mb-6">
                     <h2
                         class="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-20">
@@ -169,6 +171,65 @@
         </div>
     </div>
     {% endfor %}
+</section>
+
+<!-- Selection process.......... -->
+<section>
+    <div class="px-4 py-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div class="grid gap-10 lg:grid-cols-2">
+            <div class="flex flex-col md:pr-8 xl:pr-0 lg:max-w-lg">
+                <h2 class="font-semibold py-2 text-black-400 fs-4 text-capitalize">our unique process</h2>
+                <hr class="horizontal-line mb-4">
+                <div class="max-w-xl mb-6">
+                    <h2
+                        class="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-20">
+                    </h2>
+                    <p class="text-base text-gray-700 md:text-lg">
+                    </p>
+                </div>
+                <div>
+                    <a type="button" aria-label="" data-bs-toggle="modal" data-bs-target="#model-{{team.id}}"
+                        class="inline-flex items-center font-semibold transition-colors duration-200 text-blue-400 hover:text-blue-800">
+                        Learn More
+                        <svg class="inline-block w-3 ml-2" fill="currentColor" viewBox="0 0 12 12">
+                            <path
+                                d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="items-center justify-center -mx-4 lg:pl-8">
+                <div class="px-3">
+                    <div class="circleContainer">
+                        <div class="circle"></div>
+                        <div class="circleContent">
+                            <div class="circleItem">
+                                <i class="fas fa-user"></i>
+                                <span>Role</span>
+                            </div>
+                            <div class="circleItem">
+                                <i class="fa-solid fa-earth-asia"></i>
+                                <span>placement & trail</span>
+                            </div>
+                            <div class="circleItem">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <span>reference check</span>
+                            </div>
+                            <div class="circleItem">
+                                <i class="fa-solid fa-stairs"></i>
+                                <span>selection process</span>
+                            </div>
+                            <div class="circleItem">
+                                <i class="fas fa-search"></i>
+                                <span>search</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- Our Services -->
@@ -217,7 +278,7 @@
         </div>
         <div class="text-center">
             <a href="{% url 'services' %}"
-                class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-blue-600 hover:bg-blue-800 focus:shadow-outline focus:outline-none">
+                class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">
                 Learn more
             </a>
         </div>
@@ -307,7 +368,7 @@
         </div>
         <div class="text-center py-8">
             <a href="{% url 'destinations' %}"
-                class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-blue-600 hover:bg-blue-700 focus:shadow-outline focus:outline-none">
+                class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">
                 Learn more
             </a>
         </div>
@@ -360,7 +421,7 @@
     </div>
     <div class="text-center py-8">
         <a href="{% url 'blogs' %}"
-            class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-blue-600 hover:bg-blue-700 focus:shadow-outline focus:outline-none">
+            class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">
             Learn more
         </a>
     </div>
@@ -373,15 +434,15 @@
         <div class="flex flex-col items-center lg:flex-row">
             <div class="flex flex-col items-start justify-center w-full h-full pr-8 mb-10 lg:mb-0 lg:w-1/2">
                 <h2
-                    class="text-4xl font-extrabold leading-10 tracking-tight text-gray-900 sm:text-5xl sm:leading-none md:text-6xl lg:text-5xl xl:text-6xl">
-                    Testimonials
+                    class="text-capitalize text-4xl font-extrabold leading-10 tracking-tight text-gray-900 sm:text-5xl sm:leading-none md:text-6xl lg:text-5xl xl:text-6xl">
+                    what our customers says?
                 </h2>
                 <p class="my-6 text-lg text-gray-600">
                     Don't just take our word for it, read from our extensive list of
                     case studies and customer testimonials.
                 </p>
                 <a href="{% url 'testimonials' %}"
-                    class="flex items-center justify-center px-8 py-3 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-blue-600 border border-transparent rounded-md shadow hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue md:py-4 md:text-lg md:px-10">View
+                    class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">View
                     More
                 </a>
             </div>
@@ -420,81 +481,6 @@
                 </blockquote>
                 {% endfor %}
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- Team Members -->
-<section>
-    <div class="px-4 py-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-16">
-        <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-            <div>
-                <p
-                    class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full">
-                    Team
-                </p>
-            </div>
-            <h2
-                class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-                <span class="relative inline-block">
-                    <svg viewBox="0 0 52 24" fill="currentColor"
-                        class="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block">
-                        <defs>
-                            <pattern id="1d4040f3-9f3e-4ac7-b117-7d4009658ced" x="0" y="0" width=".135" height=".30">
-                                <circle cx="1" cy="1" r=".7"></circle>
-                            </pattern>
-                        </defs>
-                        <rect fill="url(#1d4040f3-9f3e-4ac7-b117-7d4009658ced)" width="52" height="24"></rect>
-                    </svg>
-                    <span class="relative">Meet</span>
-                </span>
-                our talented team Members
-            </h2>
-            <p class="text-base text-gray-700 md:text-lg">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque rem aperiam, eaque ipsa quae.
-            </p>
-        </div>
-        <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {% for team in teams %}
-            <div>
-                <div
-                    class="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl">
-                    {% if team.image %}
-                    <img class="object-cover w-full h-56 md:h-64 xl:h-80" src="{{team.image.url}}" alt="Person" />
-                    {% else %}
-                    <img class="object-cover w-full h-56 md:h-64 xl:h-80" src="{% static 'images/place.jpeg' %}"
-                        alt="Person" />
-                    {% endif %}
-                    <div
-                        class="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                        <p class="mb-1 text-lg font-bold text-gray-100">
-                            {{team.name}}
-                        </p>
-                        <p class="mb-4 text-xs text-gray-100">{{team.position}}</p>
-                        <p class="mb-4 text-xs tracking-wide text-gray-400">
-                            {{team.long_desc}}
-                        </p>
-                        <div class="flex items-center justify-center space-x-3">
-                            <a href="/" class="text-white transition-colors duration-300 hover:text-teal-accent-400">
-                                <svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
-                                    <path
-                                        d="M24,4.6c-0.9,0.4-1.8,0.7-2.8,0.8c1-0.6,1.8-1.6,2.2-2.7c-1,0.6-2,1-3.1,1.2c-0.9-1-2.2-1.6-3.6-1.6 c-2.7,0-4.9,2.2-4.9,4.9c0,0.4,0,0.8,0.1,1.1C7.7,8.1,4.1,6.1,1.7,3.1C1.2,3.9,1,4.7,1,5.6c0,1.7,0.9,3.2,2.2,4.1 C2.4,9.7,1.6,9.5,1,9.1c0,0,0,0,0,0.1c0,2.4,1.7,4.4,3.9,4.8c-0.4,0.1-0.8,0.2-1.3,0.2c-0.3,0-0.6,0-0.9-0.1c0.6,2,2.4,3.4,4.6,3.4 c-1.7,1.3-3.8,2.1-6.1,2.1c-0.4,0-0.8,0-1.2-0.1c2.2,1.4,4.8,2.2,7.5,2.2c9.1,0,14-7.5,14-14c0-0.2,0-0.4,0-0.6 C22.5,6.4,23.3,5.5,24,4.6z">
-                                    </path>
-                                </svg>
-                            </a>
-                            <a href="/" class="text-white transition-colors duration-300 hover:text-teal-accent-400">
-                                <svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
-                                    <path
-                                        d="M22,0H2C0.895,0,0,0.895,0,2v20c0,1.105,0.895,2,2,2h11v-9h-3v-4h3V8.413c0-3.1,1.893-4.788,4.659-4.788 c1.325,0,2.463,0.099,2.795,0.143v3.24l-1.918,0.001c-1.504,0-1.795,0.715-1.795,1.763V11h4.44l-1,4h-3.44v9H22c1.105,0,2-0.895,2-2 V2C24,0.895,23.105,0,22,0z">
-                                    </path>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
         </div>
     </div>
 </section>

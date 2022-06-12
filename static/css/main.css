@@ -13,7 +13,8 @@ body {
     --light: #F8F9FA;
     --danger: #DD3444;
     --dark: #343A3F;
-    --theme-color:#F35B28;
+    --theme-color: #F35B28;
+    --button-hover-color: #e34b18;
     --black: #000000;
 }
 
@@ -22,11 +23,23 @@ body {
     color: var(--white) !important;
     font-size: 14px !important;
 }
-
 .button:focus {
     box-shadow: none !important;
 }
 
+.bg-orange-400{
+    background-color: var(--theme-color) !important;
+}
+
+.bg-orange-400:hover{
+    background-color: var(--button-hover-color) !important;
+}
+
+.horizontal-line{
+    height: 3px !important;
+    background-color: var(--theme-color) !important;
+    opacity: 1 !important;
+}
 /* All sections.........................
 ....................................
 ..............................
@@ -40,10 +53,10 @@ body {
 }
 
 .top-navbar {
-   background-color: var(--theme-color) !important;
+    background-color: var(--theme-color) !important;
 }
 
-.header-icon{
+.header-icon {
     border: 2px solid #ffffff;
     padding: 7px;
     border-radius: 50%;
@@ -219,6 +232,7 @@ body {
 .message-provider p {
     margin-bottom: 0 !important;
 }
+
 .modal .modal-header a {
     text-decoration: none;
     font-size: 30px;
@@ -255,8 +269,68 @@ body {
 }
 
 /* Services we offer................. */
-.bg-red-500{
+.bg-red-500 {
     background: var(--theme-color) !important;
+}
+
+/* unique process............... */
+.circleContainer {
+    width: 500px;
+    height: 500px;
+    border-radius: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.circle {
+    position: absolute;
+    left: 40px;
+    top: 45px;
+    width: 430px;
+    height: 430px;
+    border: 2px solid #c4c4c4;
+    border-radius: 100%;
+    -webkit-animation: rotation 100s infinite linear;
+}
+
+.circleContent {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 100%;
+    z-index: 20;
+}
+
+.circleContent .circleItem {
+    font-size: 40px;
+}
+
+.circleContent .circleItem {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    border-radius: 50%;
+    text-align: center;
+    z-index: 3;
+    cursor: pointer;
+    border: 3px solid var(--theme-color);
+    background: #f6fbff;
+    color: var(--theme-color);
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.circleItem span{
+    font-size: 15px;
 }
 
 /* Media Queries............................
@@ -432,6 +506,7 @@ body {
         grid-template-columns: auto auto auto;
         column-gap: 20px;
     }
+
     /* news section....... */
     /* .services{
         display: grid !important;
@@ -442,6 +517,7 @@ body {
 
 /* X-Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
+
     /* carousel section.............. */
     .main-banner .carousel-control-next,
     .main-banner .carousel-control-prev {
