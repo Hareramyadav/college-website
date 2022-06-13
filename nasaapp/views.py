@@ -66,7 +66,7 @@ def index(request):
     testimonial_mobile_silde = testimonial_no // 1 + \
         ceil((testimonial_no / 1) - (testimonial_no // 1))
 
-    job_category = JobCategory.objects.all().values('title').distinct()
+    job_category = JobCategory.objects.all().values('title').distinct()[:8]
     category_data = []
     for data in job_category:
         category_id = JobCategory.objects.filter(title=data['title'])[0]
@@ -76,6 +76,8 @@ def index(request):
                 "count":count,
                 "title":data['title']
             })
+
+    counts = Counter.objects.all().order_by('created_at')
 
     header_footer = header_footer_view(request)
     data = {
@@ -99,7 +101,8 @@ def index(request):
         'clients':clients,
         'services':services,
         'category_data':category_data, 
-        'job_category':job_category
+        'job_category':job_category,
+        'counts':counts
     }
     data.update(header_footer)
     return render(request, 'index.html', data)
@@ -880,6 +883,12 @@ def contact_forms(request):
 def delete_contact(request, contact_id):
     Contact.objects.filter(id=int(contact_id)).delete()
     return redirect('/contact_forms')
+
+    
+
+
+
+
 # client pages.....................
 # ......................
 # ..............................
@@ -1120,12 +1129,14 @@ def job_category_list(request):
     return render(request, 'client/job_category.html', {'category_data':category_data, 'job_category':job_category})
 
 def jobs(request, title):
+    category = JobCategory.objects.get(title=str(title))
     category_id = JobCategory.objects.filter(title=title)[0].id
     job_listings = JobListing.objects.filter(category_id=category_id)
     category_names = JobCategory.objects.all().values('title').distinct()
     data = {
         'job_list':job_listings,
-        'category_names':category_names
+        'category_names':category_names,
+        'category':category
     }
     header_footer = header_footer_view(request)
     data.update(header_footer)

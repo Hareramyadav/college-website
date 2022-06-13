@@ -2,23 +2,35 @@
 {% load static %}
 
 {% block content %}
-<div class="container-fluid blogs-page">
-    {% for job in jobs %}
-    <div class="card px-2 py-2 flex-md-row mb-4 mb-lg-0">
-        <div class="card-text mb-3 mb-lg-0">
-            <h3>{{job.title}}</h3>
-            <p>{{job.short_desc}}</p>
-            <a href="{% url 'jobs' job_id=job.id %}">View Details</a>
+<div class="blogs-page d-md-flex flex-column jobs">
+    <div>
+        {% if category.image %}
+        <div class="image"
+            style="background-image: url({{category.image.url}}); background-repeat: no-repeat; background-size: cover; background-position: center;">
+            <h1 class="text-center text-white text-4xl">{{category.title}}</h1>
         </div>
-        <div class="card-image">
-            {% if job.image %}
-            <img src="{{job.image.url}}" alt="" srcset="" height="200" width="250">
+        {% else %}
+        <div class="image py-20"
+            style="background-image: url(../../static/images/place.jpeg); background-repeat: no-repeat; background-size: cover; background-position: center;">
+            <h1 class="text-center text-white text-4xl">{{category.title}}</h1>
+        </div>
+        {% endif %}
+    </div>
+    <div class="container my-6 d-lg-flex">
+        <div class="lg:max-w-lg col-lg-5 px-3">
+            {% if category.image %}
+            <img src="{{category.image.url}}" class="rounded" alt="">
+            {% else %}
+            <img src="{% static 'images/place.jpeg' %}" class="rounded" alt="">
             {% endif %}
         </div>
+        <div class="mt-3 mt-lg-0 col-lg-7 px-3">
+            {% for job in job_list %}
+            <ul class="list-group">
+                <li class="list-group-item mb-3 fs-4 text-capitalize"><a href="#">{{job.title}}</a></li>
+            </ul>
+            {% endfor %}
+        </div>
     </div>
-    {% endfor %}
-    {% for job in job_list %}
-    <a href="{% url 'jobs' title=job.title %}">{{job.title}}</a>
-    {% endfor %}
 </div>
 {% endblock %}

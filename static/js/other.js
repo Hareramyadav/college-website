@@ -1,4 +1,4 @@
-let i=2;
+let i = 2;
 $(document).ready(function () {
     const url = 'http://127.0.0.1:8000/';
     imageDiv = $('#images').show();
@@ -230,4 +230,23 @@ $(document).ready(function () {
     //     });
 
     // }, 5000);
+
+    // counter part...............
+    function count($this) {
+        var current = parseInt($this.html(), 10);
+        current = current + 1; /* Where 1 is increment */
+
+        $this.html(++current);
+        if (current > $this.data('count')) {
+            $this.html($this.data('count'));
+        } else {
+            setTimeout(function () { count($this) }, 10);
+        }
+    }
+
+    jQuery(".counter").each(function () {
+        jQuery(this).data('count', parseInt(jQuery(this).html(), 10));
+        jQuery(this).html('0');
+        count(jQuery(this));
+    });
 });

@@ -1,3 +1,4 @@
+from statistics import mode
 from django.db import models
 from django.core.exceptions import ValidationError
 from ckeditor.fields import RichTextField
@@ -294,3 +295,14 @@ class AdmissionForm(models.Model):
 
     def __str__(self):
         return str(self.full_name)
+
+class Counter(models.Model):
+    value = models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=300, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'counter'
+
+    def __str__(self):
+        return str(self.name)
