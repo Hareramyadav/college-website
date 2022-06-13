@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    const url = 'http://127.0.0.1:8000/';
+    // const url = 'http://127.0.0.1:8000/';
+    const url = 'http://nasa.radiatnserversite.com/';
     imageDiv = $('#images').show();
     videoDiv = $('#videos').hide();
     $('#image_button').click(function () {
