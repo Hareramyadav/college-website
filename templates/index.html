@@ -2,18 +2,14 @@
 {% load static %}
 
 {% block content %}
+
 <!-- Banner section........... -->
 <!-- Swiper Slider -->
 <div class="swiper mySwiper w-full h-px">
     <div class="swiper-wrapper">
         {% for slider in banner %}
         <div class="swiper-slide bg-no-repeat bg-center object-cover w-full"
-            {% if slider.image %}
-            style="background-image: url({{slider.banner_image.url}})"
-            {% else %}
-            style="background-color: #bababa;"
-            {% endif %}
-            >
+            style="background-image: url({{slider.banner_image.url}})">
             <div class="flex flex-col mb-16 sm:text-center sm:mb-0">
                 <div class="w-full max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
                     <h2
@@ -23,10 +19,13 @@
                                 <!-- <span class="text-orange-400">Deam Job</span> Today</span> -->
                             </span>
                     </h2>
+                    <p class="text-base text-gray-50 md:text-lg">
+                        {{slider.banner_text}}
+                    </p>
                 </div>
                 <div>
-                    <a href="{{slider.button_link}}"
-                        class="btn button inline-flex items-center justify-center h-12 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">
+                    <a href="{{slider.banner_link}}"
+                        class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">
                         {{slider.button_text}}
                     </a>
                 </div>
@@ -34,8 +33,8 @@
         </div>
         {% endfor %}
     </div>
-    <div class="swiper-button-next py-7 px-7 rounded-full"></div>
-    <div class="swiper-button-prev py-7 px-7 rounded-full"></div>
+    <div class="swiper-button-next py-7 px-7 bg-white rounded-full"></div>
+    <div class="swiper-button-prev py-7 px-7 bg-white rounded-full"></div>
     <div class="swiper-pagination"></div>
 </div>
 
@@ -43,7 +42,7 @@
 <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#popup">
     Launch demo modal
 </button> -->
-<div class="modal fade" id="popup" tabindex="-1" aria-labelledby="popuplabel" aria-hidden="true">
+<!-- <div class="modal fade" id="popup" tabindex="-1" aria-labelledby="popuplabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             {% for pop in popup %}
@@ -62,329 +61,305 @@
             {% endfor %}
         </div>
     </div>
-</div>
+</div> -->
 
-<!-- Nasa Info section............................... -->
-<div class="container-fluid nasa-info mt-3 py-5 bg-light">
-    <div class="container d-md-flex">
-        {% for menu_content in menu %}
-        {% if menu_content.menu_name == "school" %}
-        <div class="card mb-3">
-            <div class="card-body">
-                <a href="{% url 'menu_info_content' menu_id=menu_content.id %}">
-                    <h3 class="">{{menu_content.menu_name}}</h3>
-                    <div class="nasa-info-content">{{menu_content.short_content | safe}}</div>
-                </a>
-            </div>
-        </div>
-        {% endif %}
-        {% endfor %}
-        {% for menu_content in menu %}
-        {% if menu_content.menu_name == "bachelor" %}
-        <div class="card mb-3">
-            <div class="card-body">
-                <a href="{% url 'menu_info_content' menu_id=menu_content.id %}">
-                    <h3 class="">{{menu_content.menu_name}}</h3>
-                    <div>{{menu_content.short_content | safe}}</div>
-                </a>
-            </div>
-        </div>
-        {% endif %}
-        {% endfor %}
-        {% for menu_content in menu %}
-        {% if menu_content.menu_name == "higher secondary" %}
-        <div class="card">
-            <div class="card-body">
-                <a href="{% url 'menu_info_content' menu_id=menu_content.id %}">
-                    <h3 class="">{{menu_content.menu_name}}</h3>
-                    <div>{{menu_content.short_content | safe}}</div>
-                </a>
-            </div>
-        </div>
-        {% endif %}
-        {% endfor %}
-    </div>
-</div>
-
-<!-- About section........... -->
-<div class="about-nasa mt-3">
-    {% for a in about %}
-    <div class="container d-lg-flex">
-        {% if a.about_image %}
-        <div class="about-image mb-3 mb-lg-0 col-lg-6 pe-lg-4">
-            <img src="{{a.about_image.url}}" alt="" srcset="" height="250" width="100%">
-        </div>
-        {% endif %}
-        <div class="about-content col-lg-6">
-            <h3 class="about-nasa-heading">Why Nasa International College?</h3>
-            <p class="about-text">{{a.short_desc | safe}}</p>
-            <a href="/about" class="btn button text-decoration-none">Read More</a>
-        </div>
-    </div>
-    {% endfor %}
-</div>
-
-<!-- News section.................. -->
-<div class="nasa-news bg-light mt-3 py-3">
-    <h3 class="nasa-info-heading container py-3">News/Notices</h3>
-    <div class="container nasa-news-content d-md-flex">
-        <div class="main-news col-md-7">
-            {% for m in main_news %}
-            {% if m.news_image %}
-            <a href="{{m.news_link}}">
-                <img src="{{m.news_image.url}}" alt="" srcset="" width="100%" height="200">
-            </a>
-            {% endif %}
-            <h3 class="mt-3 main-news-heading">
-                <a href="{% url 'news' news_id=m.id %}" class="text-decoration-none text-dark">{{m.title}}</a>
-            </h3>
-            <h6 class="mt-2">{{m.created_at}}</h6>
-            {% endfor %}
-        </div>
-        <div class="side-news col-md-5 ps-md-3">
-            {% for s in side_news %}
-            <div class="news-one mt-4 mt-md-0 mb-md-3">
-                {% if s.news_image %}
-                <a href="{{s.news_link}}">
-                    <img src="{{s.news_image.url}}" alt="" srcset="" width="100%" height="200">
-                </a>
+<!-- About Us Section -->
+<section>
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        {% for a in about %}
+        <div class="grid gap-10 lg:grid-cols-2">
+            <div class="flex flex-col md:pr-8 xl:pr-0 lg:max-w-lg">
+                {% if a.title %}
+                <h2 class="font-semibold pb-2 text-black-400 fs-4">{{a.title}}</h2>
+                {% else %}
+                <h2 class="font-semibold py-2 text-black-400 fs-4">About us</h2>
                 {% endif %}
-                <h5 class="mt-2">
-                    <a href="{% url 'news' news_id=s.id %}" class="text-decoration-none text-dark">{{s.title}}</a>
-                </h5>
-                <h6 class="mt-2">{{s.created_at}}</h6>
+                <hr class="horizontal-line mb-4">
+                <div class="max-w-xl mb-6">
+                    <h2
+                        class="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-20">
+                        {{a.tagline}}
+                    </h2>
+                    <p class="text-base text-gray-700 md:text-lg">
+                        {{a.short_desc}}
+                    </p>
+                </div>
+                <div>
+                    <a href="/about" aria-label=""
+                        class="inline-flex items-center font-semibold transition-colors duration-200 text-blue-400 hover:text-blue-800">
+                        Learn More
+                        <svg class="inline-block w-3 ml-2" fill="currentColor" viewBox="0 0 12 12">
+                            <path
+                                d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
             </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
-
-<!-- Message Section............ -->
-<div class="messages mt-3 container">
-    <h3 class="nasa-info-heading container">Message</h3>
-    <div class="main-message-content">
-        {% for m in messages %}
-        <div class="card mb-3">
-            {% if m.image %}
-            <img src="{{m.image.url}}" class="message-image" alt="" srcset="" width="100%" height="400">
-            {% endif %}
-            <div class="card-body message-provider text-center">
-                <a type="button" class="text-decoration-none text-dark" data-bs-toggle="modal"
-                    data-bs-target="#modelone-{{m.id}}">
-                    <h5 class="">{{m.name}}</h5>
-                    <p>{{m.position}}</p>
-                </a>
+            <div class="items-center justify-center -mx-4 lg:pl-8">
+                {% if a.about_image %}
+                <div class="px-3">
+                    <img class="object-cover w-full h-40 rounded sm:h-64 xl:h-80 sm:w-full xl:w-full"
+                        src="{{a.about_image.url}}" alt="" />
+                </div>
+                {% endif %}
             </div>
         </div>
         {% endfor %}
     </div>
+</section>
 
-    <!-- Modal -->
-    {% for m in messages %}
-    <div class="modal fade" id="modelone-{{m.id}}" tabindex="-1" role="dialog" aria-labelledby="modeloneTitle"
+<!-- Message Section Section -->
+<section>
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        {% for team in teams %}
+        <div class="grid gap-10 lg:grid-cols-2 ">
+            <div class="items-center justify-center -mx-4 lg:pl-8">
+                {% if team.image %}
+                <div class="px-3">
+                    <img class="object-cover w-full h-40 rounded sm:h-64 xl:h-80 sm:w-full xl:w-full"
+                        src="{{team.image.url}}" alt="" />
+                </div>
+                {% endif %}
+            </div>
+            <div class="flex flex-col md:pr-8 xl:pr-0 lg:max-w-lg">
+                {% if team.position %}
+                <h2 class="font-semibold pb-2 text-black-400 fs-4">Message From {{team.position}}</h2>
+                {% else %}
+                <h2 class="font-semibold py-2 text-black-400 fs-4">Message From Chairman</h2>
+                {% endif %}
+                <hr class="horizontal-line mb-4">
+                <div class="max-w-xl mb-6">
+                    <h2
+                        class="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-20">
+                        {{team.name}}
+                    </h2>
+                    <p class="text-base text-gray-700 md:text-lg">
+                        {{team.short_desc}}
+                    </p>
+                </div>
+                <div>
+                    <a type="button" aria-label="" data-bs-toggle="modal" data-bs-target="#model-{{team.id}}"
+                        class="inline-flex items-center font-semibold transition-colors duration-200 text-blue-400 hover:text-blue-800">
+                        Learn More
+                        <svg class="inline-block w-3 ml-2" fill="currentColor" viewBox="0 0 12 12">
+                            <path
+                                d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% for team in teams %}
+    <div class="modal fade" id="model-{{team.id}}" tabindex="-1" role="dialog" aria-labelledby="modeloneTitle"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modeloneTitle">Message from {{m.position}}</h5>
+                    <h5 class="modal-title" id="modeloneTitle">Message from {{team.position}}</h5>
                     <a class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </a>
                 </div>
                 <div class="modal-body">
-                    {{m.long_desc}}
+                    {{team.long_desc}}
                 </div>
             </div>
         </div>
     </div>
     {% endfor %}
-</div>
+</section>
 
-<!-- gallery section........... -->
-<div class="nasa-gallery bg-light mt-3 py-3">
-    <h3 class="mb-3 nasa-info-heading">Nasa Gallery</h3>
-    <div class="container nasa-gallery-content d-lg-flex">
-        <div class="card image-gallery mb-3 mb-lg-0 col-lg-6 me-lg-2">
-            <a href="#" class="text-decoration-none ms-auto p-2">View all<i class="fas fa-angle-right ms-2"></i></a>
-            <div class="card-body">
-                <div id="imagecarousel" class="carousel slide" data-bs-ride="imagecarousel">
-                    <!-- <ol class="carousel-indicators">
-                        <li data-bs-target="#carousel" data-bs-slide-to="0" class="active"></li>
-                        {% for i in image %}
-                        <li data-bs-target="#carousel" data-bs-slide-to="{{i.id}}"></li>
-                        {% endfor %}
-                    </ol> -->
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="../static/images/slider-1.png" alt="slide">
-                        </div>
-                        {% for i in image %}
-                        {% if i.media %}
-                        <div class="carousel-item">
-                            <img class="d-block" src="{{i.media.url}}" alt="slide" width="100%" height="300">
-                        </div>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                    <a class="carousel-control-prev" href="#imagecarousel" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#imagecarousel" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+<!-- Selection process.......... -->
+<!-- <section>
+    <div class="px-4 py-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div class="grid gap-10 lg:grid-cols-2">
+            <div class="flex flex-col md:pr-8 xl:pr-0 lg:max-w-lg">
+                <h2 class="font-semibold py-2 text-black-400 fs-4 text-capitalize">our unique process</h2>
+                <hr class="horizontal-line mb-4">
+                <div class="max-w-xl mb-6">
+                    <h2
+                        class="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-20">
+                    </h2>
+                    <p class="text-base text-gray-700 md:text-lg">
+                    </p>
+                </div>
+                <div>
+                    <a type="button" aria-label="" data-bs-toggle="modal" data-bs-target="#model-{{team.id}}"
+                        class="inline-flex items-center font-semibold transition-colors duration-200 text-blue-400 hover:text-blue-800">
+                        Learn More
+                        <svg class="inline-block w-3 ml-2" fill="currentColor" viewBox="0 0 12 12">
+                            <path
+                                d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z">
+                            </path>
+                        </svg>
                     </a>
                 </div>
             </div>
-        </div>
-        <div class="card video-gallery col-lg-6 ms-lg-2">
-            <a href="#" class="text-decoration-none ms-auto p-2">Watch More<i class="fas fa-angle-right ms-2"></i></a>
-            <div class="card-body">
-                <div id="videocarousel" class="carousel slide" data-bs-ride="videocarousel">
-                    <ol class="carousel-indicators">
-                        <li data-bs-target="#carousel" data-bs-slide-to="0" class="active"></li>
-                        {% for v in video %}
-                        <li data-bs-target="#carousel" data-bs-slide-to="{{v.id}}"></li>
-                        {% endfor %}
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <iframe width="100%" height="265" src="https://www.youtube.com/embed/4w1SOYYFreU"
-                                allowfullscreen></iframe>
+            <div class="items-center justify-center -mx-4 lg:pl-8">
+                <div class="px-3">
+                    <div class="circleContainer">
+                        <div class="circle"></div>
+                        <div class="circleContent">
+                            <div class="circleItem">
+                                <i class="fas fa-user"></i>
+                                <span>Role</span>
+                            </div>
+                            <div class="circleItem">
+                                <i class="fa-solid fa-earth-asia"></i>
+                                <span>placement & trail</span>
+                            </div>
+                            <div class="circleItem">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <span>reference check</span>
+                            </div>
+                            <div class="circleItem">
+                                <i class="fa-solid fa-stairs"></i>
+                                <span>selection process</span>
+                            </div>
+                            <div class="circleItem">
+                                <i class="fas fa-search"></i>
+                                <span>search</span>
+                            </div>
                         </div>
-                        {% for v in video %}
-                        {% if v.video %}
-                        <div class="carousel-item">
-                            <iframe width="100%" height="265" src="{{v.video_url}}" allowfullscreen></iframe>
-                        </div>
-                        {% endif %}
-                        {% endfor %}
                     </div>
-                    <a class="carousel-control-prev" href="#videocarousel" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#videocarousel" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section> -->
 
-<!-- Blog section................ -->
-<div class="container blog mt-5">
-    <h3 class="nasa-info-heading container mb-1">Blogs</h3>
-    <a href="{% url 'blogs' %}" class="text-decoration-none d-flex justify-content-end align-items-center mb-1">Read
-        all<i class="fas fa-angle-right ms-2"></i></a>
-    <div class="blog-content">
-        {% for b in blog %}
-        <div class="card mb-3 py-3 px-2 mb-md-0 flex-lg-row mb-lg-0">
-            <div class="card-text col-lg-7">
-                <h3>{{b.blog_title}}</h3>
-                <p>{{b.created_at}}</p>
-                <p class="my-0">{{b.short_desc | safe}}</p>
-                <a href="{% url 'blogs' blog_id=b.id %}">Continue Reading</a>
+<!-- Portfolio counter........ -->
+<section class="text-gray-600 body-font pb-5 bg-light">
+    <div class="container px-4 pt-6 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-8">
+        <div class="flex flex-col text-center w-full mb-5">
+            <h1 class="sm:text-4xl text-3xl font-bold title-font text-gray-900">
+                Portfolio
+            </h1>
+        </div>
+        <div class="grid grid-cols-1 gap-3 text-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center">
+            {% for count in counts %}
+            <div class="border rounded py-4 d-flex flex-column justify-content-center align-items-center">
+                <span class="text-4xl text-black fw-bold counter">{{count.value}}</span>
+                <span class="text-uppercase text-2xl text-black">{{count.name}}</span>
             </div>
-            {% if b.blog_image %}
-            <div class="card-image mt-3 col-lg-5 mt-lg-0">
-                <img src="{{b.blog_image.url}}" alt="" srcset="" width="100%" height="200">
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Job Categories -->
+<section class="text-gray-600 body-font job-category pb-5">
+    <div class="container px-4 pt-6 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-8">
+        <div class="flex flex-col text-center w-full mb-5">
+            <h1 class="sm:text-4xl text-3xl font-bold title-font text-gray-900">
+                Job Categories
+            </h1>
+        </div>
+        <div class="grid grid-cols-1 gap-3 text-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {% for job in job_category %}
+            <div class="card">
+                <div class="card-body p-0 hover:md:scale-105 ease-in-out duration-300 transition cursor-pointer">
+                    <div class="overlay"></div>
+                    <div class="card-image rounded"
+                        style="background-image: url(../static/images/place.jpeg); background-repeat: no-repeat; background-size: cover; background-position: center; min-width: 280px; height: 320px;">
+                        <div
+                            class="card-title position-absolute bottom-0 left-5 text-3xl md:text-2xl pb-3 text-white fw-bold">
+                            <a href="{% url 'jobs' title=job.title %}" class="hover:text-white">{{job.title}}</a>
+                        </div>
+                    </div>
+                </div>
             </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="text-center mt-3 mt-lg-0">
+        <a href="/job_category"
+            class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">
+            View All
+        </a>
+    </div>
+</section>
+
+<!-- Testimonials -->
+
+<section class="flex items-center justify-center py-16 bg-gray-100 min-w-screen">
+    <div class="max-w-6xl px-12 mx-auto bg-gray-100 md:px-16 xl:px-10">
+        <div class="flex flex-col items-center lg:flex-row">
+            <div class="flex flex-col items-start justify-center w-full h-full pr-8 mb-10 lg:mb-0 lg:w-1/2">
+                <h2
+                    class="text-capitalize text-4xl font-extrabold leading-10 tracking-tight text-gray-900 sm:text-5xl sm:leading-none md:text-6xl lg:text-5xl xl:text-6xl">
+                    what our customers says?
+                </h2>
+                <p class="my-6 text-lg text-gray-600">
+                    Don't just take our word for it, read from our extensive list of
+                    case studies and customer testimonials.
+                </p>
+                <a href="{% url 'testimonials' %}"
+                    class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">View
+                    More
+                </a>
+            </div>
+            <div class="w-full lg:w-1/2">
+                {% for testimonial in testimonial %}
+                <blockquote
+                    class="flex items-center justify-between mb-3 w-full col-span-1 p-6 bg-white rounded-lg hover:shadow-lg hover:cursor-pointer transition-all duration-300">
+                    <div class="flex flex-col pr-8">
+                        <div class="relative pl-12">
+                            <svg class="absolute left-0 w-10 h-10 text-blue-500 fill-current"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125">
+                                <path
+                                    d="M30.7 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2C12.7 83.1 5 72.6 5 61.5c0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S30.7 31.6 30.7 42zM82.4 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2-11.8 0-19.5-10.5-19.5-21.6 0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S82.4 31.6 82.4 42z">
+                                </path>
+                            </svg>
+                            <p class="mt-2 text-sm text-gray-600 sm:text-base lg:text-sm xl:text-base">
+                                <a href="{% url 'testimonials' test_id=testimonial.id %}">
+                                    {{testimonial.short_message}}
+                                </a>
+                            </p>
+                        </div>
+
+                        <h3
+                            class="pl-12 mt-3 text-sm font-medium leading-5 text-gray-800 truncate sm:text-base lg:text-sm">
+                            {{testimonial.student_name}}
+                            <!-- <span class="mt-1 text-sm leading-5 text-gray-500 truncate">- CEO SomeCompany</span> -->
+                        </h3>
+                    </div>
+                    {% if testimonial.student_image %}
+                    <img class="flex-shrink-0 w-20 h-20 bg-gray-300 rounded-full xl:w-24 xl:h-24"
+                        src="{{testimonial.student_image}}" alt="" />
+                    {% else %}
+                    <img class="flex-shrink-0 w-20 h-20 bg-gray-300 rounded-full xl:w-24 xl:h-24"
+                        src="{% static 'images/place.jpeg' %}" alt="" />
+                    {% endif %}
+                </blockquote>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Clients -->
+<section class="px-4 py-24 mx-auto max-w-7xl">
+    <h1 class="mb-3 text-3xl font-bold leading-tight text-center text-gray-900 md:text-4xl">
+        Our Clients
+    </h1>
+    <h2 class="mb-12 text-sm tracking-wide text-center text-gray-800 uppercase">
+        We're proud to have played a part in these amazing journeys.
+    </h2>
+    <div class="grid grid-cols-2 gap-2 text-center lg:grid-cols-6">
+        {% for client in clients %}
+        <div class="flex items-center justify-center p-6 bg-opacity-25 bg-primary-light">
+            {% if client.image %}
+            <img src="{{client.image}}" alt="Todoist Logo" class="block object-contain h-16" />
+            {% else %}
+            <img src="{% static 'images/place.jpeg' %}" alt="Todoist Logo" class="block object-contain h-16 rounded" />
             {% endif %}
         </div>
         {% endfor %}
     </div>
-</div>
-
-<!-- Testimonial section................. -->
-<div class="testimonial-mobile bg-light mt-3 py-3">
-    <h3 class="nasa-info-heading container mb-1">Testimonial</h3>
-    <a href="{% url 'testimonials' %}"
-        class="text-decoration-none container d-flex justify-content-end align-items-center mb-1">View all<i
-            class="fas fa-angle-right"></i></a>
-    <div id="testimonialMobile" class="carousel slide" data-bs-ride="testimonialMobile">
-        <!-- <ol class="carousel-indicators">
-            {% for t in range_mobile %}
-            <li data-bs-target="#testimonial" data-bs-slide-to="{{t}}" class="active"></li>
-            {% endfor %}
-        </ol> -->
-        <div class="carousel-inner container">
-            <div class="carousel-item active">
-                {% for t in testimonial|slice:":" %}
-                <div class="card">
-                    <div class="card-body testimonial-container">
-                        <div class="student-detail">
-                            {% if t.student_image %}
-                            <div class="student-image d-flex flex-column">
-                                <img class="" src="{{t.student_image.url}}" alt="First slide">
-                                <h5 class="student-name">{{t.student_name}}</h5>
-                            </div>
-                            {% endif %}
-                            <p class="text-center">{{t.short_message | safe}} <a class="text-decoration-none"
-                                    href="{% url 'testimonials' test_id=t.id %}">Read
-                                    More</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                {% if forloop.counter|divisibleby:1 and forloop.counter > 0 and not forloop.last %}
-            </div>
-            <div class="carousel-item">
-                {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#testimonialMobile" role="button" data-bs-slide="prev">
-            <span><i class="fas fa-angle-left text-dark fs-1"></i></span>
-        </a>
-        <a class="carousel-control-next" href="#testimonialMobile" role="button" data-bs-slide="next">
-            <span><i class="fas fa-angle-right text-dark fs-1"></i></span>
-        </a>
-    </div>
-</div>
-
-<div class="testimonial-desktop bg-light mt-3 py-3">
-    <h3 class="nasa-info-heading container mb-1">Testimonial</h3>
-    <a href="{% url 'testimonials' %}"
-        class="text-decoration-none container d-flex justify-content-end align-items-center mb-1">View all<i
-            class="fas fa-angle-right"></i></a>
-    <div id="testimonial" class="carousel slide" data-bs-ride="testimonial">
-        <ol class="carousel-indicators">
-            {% for t in range %}
-            <li data-bs-target="#testimonial" data-bs-slide-to="{{t}}" class="active"></li>
-            {% endfor %}
-        </ol>
-        <div class="carousel-inner container">
-            <div class="carousel-item active">
-                {% for t in testimonial|slice:":" %}
-                <div class="card me-2">
-                    <div class="card-body testimonial-container">
-                        <div class="student-detail">
-                            {% if t.student_image %}
-                            <div class="student-image d-flex flex-column">
-                                <img class="" src="{{t.student_image.url}}" alt="First slide">
-                                <h5 class="student-name">{{t.student_name}}</h5>
-                            </div>
-                            {% endif %}
-                            <p class="text-center">{{t.short_message | safe}} <a class="text-decoration-none"
-                                    href="{% url 'testimonials' test_id=t.id %}">Read
-                                    More</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
-            </div>
-            <div class="carousel-item">
-                {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#testimonial" role="button" data-bs-slide="prev">
-            <span><i class="fas fa-angle-left text-dark fs-1"></i></span>
-        </a>
-        <a class="carousel-control-next" href="#testimonial" role="button" data-bs-slide="next">
-            <span><i class="fas fa-angle-right text-dark fs-1"></i></span>
-        </a>
-    </div>
-</div>
-
+</section>
 {% endblock %}
