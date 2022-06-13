@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    // url = 'http://127.0.0.1:8000/'
-    url = 'http://nasa.radiatnserversite.com/'
+    const url = 'http://127.0.0.1:8000/';
     imageDiv = $('#images').show();
     videoDiv = $('#videos').hide();
     $('#image_button').click(function () {
@@ -95,22 +94,23 @@ $(document).ready(function () {
                         '</ul></div>'
                     )
                     filteredSubMenu.map(b => {
-                        $(`#submenu-${mainMenuId}`).append(`<li><a class="dropdown-item" href="${url}sub_menu/${b.id}">` + b.sub_menu_name + '</a></li>')
+                        $(`#submenu-${mainMenuId}`).append(`<li><a class="dropdown-item text-capitalize" href="${url}sub_menu/${b.id}">` + b.sub_menu_name + '</a></li>')
                     })
                 } else {
-                    if(a.menu_link != ''){
-                        $('.bottom-header').append(
-                            `<a class="nav-link text-capitalize bottom-nav-link text-dark" href="${url}${a.menu_link}">`
-                            + a.menu_name +
-                            '</a>'
-                        )
-                    }else{
+                    if(a.menu_link === null){
                         $('.bottom-header').append(
                             `<a class="nav-link text-capitalize bottom-nav-link text-dark" href="${url}nasacollege/${a.id}">`
                             + a.menu_name +
                             '</a>'
                         )
+                    }else{
+                        $('.bottom-header').append(
+                            `<a class="nav-link text-capitalize bottom-nav-link text-dark" href="${url}${a.menu_link}">`
+                            + a.menu_name +
+                            '</a>'
+                        )
                     }
+                    
                 }
             }
         })
@@ -118,7 +118,7 @@ $(document).ready(function () {
         console.log("new sub menu", subMenuList);
     });
 
-    // Input based on selected value....................
+    // main menu based on selected value....................
     var linkContent = $('.link-content').hide();
     $('#menu-type').change(function () {
         var val = $(this).val();
@@ -128,4 +128,5 @@ $(document).ready(function () {
             linkContent.hide();
         }
     })
+
 });
