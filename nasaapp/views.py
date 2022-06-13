@@ -1,4 +1,5 @@
 
+from tkinter import image_names
 from turtle import title
 from unicodedata import category
 from webbrowser import get
@@ -71,13 +72,17 @@ def index(request):
     for data in job_category:
         category_id = JobCategory.objects.filter(title=data['title'])[0]
         count = JobListing.objects.filter(category_id=int(category_id.id)).count()
-        if count > 0:
-            category_data.append({
-                "count":count,
-                "title":data['title']
-            })
+        if category_id.image:
+            image_str = category_id.image.url
+            if count > 0:
+                category_data.append({
+                    "count":count,
+                    "title":data['title'],
+                    "image":str(image_str),
+                })
 
     counts = Counter.objects.all().order_by('created_at')
+    selection = SelectionProcess.objects.all().order_by('created_at')
 
     header_footer = header_footer_view(request)
     data = {
@@ -102,7 +107,8 @@ def index(request):
         'services':services,
         'category_data':category_data, 
         'job_category':job_category,
-        'counts':counts
+        'counts':counts,
+        'selection':selection,
     }
     data.update(header_footer)
     return render(request, 'index.html', data)
@@ -1119,11 +1125,14 @@ def job_category_list(request):
     for data in job_category:
         category_id = JobCategory.objects.filter(title=data['title'])[0]
         count = JobListing.objects.filter(category_id=int(category_id.id)).count()
-        if count > 0:
-            category_data.append({
-                "count":count,
-                "title":data['title']
-            })
+        if category_id.image:
+            image_str = category_id.image.url
+            if count > 0:
+                category_data.append({
+                    "count":count,
+                    "title":data['title'],
+                    "image":str(image_str),
+                })
     header_footer = header_footer_view(request)
     data.update(header_footer)
     return render(request, 'client/job_category.html', {'category_data':category_data, 'job_category':job_category})
@@ -1168,3 +1177,13 @@ def teams(request):
     header_footer = header_footer_view(request)
     data.update(header_footer)
     return render(request, 'client/teams.html', data)
+
+def selection(request, selection_id):
+    selection = SelectionProcess.objects.get(id=int(selection_id))
+    data = {
+        'selection': selection,
+        'selection_id':selection_id,
+    }
+    header_footer = header_footer_view(request)
+    data.update(header_footer)
+    return render(request, 'client/selection_process.html', data)

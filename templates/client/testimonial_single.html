@@ -6,7 +6,7 @@
     <div class="card d-flex flex-row justify-content-between px-2 py-2 me-3 align-items-center">
         <div class="card-text">
             <h3>{{testimonial.student_name}}</h3>
-            <p>{{testimonial.long_message}}</p>
+            <p>{{testimonial.long_message | safe}}</p>
         </div>
         <div class="card-image">
             {% if t.student_image %}

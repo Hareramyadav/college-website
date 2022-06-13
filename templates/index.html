@@ -173,8 +173,27 @@
     {% endfor %}
 </section>
 
+<!-- Portfolio counter........ -->
+<section class="text-gray-600 body-font pb-5 bg-light">
+    <div class="container px-4 pt-6 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-8">
+        <div class="flex flex-col text-center w-full mb-5">
+            <h1 class="sm:text-4xl text-3xl font-bold title-font text-gray-900">
+                Portfolio
+            </h1>
+        </div>
+        <div class="grid grid-cols-1 gap-3 text-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center">
+            {% for count in counts %}
+            <div class="border rounded py-4 d-flex flex-column justify-content-center align-items-center">
+                <span class="text-4xl text-black fw-bold counter">{{count.value}}</span>
+                <span class="text-uppercase text-2xl text-black">{{count.name}}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
 <!-- Selection process.......... -->
-<!-- <section>
+<section>
     <div class="px-4 py-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div class="grid gap-10 lg:grid-cols-2">
             <div class="flex flex-col md:pr-8 xl:pr-0 lg:max-w-lg">
@@ -187,7 +206,7 @@
                     <p class="text-base text-gray-700 md:text-lg">
                     </p>
                 </div>
-                <div>
+                <!-- <div>
                     <a type="button" aria-label="" data-bs-toggle="modal" data-bs-target="#model-{{team.id}}"
                         class="inline-flex items-center font-semibold transition-colors duration-200 text-blue-400 hover:text-blue-800">
                         Learn More
@@ -197,17 +216,19 @@
                             </path>
                         </svg>
                     </a>
-                </div>
+                </div> -->
             </div>
             <div class="items-center justify-center -mx-4 lg:pl-8">
                 <div class="px-3">
                     <div class="circleContainer">
                         <div class="circle"></div>
                         <div class="circleContent">
+                            {% for process in selection %}
                             <div class="circleItem">
                                 <i class="fas fa-user"></i>
-                                <span>Role</span>
+                                <span><a href="{% url 'process' selection_id=process.id %}">{{process.title}}</a></span>
                             </div>
+                            {% endfor %}
                             <div class="circleItem">
                                 <i class="fa-solid fa-earth-asia"></i>
                                 <span>placement & trail</span>
@@ -230,25 +251,6 @@
             </div>
         </div>
     </div>
-</section> -->
-
-<!-- Portfolio counter........ -->
-<section class="text-gray-600 body-font pb-5 bg-light">
-    <div class="container px-4 pt-6 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-8">
-        <div class="flex flex-col text-center w-full mb-5">
-            <h1 class="sm:text-4xl text-3xl font-bold title-font text-gray-900">
-                Portfolio
-            </h1>
-        </div>
-        <div class="grid grid-cols-1 gap-3 text-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center">
-            {% for count in counts %}
-            <div class="border rounded py-4 d-flex flex-column justify-content-center align-items-center">
-                <span class="text-4xl text-black fw-bold counter">{{count.value}}</span>
-                <span class="text-uppercase text-2xl text-black">{{count.name}}</span>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
 </section>
 
 <!-- Job Categories -->
@@ -260,15 +262,16 @@
             </h1>
         </div>
         <div class="grid grid-cols-1 gap-3 text-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {% for job in job_category %}
+            {% for category in category_data %}
             <div class="card">
                 <div class="card-body p-0 hover:md:scale-105 ease-in-out duration-300 transition cursor-pointer">
                     <div class="overlay"></div>
                     <div class="card-image rounded"
-                        style="background-image: url(../static/images/place.jpeg); background-repeat: no-repeat; background-size: cover; background-position: center; min-width: 280px; height: 320px;">
+                        style="background-image: url({{category.image}}); background-repeat: no-repeat; background-size: cover; background-position: center; min-width: 280px; height: 320px;">
                         <div
                             class="card-title position-absolute bottom-0 left-5 text-3xl md:text-2xl pb-3 text-white fw-bold">
-                            <a href="{% url 'jobs' title=job.title %}" class="hover:text-white">{{job.title}}</a>
+                            <a href="{% url 'jobs' title=category.title %}"
+                                class="hover:text-white">{{category.title}}</a>
                         </div>
                     </div>
                 </div>

@@ -11,13 +11,16 @@
             </h1>
         </div>
         <div class="grid grid-cols-1 gap-3 text-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {% for job in job_category %}
+            {% for category in category_data %}
             <div class="card">
                 <div class="card-body p-0 hover:md:scale-105 ease-in-out duration-300 transition cursor-pointer">
                     <div class="overlay"></div>
-                    <div class="card-image rounded" style="background-image: url(../static/images/place.jpeg); background-repeat: no-repeat; background-size: cover; background-position: center; min-width: 280px; height: 320px;">
-                        <div class="card-title position-absolute bottom-0 left-5 text-3xl md:text-2xl pb-3 text-white fw-bold">
-                            <a href="{% url 'jobs' title=job.title %}" class="hover:text-white">{{job.title}}</a>
+                    <div class="card-image rounded"
+                        style="background-image: url({{category.image}}); background-repeat: no-repeat; background-size: cover; background-position: center; min-width: 280px; height: 320px;">
+                        <div
+                            class="card-title position-absolute bottom-0 left-5 text-3xl md:text-2xl pb-3 text-white fw-bold">
+                            <a href="{% url 'jobs' title=category.title %}"
+                                class="hover:text-white">{{category.title}}</a>
                         </div>
                     </div>
                 </div>

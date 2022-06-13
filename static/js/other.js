@@ -98,9 +98,9 @@ $(document).ready(function () {
                         $(`#submenu-${mainMenuId}`).append(`<li><a class="dropdown-item text-capitalize" href="${url}sub_menu/${b.id}">` + b.sub_menu_name + '</a></li>')
                     })
                 } else {
-                    if (a.menu_link != '') {
+                    if (a.menu_link === null || '') {
                         $('.bottom-header').append(
-                            `<a class="nav-link text-capitalize bottom-nav-link text-dark" href="${url}shalmani/${a.id}">`
+                            `<a class="nav-link text-capitalize bottom-nav-link text-dark" href="${url}raki/${a.id}">`
                             + a.menu_name +
                             '</a>'
                         )
@@ -184,52 +184,6 @@ $(document).ready(function () {
         });
         angle += step;
     });
-
-
-    // $('.itemDot').click(function () {
-
-    //     var dataTab = $(this).data("tab");
-    //     $('.itemDot').removeClass('active');
-    //     $(this).addClass('active');
-    //     $('.CirItem').removeClass('active');
-    //     $('.CirItem' + dataTab).addClass('active');
-    //     i = dataTab;
-
-    //     $('.dotCircle').css({
-    //         "transform": "rotate(" + (360 - (i - 1) * 36) + "deg)",
-    //         "transition": "2s"
-    //     });
-    //     $('.itemDot').css({
-    //         "transform": "rotate(" + ((i - 1) * 36) + "deg)",
-    //         "transition": "1s"
-    //     });
-
-
-    // });
-
-    // setInterval(function () {
-    //     var dataTab = $('.itemDot.active').data("tab");
-    //     if (dataTab > 9 || i > 9) {
-    //         dataTab = 1;
-    //         i = 1;
-    //     }
-    //     $('.itemDot').removeClass('active');
-    //     $('[data-tab="' + i + '"]').addClass('active');
-    //     $('.CirItem').removeClass('active');
-    //     $('.CirItem' + i).addClass('active');
-    //     i++;
-
-
-    //     $('.dotCircle').css({
-    //         "transform": "rotate(" + (360 - (i - 2) * 36) + "deg)",
-    //         "transition": "2s"
-    //     });
-    //     $('.itemDot').css({
-    //         "transform": "rotate(" + ((i - 2) * 36) + "deg)",
-    //         "transition": "1s"
-    //     });
-
-    // }, 5000);
 
     // counter part...............
     function count($this) {

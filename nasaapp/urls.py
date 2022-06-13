@@ -75,7 +75,7 @@ urlpatterns = [
     path('delete_team/<int:team_id>', views.delete_team, name='delete_team'),
 
     # client pages
-    path('shalmani/<int:page_id>', views.pages, name="pages"),
+    path('raki/<int:page_id>', views.pages, name="pages"),
     path('contact', views.contact, name="contact"),
     path('admission-from', views.admission_from, name="admission-from"),
     path('contact_form', views.contact_form, name="contact_form"),
@@ -92,4 +92,5 @@ urlpatterns = [
     path('jobs/<int:job_id>', views.job, name="jobs"),
     path('clients', views.clients, name="clients"),
     path('teams', views.teams, name="teams"),
+    path('process/<int:selection_id>', views.selection, name="process"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

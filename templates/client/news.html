@@ -10,9 +10,11 @@
             <p>{{n.created_at}}</p>
             <a href="{% url 'news' news_id=n.id %}">View Details</a>
         </div>
+        {% if n.news_image %}
         <div class="card-image">
             <img src="{{n.news_image.url}}" alt="" srcset="" height="200" width="250">
         </div>
+        {% endif %}
     </div>
     {% endfor %}
 </div>
