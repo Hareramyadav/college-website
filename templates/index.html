@@ -8,7 +8,12 @@
     <div class="swiper-wrapper">
         {% for slider in banner %}
         <div class="swiper-slide bg-no-repeat bg-center object-cover w-full"
-            style="background-image: url({{slider.banner_image.url}})">
+            {% if slider.image %}
+            style="background-image: url({{slider.banner_image.url}})"
+            {% else %}
+            style="background-color: #bababa;"
+            {% endif %}
+            >
             <div class="flex flex-col mb-16 sm:text-center sm:mb-0">
                 <div class="w-full max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
                     <h2

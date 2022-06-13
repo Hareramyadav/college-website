@@ -25,8 +25,8 @@ class Menu(models.Model):
     menu_type = models.CharField(max_length=200, null=True, blank=True)
     menu_index = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to="static/images")
-    short_content = RichTextField(max_length=5000, null=True, blank=True)
-    long_content = RichTextField(max_length=10000, null=True, blank=True)
+    short_content = RichTextField(null=True, blank=True)
+    long_content = RichTextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -41,8 +41,8 @@ class SubMenu(models.Model):
     sub_menu_name = models.CharField(max_length=300, null=True, blank=True)
     link_name = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to="static/images")
-    short_content = RichTextField(max_length=5000, null=True, blank=True)
-    long_content = RichTextField(max_length=10000, null=True, blank=True)
+    short_content = RichTextField(null=True, blank=True)
+    long_content = RichTextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -86,7 +86,7 @@ class News(models.Model):
     news_image = models.ImageField(
         blank=True, null=True, upload_to="static/news")
     title = models.CharField(max_length=1000, blank=True, null=True)
-    long_desc = RichTextField(max_length=5000, null=True, blank=True)
+    long_desc = RichTextField(null=True, blank=True)
     news_link = models.CharField(max_length=300, blank=True, null=True)
     news_position = models.CharField(max_length=200, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -102,7 +102,7 @@ class Message(models.Model):
     image = models.ImageField(blank=True, null=True, upload_to="static/images")
     name = models.CharField(max_length=1000, null=True, blank=True)
     position = models.CharField(max_length=500, null=True, blank=True)
-    long_desc = RichTextField(max_length=2000, null=True, blank=True)
+    long_desc = RichTextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -128,8 +128,8 @@ class Blog(models.Model):
     blog_image = models.ImageField(blank=True, null=True, upload_to="static/blogs")
     blog_title = models.CharField(max_length=500, blank=True, null=True)
     blog_author = models.CharField(max_length=500, blank=True, null=True)
-    short_desc = RichTextField(max_length=1000, blank=True, null=True)
-    long_desc = RichTextField(max_length=3000, null=True, blank=True)
+    short_desc = RichTextField(blank=True, null=True)
+    long_desc = RichTextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -142,8 +142,8 @@ class Testimonial(models.Model):
     student_image = models.ImageField(
         blank=True, null=True, upload_to="static/testimonial")
     student_name = models.CharField(max_length=500, null=True, blank=True)
-    short_message = RichTextField(max_length=2000, null=True, blank=True)
-    long_message = RichTextField(max_length=5000, null=True, blank=True)
+    short_message = RichTextField(null=True, blank=True)
+    long_message = RichTextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -175,7 +175,7 @@ class Footer(models.Model):
 class Popup(models.Model):
     title = models.CharField(max_length=1000, null=True, blank=True)
     file = models.FileField(null=True, blank=True, upload_to="static/images")
-    message = RichTextField(max_length=5000, null=True, blank=True,)
+    message = RichTextField(null=True, blank=True,)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
