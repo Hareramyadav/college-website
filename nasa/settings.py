@@ -82,12 +82,21 @@ WSGI_APPLICATION = 'nasa.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'radijmdg_db',
-        'USER':'radijmdg_user',
-        'PASSWORD':'@RfCdHq67ngE',
+        'NAME': 'nasacollege_db',
+        'USER':'nasacollege_user',
+        'PASSWORD':')~*4!i4a0idA',
         'HOST':'localhost',
         'PORT':'3306',
     }
+
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'radijmdg_db',
+    #     'USER':'radijmdg_user',
+    #     'PASSWORD':'@RfCdHq67ngE',
+    #     'HOST':'localhost',
+    #     'PORT':'3306',
+    # }
 
     # 'default': {
     #     'ENGINE': 'django.db.backends.mysql',
