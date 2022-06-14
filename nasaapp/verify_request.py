@@ -24,3 +24,9 @@ def validate_admin(email):
         return True
     else:
         return False
+
+def build_image_url(file_url):
+    file_name = file_url.split('/')[-1]
+    file_name = str(file_name)
+    file_link = 'images/' + file_name
+    return file_link

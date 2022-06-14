@@ -1138,14 +1138,14 @@ def job_category_list(request):
     return render(request, 'client/job_category.html', {'category_data':category_data, 'job_category':job_category})
 
 def jobs(request, title):
-    category = JobCategory.objects.get(title=str(title))
+    category = JobCategory.objects.filter(title__exact=title)
     category_id = JobCategory.objects.filter(title=title)[0].id
-    job_listings = JobListing.objects.filter(category_id=category_id)
-    category_names = JobCategory.objects.all().values('title').distinct()
+    job_listings = JobListing.objects.filter(category_id=int(category_id))
+    
     data = {
         'job_list':job_listings,
-        'category_names':category_names,
-        'category':category
+        'category':category,
+        'category_id':category_id,
     }
     header_footer = header_footer_view(request)
     data.update(header_footer)
