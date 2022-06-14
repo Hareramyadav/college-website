@@ -97,14 +97,7 @@ def header_footer_view(request):
     top_header = [m for m in menu_lists if m.menu_position == 'topheader']
     bottom_header = [
         m for m in menu_lists if m.menu_position == 'bottomheader']
-    footer = Footer.objects.all().order_by('created_at')
-    footer_first = [
-        f for f in footer if f.footer_position == 'footer_first'][:1]
-    print('footer first', footer_first)
-    footer_second = [
-        s for s in footer if s.footer_position == 'footer_second'][:1]
-    footer_third = [
-        t for t in footer if t.footer_position == 'footer_third'][:1]
+    footer = Footer.objects.all().order_by('created_at')[:1]
     return ({
         'top_header': top_header,
         'bottom_header': bottom_header,
@@ -112,9 +105,7 @@ def header_footer_view(request):
         'dropdown_menu':dropdown_menu,
         'link_menu':link_menu,
         'sub_menu': sub_menu_lists,
-        'footer_first': footer_first,
-        'footer_second': footer_second,
-        'footer_third': footer_third,
+        'footer':footer,
         'site_identity':site_identity,
     })
 
@@ -172,12 +163,8 @@ def create_footer(request):
         address = request.POST.get('address')
         phone_number = request.POST.get('phone_number')
         email = request.POST.get('email')
-        footer_position = request.POST.get('footer_position')
-        quick_links = request.POST.get('quick_links')
-        social_links = request.POST.get('social_links')
 
-        data = dict(heading=heading, address=address, phone_number=phone_number, email=email,
-                    footer_position=footer_position, quick_links=quick_links, social_links=social_links)
+        data = dict(heading=heading, address=address, phone_number=phone_number, email=email)
         if(Footer.objects.all().count() >= 3):
             messages.warning(request, "You can create only 3 footers")
             return HttpResponseRedirect('/create_footer')
@@ -197,17 +184,11 @@ def edit_footer(request, footer_id):
         address = request.POST.get('address')
         phone_number = request.POST.get('phone_number')
         email = request.POST.get('email')
-        footer_position = request.POST.get('footer_position')
-        quick_links = request.POST.get('quick_links')
-        social_links = request.POST.get('social_links')
 
         footer.heading = heading
         footer.address = address
         footer.phone_number = phone_number
         footer.email = email
-        footer.footer_position = footer_position
-        footer.quick_links = quick_links
-        footer.social_links = social_links
 
         footer.save()
         return redirect('/create_footer')
@@ -713,12 +694,7 @@ def about(request):
 
 def contact(request):
     footer = Footer.objects.all().order_by('created_at')
-    footer_first = [
-        f for f in footer if f.footer_position == 'footer_first'][:1]
-    footer_third = [
-        t for t in footer if t.footer_position == 'footer_third'][:1]
-    data = {'footer': footer, 'footer_first': footer_first,
-            'footer_third': footer_third}
+    data = {'footer': footer}
     header_footer = header_footer_view(request)
     data.update(header_footer)
     return render(request, 'client/contact.html', data)

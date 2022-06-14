@@ -38,10 +38,11 @@
 <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#popup">
     Launch demo modal
 </button> -->
+{% for pop in popup %}
+{% if pop.title %}
 <div class="modal fade" id="popup" tabindex="-1" aria-labelledby="popuplabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            {% for pop in popup %}
             <div class="modal-header">
                 <h5 class="modal-title" id="popuplabel">{{pop.title}}</h5>
                 <a class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -54,10 +55,11 @@
                 <img class="mt-3" src="{{pop.file.url}}" alt="{{pop.file}}" width="100%" height="350">
                 {% endif %}
             </div>
-            {% endfor %}
         </div>
     </div>
 </div>
+{% endif %}
+{% endfor %}
 
 <!-- Nasa Info section............................... -->
 <div class="container-fluid nasa-info mt-3 py-5 bg-light">

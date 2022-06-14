@@ -154,7 +154,6 @@ class Testimonial(models.Model):
 
 
 class Footer(models.Model):
-    heading = models.CharField(max_length=1000, null=True, blank=True)
     address = models.CharField(max_length=200, null=True, blank=True)
     phone_number = models.CharField(max_length=200, null=True, blank=True)
     email = models.CharField(max_length=200, null=True, blank=True)
@@ -162,15 +161,13 @@ class Footer(models.Model):
     instagram = models.URLField(max_length=3000, blank=True, null=True)
     twitter = models.URLField(max_length=3000, blank=True, null=True)
     youtube = models.URLField(max_length=3000, blank=True, null=True)
-    footer_position = models.CharField(max_length=200, null=True, blank=True)
-    quick_links = models.CharField(max_length=3000, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 'Footer'
 
     def __str__(self):
-        return str(self.footer_position)
+        return str(self.address)
 
 class Popup(models.Model):
     title = models.CharField(max_length=1000, null=True, blank=True)
