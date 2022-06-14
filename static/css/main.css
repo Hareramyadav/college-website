@@ -277,8 +277,8 @@ body {
 
 /* unique process............... */
 .circleContainer {
-    width: 500px;
-    height: 500px;
+    width: 410px;
+    height: 410px;
     border-radius: 100%;
     margin: 0 auto;
     position: relative;
@@ -288,8 +288,8 @@ body {
     position: absolute;
     left: 40px;
     top: 45px;
-    width: 430px;
-    height: 430px;
+    width: 350px;
+    height: 350px;
     border: 2px solid #c4c4c4;
     border-radius: 100%;
     -webkit-animation: rotation 100s infinite linear;

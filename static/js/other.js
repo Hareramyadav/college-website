@@ -1,6 +1,7 @@
 let i = 2;
 $(document).ready(function () {
-    const url = 'http://127.0.0.1:8000/';
+    // const url = 'http://127.0.0.1:8000/';
+    const url = 'http://raki.radiatnserversite.com/';
     imageDiv = $('#images').show();
     videoDiv = $('#videos').hide();
     $('#image_button').click(function () {
@@ -163,7 +164,7 @@ $(document).ready(function () {
 
     // circular loop.................
 
-    var radius = 300;
+    var radius = 250;
     var fields = $('.circleItem');
     var container = $('.circleContent');
     var width = container.width();
