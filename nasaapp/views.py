@@ -43,6 +43,39 @@ def admin_logout(request):
     logout(request)
     return redirect('/admin_login')
 
+def menu_info_content(request, menu_id):
+    menu = Menu.objects.get(id=int(menu_id))
+    data = {
+        'menu_data':menu
+    }
+    header_footer = header_footer_view(request)
+    sidebars = sidebar(request)
+    data.update(header_footer)
+    data.update(sidebars)
+    return render(request, 'client/info.html', data)
+
+def header_footer_view(request):
+    site_identity = SiteIdentity.objects.all().order_by('created_at')
+    menu_lists = Menu.objects.all().order_by('created_at')
+    dropdown_menu = [d for d in menu_lists if d.menu_type == 'dropdown']
+    link_menu = [l for l in menu_lists if l.menu_type == 'link']
+    sub_menu_lists = SubMenu.objects.all()
+    top_header = [m for m in menu_lists if m.menu_position == 'topheader']
+    bottom_header = [
+        m for m in menu_lists if m.menu_position == 'bottomheader']
+    footer = Footer.objects.all().order_by('created_at')
+    return ({
+        'top_header': top_header,
+        'bottom_header': bottom_header,
+        'menu_list':menu_lists,
+        'dropdown_menu':dropdown_menu,
+        'link_menu':link_menu,
+        'sub_menu': sub_menu_lists,
+        'site_identity':site_identity,
+        'footer':footer,
+    })
+
+
 def index(request):
     jobs = JobListing.objects.all().order_by('-created_at')[:6]
     destinations = Destination.objects.all().order_by('-created_at')[:6]
@@ -114,49 +147,6 @@ def index(request):
     return render(request, 'index.html', data)
 
 
-def menu_info_content(request, menu_id):
-    menu = Menu.objects.get(id=int(menu_id))
-    data = {
-        'menu_data':menu
-    }
-    header_footer = header_footer_view(request)
-    sidebars = sidebar(request)
-    data.update(header_footer)
-    data.update(sidebars)
-    return render(request, 'client/info.html', data)
-
-def header_footer_view(request):
-    site_identity = SiteIdentity.objects.all().order_by('created_at')
-    menu_lists = Menu.objects.all().order_by('created_at')
-    dropdown_menu = [d for d in menu_lists if d.menu_type == 'dropdown']
-    link_menu = [l for l in menu_lists if l.menu_type == 'link']
-    sub_menu_lists = SubMenu.objects.all()
-    top_header = [m for m in menu_lists if m.menu_position == 'topheader']
-    bottom_header = [
-        m for m in menu_lists if m.menu_position == 'bottomheader']
-    footer = Footer.objects.all().order_by('created_at')
-    footer_first = [
-        f for f in footer if f.footer_position == 'footer_first'][:1]
-    print('footer first', footer_first)
-    footer_second = [
-        s for s in footer if s.footer_position == 'footer_second'][:1]
-    footer_third = [
-        t for t in footer if t.footer_position == 'footer_third'][:1]
-    copyright = [c for c in footer if c.footer_position == 'copyright'][:1]
-    return ({
-        'top_header': top_header,
-        'bottom_header': bottom_header,
-        'menu_list':menu_lists,
-        'dropdown_menu':dropdown_menu,
-        'link_menu':link_menu,
-        'sub_menu': sub_menu_lists,
-        'footer_first': footer_first,
-        'footer_second': footer_second,
-        'footer_third': footer_third,
-        'site_identity':site_identity,
-        'copyright':copyright,
-    })
-
 @validate_request_for_admin
 def admin_dashboard(request):
     site_identity = SiteIdentity.objects.all().order_by('created_at')
@@ -212,7 +202,6 @@ def create_footer(request):
         address = request.POST.get('address')
         phone_number = request.POST.get('phone_number')
         email = request.POST.get('email')
-        footer_position = request.POST.get('footer_position')
         facebook = request.POST.get('facebook')
         instagram = request.POST.get('instagram')
         twitter = request.POST.get('twitter')
@@ -225,7 +214,7 @@ def create_footer(request):
         data = dict(heading=heading, address=address, phone_number=phone_number, email=email,
         facebook=facebook, instagram=instagram, twitter=twitter, youtube=youtube, tiktok=tiktok,
         license_no=license_no, copyright=copyright,
-                    footer_position=footer_position, quick_links=quick_links)
+                    quick_links=quick_links)
         if(Footer.objects.all().count() >= 4):
             messages.warning(request, "You can create only 4 footers")
             return HttpResponseRedirect('/create_footer')
@@ -245,7 +234,6 @@ def edit_footer(request, footer_id):
         address = request.POST.get('address')
         phone_number = request.POST.get('phone_number')
         email = request.POST.get('email')
-        footer_position = request.POST.get('footer_position')
         quick_links = request.POST.get('quick_links')
         social_links = request.POST.get('social_links')
 
@@ -253,7 +241,6 @@ def edit_footer(request, footer_id):
         footer.address = address
         footer.phone_number = phone_number
         footer.email = email
-        footer.footer_position = footer_position
         footer.quick_links = quick_links
         footer.social_links = social_links
 
@@ -1020,12 +1007,7 @@ def about(request):
 
 def contact(request):
     footer = Footer.objects.all().order_by('created_at')
-    footer_first = [
-        f for f in footer if f.footer_position == 'footer_first'][:1]
-    footer_third = [
-        t for t in footer if t.footer_position == 'footer_third'][:1]
-    data = {'footer': footer, 'footer_first': footer_first,
-            'footer_third': footer_third}
+    data = {'footer': footer}
     header_footer = header_footer_view(request)
     data.update(header_footer)
     return render(request, 'client/contact.html', data)

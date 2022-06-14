@@ -250,8 +250,6 @@ class Footer(models.Model):
     twitter = models.URLField(max_length=300, blank=True, null=True)
     youtube = models.URLField(max_length=300, blank=True, null=True)
     tiktok = models.URLField(max_length=300, blank=True, null=True)
-    footer_position = models.CharField(max_length=200, null=True, blank=True)
-    quick_links = models.CharField(max_length=3000, null=True, blank=True)
     license_no = models.CharField(max_length=200, blank=True, null=True)
     copyright = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -260,7 +258,7 @@ class Footer(models.Model):
         db_table = 'Footer'
 
     def __str__(self):
-        return str(self.footer_position)
+        return str(self.email)
 
 class Popup(models.Model):
     title = models.CharField(max_length=1000, null=True, blank=True)
