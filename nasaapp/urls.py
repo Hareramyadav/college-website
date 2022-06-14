@@ -93,4 +93,4 @@ urlpatterns = [
     path('clients', views.clients, name="clients"),
     path('teams', views.teams, name="teams"),
     path('process/<int:selection_id>', views.selection, name="process"),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
