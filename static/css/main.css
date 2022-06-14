@@ -251,6 +251,13 @@ body {
     gap: 10px 20px;
 }
 
+/* News section......... */
+.single-news img{
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+}
+
 
 /* Media Queries............................
 ....................................
@@ -320,10 +327,14 @@ body {
     /* nasa news section................. */
     .main-news img {
         height: 350px;
+        object-fit: cover;
+        object-position: center;
     }
 
     .side-news img {
         height: 150px;
+        object-fit: cover;
+        object-position: center;
     }
 
     /* message section.................. */
