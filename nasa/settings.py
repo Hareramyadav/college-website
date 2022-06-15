@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '(#j2&xt=#^%w@3yj5=d4n%_#j#abrv5hj(+f7mp&5r5*3&ry8a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -150,8 +150,8 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-STATIC_ROOT = '/home/nasacollege/public_html/static'
-MEDIA_ROOT = '/home/nasacollege/public_html/media'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 USERNAME = 'nasacollege'
 EMAIL = 'info@nasacollege.edu.np'
