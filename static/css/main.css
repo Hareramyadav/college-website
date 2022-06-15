@@ -399,7 +399,7 @@ body {
 
     /* banner section....... */
     .swiper-slide{
-        height: 100%;
+        min-height: 600px;
     }
 
     /* carousel section.............. */
