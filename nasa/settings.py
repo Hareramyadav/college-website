@@ -150,8 +150,8 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-STATIC_ROOT = '/home/nasacollege/public_html/static'
-MEDIA_ROOT = '/home/nasacollege/public_html/media'
+STATIC_ROOT = '/home/nasacollege/nasacollege.com/static'
+MEDIA_ROOT = '/home/nasacollege/nasacollege.com/media'
 
 USERNAME = 'nasacollege'
 EMAIL = 'info@nasacollege.edu.np'
