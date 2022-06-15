@@ -71,6 +71,20 @@ body {
     padding-left: 1rem !important;
 }
 
+.fixed{
+    background-color: var(--light);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+/* banner section....... */
+.swiper-slide{
+    height: 200px;
+}
+
 /* Carousel Section........................... */
 .carousel-indicators [data-bs-target] {
     width: 10px !important;
@@ -299,6 +313,11 @@ body {
         display: none;
     }
 
+    /* banner section....... */
+    .swiper-slide{
+        height: 350px;
+    }
+
     /* carousel section.................. */
     .main-slider-content.carousel-caption {
         top: 40%;
@@ -376,6 +395,11 @@ body {
         grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
         gap: 0px 5px !important;
         justify-content: center;
+    }
+
+    /* banner section....... */
+    .swiper-slide{
+        height: 100%;
     }
 
     /* carousel section.............. */
