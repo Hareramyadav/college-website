@@ -80,14 +80,14 @@ WSGI_APPLICATION = 'nasa.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'nasacollege_db',
-    #     'USER':'nasacollege_user',
-    #     'PASSWORD':')~*4!i4a0idA',
-    #     'HOST':'localhost',
-    #     'PORT':'3306',
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'nasacollege_db',
+        'USER':'nasacollege_user',
+        'PASSWORD':')~*4!i4a0idA',
+        'HOST':'localhost',
+        'PORT':'3306',
+    }
 
     # 'default': {
     #     'ENGINE': 'django.db.backends.mysql',
@@ -98,17 +98,17 @@ DATABASES = {
     #     'PORT':'3306',
     # }
 
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nasa',
-        'USER':'root',
-        'PASSWORD':'',
-        'HOST':'localhost',
-        'PORT':'',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'nasa',
+    #     'USER':'root',
+    #     'PASSWORD':'',
+    #     'HOST':'localhost',
+    #     'PORT':'',
+    #     'OPTIONS': {
+    #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+    #     }
+    # }
 }
 
 
