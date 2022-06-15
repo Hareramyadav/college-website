@@ -13,17 +13,20 @@
                 <div class="w-full max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
                     <h2
                         class="max-w-lg mb-6 font-sans text-3xl font-extrabold leading-none tracking-tight text-white sm:text-5xl md:mx-auto">
+                        {% if slider.banner_text %}
                         <span class="relative inline-block">
-                            <span class="relative uppercase animate__fadeInUp">{{slider.banner_text}}
-                                <!-- <span class="text-orange-400">Deam Job</span> Today</span> -->
-                            </span>
+                            <span class="relative uppercase animate__fadeInUp">{{slider.banner_text}}</span>
+                        </span>
+                        {% endif %}
                     </h2>
                 </div>
                 <div>
+                    {% if slider.button_text %}
                     <a href="{{slider.button_link}}"
                         class="btn button inline-flex items-center justify-center h-12 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">
                         {{slider.button_text}}
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
