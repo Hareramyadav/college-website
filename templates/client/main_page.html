@@ -30,7 +30,7 @@
                         GET IN TOUCH WITH US
                     </h2>
                     <p class="text-base text-body-color leading-relaxed mb-9">
-                        {{data.short_content}}
+                        {{data.short_content | safe}}
                     </p>
                     {% for footer in footer_first %}
                     <div class="flex mb-8 max-w-[370px] w-full">
@@ -135,7 +135,9 @@
         <div class="image-container">
             {% for i in image %}
             <div class="image-box mb-3 mb-md-0">
+                {% if i.media %}
                 <img src="{{i.media.url}}" alt="" srcset="" width="100%" height="200">
+                {% endif %}
             </div>
             {% endfor %}
         </div>
@@ -169,7 +171,7 @@
                     </strong>
                     <h5 class="font-semibold mb-3">{{job.country}}</h6>
                         <p class="text-body-color">
-                            {{job.short_desc}}
+                            {{job.short_desc | safe}}
                         </p>
                         <a href="{% url 'jobs' job_id=job.id %}"
                             class="inline-flex items-center px-5 py-3 mt-8 font-medium text-blue-600 bg-gray-100 rounded-lg hover:opacity-75">
@@ -189,7 +191,7 @@
 {% else %}
 <section class="bg-white py-20 lg:py-[30px] overflow-hidden relative">
     <div class="px-4 py-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-8">
-        {{data.long_content}}
+        {{data.long_content | safe}}
     </div>
 </section>
 {% endif %}

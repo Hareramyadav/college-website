@@ -22,7 +22,7 @@
                         class="inline-block mb-3 text-2xl font-bold leading-22 transition-colors duration-200 hover:text-blue-900">
                         {{blog.blog_title}}</a>
                     <p class="mb-2 text-gray-700">
-                        {{blog.short_desc}}
+                        {{blog.short_desc | safe}}
                     </p>
                     <a href="{% url 'blogs' blog_id=blog.id %}" aria-label=""
                         class="inline-flex items-center font-semibold transition-colors duration-200 text-blue-600 hover:text-blue-900">Learn

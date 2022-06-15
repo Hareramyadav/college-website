@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 class SiteIdentity(models.Model):
@@ -23,8 +23,8 @@ class Menu(models.Model):
     menu_type = models.CharField(max_length=200, null=True, blank=True)
     menu_index = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to="static/images")
-    short_content = models.TextField(max_length=5000, null=True, blank=True)
-    long_content = models.TextField(max_length=10000, null=True, blank=True)
+    short_content = RichTextField(null=True, blank=True)
+    long_content = RichTextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -39,8 +39,8 @@ class SubMenu(models.Model):
     sub_menu_name = models.CharField(max_length=300, null=True, blank=True)
     link_name = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to="static/images")
-    short_content = models.TextField(max_length=5000, null=True, blank=True)
-    long_content = models.TextField(max_length=10000, null=True, blank=True)
+    short_content = RichTextField(null=True, blank=True)
+    long_content = RichTextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -67,8 +67,8 @@ class Banner(models.Model):
 class Service(models.Model):
     image = models.ImageField(blank=True, null=True, upload_to="static/images")
     title = models.CharField(max_length=300, null=True, blank=True)
-    short_desc = models.TextField(blank=True, null=True)
-    long_desc = models.TextField(blank=True, null=True)
+    short_desc = RichTextField(blank=True, null=True)
+    long_desc = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -91,8 +91,8 @@ class Destination(models.Model):
 class JobCategory(models.Model):
     title = models.CharField(max_length=300, null=True, blank=True)
     image = models.ImageField(blank=True, null=True, upload_to="static/images")
-    short_desc = models.TextField(blank=True, null=True)
-    long_desc = models.TextField(blank=True, null=True)
+    short_desc = RichTextField(blank=True, null=True)
+    long_desc = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -107,8 +107,8 @@ class JobListing(models.Model):
     company_name = models.CharField(max_length=200, null=True, blank=True)
     country = models.CharField(max_length=100, null=True, blank=True)
     title = models.CharField(max_length=300, null=True, blank=True)
-    short_desc = models.TextField(blank=True, null=True)
-    long_desc = models.TextField(blank=True, null=True)
+    short_desc = RichTextField(blank=True, null=True)
+    long_desc = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -132,7 +132,7 @@ class Contact(models.Model):
     name = models.CharField(max_length=500, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=100, blank=True, null=True)
-    message = models.TextField(blank=True, null=True)
+    message = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -148,10 +148,10 @@ class AboutSection(models.Model):
         blank=True, null=True, upload_to="static/images")
     image_three = models.ImageField(
         blank=True, null=True, upload_to="static/images")
-    short_desc = models.TextField(blank=True, null=True)
+    short_desc = RichTextField(blank=True, null=True)
     title = models.CharField(max_length=200, null=True, blank=True)
     tagline = models.CharField(max_length=200, null=True, blank=True)
-    long_desc = models.TextField(blank=True, null=True)
+    long_desc = RichTextField(blank=True, null=True)
     about_link = models.CharField(max_length=500, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -169,8 +169,8 @@ class News(models.Model):
     heading = models.CharField(max_length=500, blank=True, null=True)
     news_image = models.ImageField(
         blank=True, null=True, upload_to="static/news")
-    short_desc = models.TextField(max_length=2000, null=True, blank=True)
-    long_desc = models.TextField(null=True, blank=True)
+    short_desc = RichTextField(null=True, blank=True)
+    long_desc = RichTextField(null=True, blank=True)
     news_link = models.CharField(max_length=300, blank=True, null=True)
     news_position = models.CharField(max_length=200, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -186,7 +186,7 @@ class Message(models.Model):
     image = models.ImageField(blank=True, null=True, upload_to="static/images")
     name = models.CharField(max_length=1000, null=True, blank=True)
     position = models.CharField(max_length=500, null=True, blank=True)
-    long_desc = models.TextField(max_length=2000, null=True, blank=True)
+    long_desc = RichTextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -212,8 +212,8 @@ class Blog(models.Model):
     blog_image = models.ImageField(blank=True, null=True, upload_to="static/blogs")
     blog_title = models.CharField(max_length=500, blank=True, null=True)
     blog_author = models.CharField(max_length=500, blank=True, null=True)
-    short_desc = models.TextField(max_length=1000, blank=True, null=True)
-    long_desc = models.TextField(max_length=3000, null=True, blank=True)
+    short_desc = RichTextField(blank=True, null=True)
+    long_desc = RichTextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -226,8 +226,8 @@ class Testimonial(models.Model):
     student_image = models.ImageField(
         blank=True, null=True, upload_to="static/testimonial")
     student_name = models.CharField(max_length=500, null=True, blank=True)
-    short_message = models.TextField(max_length=2000, null=True, blank=True)
-    long_message = models.TextField(max_length=5000, null=True, blank=True)
+    short_message = RichTextField(null=True, blank=True)
+    long_message = RichTextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -250,7 +250,7 @@ class Footer(models.Model):
     footer_position = models.CharField(max_length=200, null=True, blank=True)
     quick_links = models.CharField(max_length=3000, null=True, blank=True)
     license_no = models.CharField(max_length=200, blank=True, null=True)
-    copyright = models.TextField(blank=True, null=True)
+    copyright = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -262,7 +262,7 @@ class Footer(models.Model):
 class Popup(models.Model):
     title = models.CharField(max_length=1000, null=True, blank=True)
     file = models.FileField(null=True, blank=True, upload_to="static/images")
-    message = models.TextField(max_length=5000, null=True, blank=True,)
+    message = RichTextField(null=True, blank=True,)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

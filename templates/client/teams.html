@@ -46,7 +46,7 @@
                         </p>
                         <p class="mb-4 text-xs text-gray-100">{{team.position}}</p>
                         <p class="mb-4 text-xs tracking-wide text-gray-400">
-                            {{team.long_desc}}
+                            {{team.long_desc | safe}}
                         </p>
                         <div class="flex items-center justify-center space-x-3">
                             <a href="/" class="text-white transition-colors duration-300 hover:text-teal-accent-400">
