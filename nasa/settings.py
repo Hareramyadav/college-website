@@ -80,30 +80,30 @@ WSGI_APPLICATION = 'nasa.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'radijmdg_hiringdb',
-    #     'USER': 'radijmdg_hiringuser',
-    #     'PASSWORD': 'r1Vdyj!6$I&G',
-    #     'HOST': 'localhost',
-    #     'PORT': '3306',
-    #     'OPTIONS': {
-    #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-    #     }
-    # }
-
-
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hiring',
-        'USER': 'root',
-        'PASSWORD': '',
+        'NAME': 'radijmdg_hiringdb',
+        'USER': 'radijmdg_hiringuser',
+        'PASSWORD': 'r1Vdyj!6$I&G',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
     }
+
+
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'hiring',
+    #     'USER': 'root',
+    #     'PASSWORD': '',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    #     'OPTIONS': {
+    #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+    #     }
+    # }
 }
 
 
