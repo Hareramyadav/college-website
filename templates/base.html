@@ -81,19 +81,18 @@
     <div class="footer mt-5 py-3">
         <div class="container-fluid">
             <div class="footer-first mb-4">
-                {% for ff in footer_first %}
+                {% for footer in footer %}
                 <div class="footer-heading mb-3">
-                    <h3 class="text-light">{{ff.heading}}</h3>
+                    <h3 class="text-light">Shalmani</h3>
                     <hr>
                 </div>
                 <div class="contact-detail d-flex flex-column">
-                    <h5 class="college-name mb-3 text-light">Nasa International College</h5>
-                    <h6 class="icon text-light"><i class="fas fa-map-marker me-3"></i> {{ff.address}}</h6>
+                    <h6 class="icon text-light"><i class="fas fa-map-marker me-3"></i> {{footer.address}}</h6>
                     <span class="icon text-light"><i class="fas fa-phone me-3"></i><a
                             class="text-decoration-none text-light"
-                            href="tel:+977-01-4112043">{{ff.phone_number}}</a></span>
+                            href="tel:+977-01-4112043">{{footer.phone_number}}</a></span>
                     <span class="icon text-light"><i class="fas fa-envelope me-3"></i><a
-                            class="text-decoration-none text-light" href="emailto:{{ff.email}}">{{ff.email}}</a></span>
+                            class="text-decoration-none text-light" href="emailto:{{footer.email}}">{{footer.email}}</a></span>
                 </div>
                 {% endfor %}
             </div>
@@ -118,15 +117,15 @@
                     <hr>
                 </div>
                 <div class="social-details">
-                    {% for ft in footer_third %}
-                    <a href="{{ft.facebook}}" target="_blank" class="text-light"><i
+                    {% for footer in footer %}
+                    <a href="{{footer.facebook}}" target="_blank" class="text-light"><i
                             class="fa-brands fa-facebook icon me-3 fs-3"></i></a>
-                    <a href="{{ft.instagram}}" target="_blank" class="text-light"><i
+                    <a href="{{footer.instagram}}" target="_blank" class="text-light"><i
                             class="fa-brands fa-instagram icon me-3 fs-3"></i></a>
-                    <a href="{{ft.youtube}}" target="_blank" class="text-light"><i
+                    <a href="{{footer.youtube}}" target="_blank" class="text-light"><i
                             class="fa-brands fa-youtube icon me-3 fs-3"></i></a>
-                    {% if ft.twitter %}
-                    <a href="{{ft.twitter}}" target="_blank" class="text-light"><i
+                    {% if footer.twitter %}
+                    <a href="{{footer.twitter}}" target="_blank" class="text-light"><i
                             class="fa-brands fa-twitter icon me-3 fs-3"></i></a>
                     {% endif %}
                     {% endfor %}

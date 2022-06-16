@@ -238,7 +238,6 @@ class Testimonial(models.Model):
 
 
 class Footer(models.Model):
-    heading = models.CharField(max_length=1000, null=True, blank=True)
     address = models.CharField(max_length=200, null=True, blank=True)
     phone_number = models.CharField(max_length=200, null=True, blank=True)
     email = models.CharField(max_length=200, null=True, blank=True)
@@ -247,8 +246,6 @@ class Footer(models.Model):
     twitter = models.URLField(max_length=300, blank=True, null=True)
     youtube = models.URLField(max_length=300, blank=True, null=True)
     tiktok = models.URLField(max_length=300, blank=True, null=True)
-    footer_position = models.CharField(max_length=200, null=True, blank=True)
-    quick_links = models.CharField(max_length=3000, null=True, blank=True)
     license_no = models.CharField(max_length=200, blank=True, null=True)
     copyright = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)

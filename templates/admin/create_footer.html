@@ -11,10 +11,7 @@
         {% endif %}
         <form method="POST" action="{% url 'create_footer' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-group mb-3">
-                <label for="heading">Footer Heading</label>
-                <input type="text" name="heading" class="form-control" id="" placeholder="">
-            </div>
+            {{form.media}}
             <div class="footer-first">
                 <div class="form-group mb-3">
                     <label for="address">Address</label>
@@ -29,23 +26,8 @@
                     <input type="text" name="email" class="form-control" id="" placeholder="">
                 </div>
                 <div class="form-group mb-3">
-                    <label for="license_no">Licence/VAT/PAN</label>
-                    <input type="text" name="license_no" class="form-control" id="" placeholder="">
-                </div>
-            </div>
-            <div class="form-group mb-3">
-                <label for="menu_position">Footer Position</label>
-                <select class="form-select" name="footer_position" id="footer_position">
-                    <option value="footer_first" selected>Footer First</option>
-                    <!-- <option value="footer_second">Footer Second</option> -->
-                    <option value="footer_third">Footer Third</option>
-                    <option value="copyright">Copyright</option>
-                </select>
-            </div>
-            <div class="social-links">
-                <div class="form-group mb-3">
                     <label for="facebook">Facebook</label>
-                    <input type="url" name="facebook" class="form-control" id="" placeholder="">
+                    <input type="text" name="facebook" class="form-control" id="" placeholder="">
                 </div>
                 <div class="form-group mb-3">
                     <label for="instagram">Instagram</label>
@@ -53,25 +35,25 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="twitter">Twitter</label>
-                    <input type="url" name="twitter" class="form-control" id="" placeholder="">
+                    <input type="text" name="twitter" class="form-control" id="" placeholder="">
                 </div>
                 <div class="form-group mb-3">
                     <label for="youtube">Youtube</label>
-                    <input type="url" name="youtube" class="form-control" id="" placeholder="">
+                    <input type="text" name="youtube" class="form-control" id="" placeholder="">
                 </div>
                 <div class="form-group mb-3">
                     <label for="tiktok">Tiktok</label>
-                    <input type="url" name="tiktok" class="form-control" id="" placeholder="">
+                    <input type="text" name="tiktok" class="form-control" id="" placeholder="">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="license_no">Licence/VAT/PAN</label>
+                    <input type="text" name="license_no" class="form-control" id="" placeholder="">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="copyright">Copyright</label>
+                    <textarea name="copyright" class="form-control" id="short_desc" placeholder=""></textarea>
                 </div>
             </div>
-            <div class="form-group mb-3 copyright" id="">
-                <label for="copyright">Copyright</label>
-                <input type="text" name="copyright" class="form-control" id="" placeholder="">
-            </div>
-            <!-- <div class="form-group mb-3 quick-links">
-                <label for="quick_links">Quick Links</label>
-                <input type="text" name="quick_links" class="form-control" id="" placeholder="">
-            </div> -->
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
@@ -86,7 +68,7 @@
             <tbody>
                 {% for f in footer %}
                 <tr>
-                    <td>{{f.footer_position}}</td>
+                    <td>{{f.email}}</td>
                     <td>
                         <a href="{% url 'edit_footer' footer_id=f.id %}" class="text-info"><i
                                 class="fas fa-edit"></i></a>
@@ -99,4 +81,11 @@
         </table>
     </div>
 </div>
+
+<script type="text/javascript">
+    CKEDITOR.replace('short_desc');
+    var editor = CKEDITOR.instances['short_desc'];
+    editor.setData();
+</script>
+
 {% endblock %}

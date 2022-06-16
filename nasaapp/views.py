@@ -13,6 +13,7 @@ import math
 from math import ceil
 from .verify_request import *
 from django.contrib.auth import authenticate, login, logout
+from .forms import *
 
 # Create your views here.
 
@@ -109,15 +110,7 @@ def header_footer_view(request):
     top_header = [m for m in menu_lists if m.menu_position == 'topheader']
     bottom_header = [
         m for m in menu_lists if m.menu_position == 'bottomheader']
-    footer = Footer.objects.all().order_by('created_at')
-    footer_first = [
-        f for f in footer if f.footer_position == 'footer_first'][:1]
-    print('footer first', footer_first)
-    footer_second = [
-        s for s in footer if s.footer_position == 'footer_second'][:1]
-    footer_third = [
-        t for t in footer if t.footer_position == 'footer_third'][:1]
-    copyright = [c for c in footer if c.footer_position == 'copyright'][:1]
+    footer = Footer.objects.all().order_by('created_at')[:1]
     return ({
         'top_header': top_header,
         'bottom_header': bottom_header,
@@ -125,9 +118,7 @@ def header_footer_view(request):
         'dropdown_menu':dropdown_menu,
         'link_menu':link_menu,
         'sub_menu': sub_menu_lists,
-        'footer_first': footer_first,
-        'footer_second': footer_second,
-        'footer_third': footer_third,
+        'footer':footer,
         'site_identity':site_identity,
         'copyright':copyright,
     })
@@ -182,6 +173,7 @@ def edit_identity(request, site_id):
 
 @validate_request_for_admin
 def create_footer(request):
+    form = FooterForm()
     if request.method == 'POST':
         heading = request.POST.get('heading')
         address = request.POST.get('address')
@@ -206,14 +198,13 @@ def create_footer(request):
             return HttpResponseRedirect('/create_footer')
         Footer.objects.create(**data)
         return HttpResponseRedirect('/create_footer')
-    header_footer = header_footer_view(request)
     footer = Footer.objects.all().order_by('created_at')
-    data = {'footer': footer}
-    data.update(header_footer)
+    data = {'footer': footer, 'form':form}
     return render(request, 'admin/create_footer.html', data)
 
 @validate_request_for_admin
 def edit_footer(request, footer_id):
+    form = FooterForm()
     footer = Footer.objects.get(id=int(footer_id))
     if request.method == 'POST':
         heading = request.POST.get('heading')
@@ -234,10 +225,8 @@ def edit_footer(request, footer_id):
 
         footer.save()
         return redirect('/create_footer')
-    header_footer = header_footer_view(request)
-    data = {'footer': footer, 'footer_id': footer_id}
-    data.update(header_footer)
-    return render(request, 'admin/edit_footer.html', data)
+
+    return render(request, 'admin/edit_footer.html', {'footer': footer, 'footer_id': footer_id, 'form':form})
 
 @validate_request_for_admin
 def delete_footer(request, footer_id):
@@ -246,6 +235,7 @@ def delete_footer(request, footer_id):
 
 @validate_request_for_admin
 def create_menu(request):
+    form = MenuForm()
     if request.method == 'POST':
         menu_name = request.POST.get('menu_name').lower()
         menu_link = request.POST.get('menu_link')
@@ -263,12 +253,13 @@ def create_menu(request):
         return HttpResponseRedirect('/create_menu')
     header_footer = header_footer_view(request)
     menu = Menu.objects.all().order_by('created_at')
-    data = {'menu': menu}
+    data = {'menu': menu, 'form':form}
     data.update(header_footer)
     return render(request, 'admin/create_menu.html', data)
 
 @validate_request_for_admin
 def edit_menu(request, menu_id):
+    form = MenuForm()
     menu = Menu.objects.get(id=int(menu_id))
     if request.method == 'POST':
         menu_name = request.POST.get('menu_name')
@@ -288,7 +279,7 @@ def edit_menu(request, menu_id):
 
         menu.save()
         return redirect('/create_menu')
-    return render(request, 'admin/edit_menu.html', {'menu': menu, 'menu_id': menu_id})
+    return render(request, 'admin/edit_menu.html', {'menu': menu, 'menu_id': menu_id, 'form':form})
 
 @validate_request_for_admin
 def delete_menu(request, menu_id):
@@ -297,6 +288,7 @@ def delete_menu(request, menu_id):
 
 @validate_request_for_admin
 def create_sub_menu(request):
+    form = SubMenuForm()
     menu_names = Menu.objects.all().values('menu_name').distinct()
     if request.method == 'POST':
         sub_menu_name = request.POST.get('sub_menu_name').lower()
@@ -313,12 +305,13 @@ def create_sub_menu(request):
         return redirect('/create_sub_menu')
     header_footer = header_footer_view(request)
     sub_menu = SubMenu.objects.all().order_by('created_at')
-    data = {'sub_menu': sub_menu, 'menu_names':menu_names}
+    data = {'sub_menu': sub_menu, 'menu_names':menu_names, 'form':form}
     data.update(header_footer)
     return render(request, 'admin/create_sub_menu.html', data)
 
 @validate_request_for_admin
 def edit_sub_menu(request, sub_menu_id):
+    form = SubMenuForm()
     sub_menu = SubMenu.objects.get(id=int(sub_menu_id))
     if request.method == 'POST':
         sub_menu_name = request.POST.get('sub_menu_name').lower()
@@ -337,7 +330,7 @@ def edit_sub_menu(request, sub_menu_id):
         
         sub_menu.save()
         return redirect('/create_sub_menu')
-    return render(request, 'admin/edit_sub_menu.html', {'sub_menu_id':sub_menu_id, 'sub_menu':sub_menu})
+    return render(request, 'admin/edit_sub_menu.html', {'sub_menu_id':sub_menu_id, 'sub_menu':sub_menu, 'form':form})
 
 @validate_request_for_admin
 def delete_sub_menu(request, sub_menu_id):
@@ -386,6 +379,7 @@ def delete_banner(request, banner_id):
 
 @validate_request_for_admin
 def create_about(request):
+    form = AboutForm()
     if request.method == 'POST':
         about_image = request.FILES.get('about_image')
         image_two = request.FILES.get('image_two')
@@ -401,10 +395,11 @@ def create_about(request):
         AboutSection.objects.create(**data)
         return redirect('/create_about')
     about = AboutSection.objects.all().order_by('created_at')
-    return render(request, 'admin/create_about.html', {'about': about})
+    return render(request, 'admin/create_about.html', {'about': about, 'form':form})
 
 @validate_request_for_admin
 def edit_about(request, about_id):
+    form = AboutForm()
     about = AboutSection.objects.get(id=int(about_id))
     if request.method == 'POST':
         about_image = request.FILES.get('about_image', None)
@@ -427,7 +422,7 @@ def edit_about(request, about_id):
             about.about_image = about_image
         about.save()
         return redirect('/create_about')
-    return render(request, 'admin/edit_about.html', {'about': about, 'about_id': about_id})
+    return render(request, 'admin/edit_about.html', {'about': about, 'about_id': about_id, 'form':form})
 
 @validate_request_for_admin
 def delete_about(request, about_id):
@@ -437,6 +432,7 @@ def delete_about(request, about_id):
 
 @validate_request_for_admin
 def create_news(request):
+    form = NewsForm()
     if request.method == 'POST':
         title = request.POST.get('title')
         tagline = request.POST.get('tagline')
@@ -451,10 +447,11 @@ def create_news(request):
         News.objects.create(**data)
         return redirect('/create_news')
     news = News.objects.all().order_by('created_at')
-    return render(request, 'admin/create_news.html', {'news': news})
+    return render(request, 'admin/create_news.html', {'news': news, 'form':form})
 
 @validate_request_for_admin
 def edit_news(request, news_id):
+    form = NewsForm()
     news = News.objects.get(id=int(news_id))
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -474,7 +471,7 @@ def edit_news(request, news_id):
         
         news.save()
         return redirect('/create_news')
-    return render(request, 'admin/edit_news.html', {'news': news, 'news_id':news_id})
+    return render(request, 'admin/edit_news.html', {'news': news, 'news_id':news_id, 'form':form})
 
 @validate_request_for_admin
 def delete_news(request, news_id):
@@ -514,6 +511,7 @@ def delete_gallery(request, gallery_id):
 
 @validate_request_for_admin
 def create_blog(request):
+    form = BlogsForm()
     if request.method == 'POST':
         blog_image = request.FILES.get('blog_image')
         blog_title = request.POST.get('blog_title')
@@ -526,10 +524,11 @@ def create_blog(request):
         Blog.objects.create(**data)
         return redirect('/create_blog')
     blog = Blog.objects.all().order_by('created_at')
-    return render(request, 'admin/create_blog.html', {'blog': blog})
+    return render(request, 'admin/create_blog.html', {'blog': blog, 'form':form})
 
 @validate_request_for_admin
 def edit_blog(request, blog_id):
+    form = BlogsForm()
     blog = Blog.objects.get(id=int(blog_id))
     if request.method == 'POST':
         blog_image = request.FILES.get('blog_image', None)
@@ -546,7 +545,7 @@ def edit_blog(request, blog_id):
             blog.blog_image = blog_image
         blog.save()
         return redirect('/create_blog')
-    return render(request, 'admin/edit_blog.html', {'blog': blog, 'blog_id': blog_id})
+    return render(request, 'admin/edit_blog.html', {'blog': blog, 'blog_id': blog_id, 'form':form})
 
 @validate_request_for_admin
 def delete_blog(request, blog_id):
@@ -555,6 +554,7 @@ def delete_blog(request, blog_id):
 
 @validate_request_for_admin
 def create_testimonial(request):
+    form = TestimonialForm()
     if request.method == 'POST':
         student_image = request.FILES.get('student_image')
         student_name = request.POST.get('student_name')
@@ -566,10 +566,11 @@ def create_testimonial(request):
         testimonial = Testimonial.objects.create(**data)
         return redirect('/create_testimonial')
     testimonial = Testimonial.objects.all().order_by('created_at')
-    return render(request, 'admin/create_testimonial.html', {'testimonial': testimonial})
+    return render(request, 'admin/create_testimonial.html', {'testimonial': testimonial, 'form':form})
 
 @validate_request_for_admin
 def edit_testimonial(request, test_id):
+    form = TestimonialForm()
     testimonial = Testimonial.objects.get(id=int(test_id))
     if request.method == 'POST':
         student_image = request.FILES.get('student_image', None)
@@ -586,7 +587,7 @@ def edit_testimonial(request, test_id):
 
         testimonial.save()
         return redirect('/create_testimonial')
-    return render(request, 'admin/edit_testimonial.html', {'testimonial': testimonial, 'test_id': test_id})
+    return render(request, 'admin/edit_testimonial.html', {'testimonial': testimonial, 'test_id': test_id, 'form':form})
 
 @validate_request_for_admin
 def delete_testimonial(request, test_id):
@@ -595,6 +596,7 @@ def delete_testimonial(request, test_id):
 
 @validate_request_for_admin
 def create_popup(request):
+    form = PopupForm()
     if request.method == 'POST':
         title = request.POST.get('title')
         file = request.FILES.get('file')
@@ -607,10 +609,11 @@ def create_popup(request):
         Popup.objects.create(**data)
         return redirect('/create_popup')
     popup = Popup.objects.all().order_by('created_at')
-    return render(request, 'admin/create_popup.html', {'popup': popup})
+    return render(request, 'admin/create_popup.html', {'popup': popup, 'form':form})
 
 @validate_request_for_admin
 def edit_popup(request, popup_id):
+    form = PopupForm()
     popup = Popup.objects.get(id=int(popup_id))
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -624,7 +627,7 @@ def edit_popup(request, popup_id):
 
         popup.save()
         return redirect('/create_popup')
-    return render(request, 'admin/edit_popup.html', {'popup': popup, 'popup_id': popup_id})
+    return render(request, 'admin/edit_popup.html', {'popup': popup, 'popup_id': popup_id, 'form':form})
 
 @validate_request_for_admin
 def delete_popup(request, popup_id):
@@ -646,6 +649,7 @@ def delete_form(request, form_id):
 #................................
 
 def create_category(request):
+    form = JobCategoryForm()
     if request.method == 'POST':
         title = request.POST.get('title')
         image = request.FILES.get('image')
@@ -656,9 +660,10 @@ def create_category(request):
         JobCategory.objects.create(**data)
         return redirect('/create_category')
     category = JobCategory.objects.all().order_by('created_at')
-    return render(request, 'admin/create_category.html', {'category':category})
+    return render(request, 'admin/create_category.html', {'category':category, 'form':form})
 
 def edit_category(request, category_id):
+    form = JobCategoryForm()
     category = JobCategory.objects.get(id=int(category_id))
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -674,13 +679,14 @@ def edit_category(request, category_id):
             category.image = image
         category.save()
         return redirect('/create_category')
-    return render(request, 'admin/edit_category.html', {'category':category, 'category_id':category_id})
+    return render(request, 'admin/edit_category.html', {'category':category, 'category_id':category_id, 'form':form})
 
 def delete_category(request, category_id):
     JobCategory.objects.filter(id=int(category_id)).delete()
     return redirect('/create_category')
 
 def create_joblisting(request):
+    form = JobForm()
     job_category = JobCategory.objects.all().values('title').distinct()
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -698,9 +704,10 @@ def create_joblisting(request):
         JobListing.objects.create(**data)
         return redirect('/create_joblisting')
     joblisting = JobListing.objects.all().order_by('created_at')
-    return render(request, 'admin/create_joblisting.html', {'joblisting':joblisting, 'job_category':job_category})
+    return render(request, 'admin/create_joblisting.html', {'joblisting':joblisting, 'job_category':job_category, 'form':form})
 
 def edit_joblisting(request, joblisting_id):
+    form = JobForm()
     joblisting = JobListing.objects.get(id=int(joblisting_id))
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -720,7 +727,7 @@ def edit_joblisting(request, joblisting_id):
             joblisting.image = image
         joblisting.save()
         return redirect('/create_joblisting')
-    return render(request, 'admin/edit_joblisting.html', {'joblisting':joblisting, 'joblisting_id':joblisting_id})    
+    return render(request, 'admin/edit_joblisting.html', {'joblisting':joblisting, 'joblisting_id':joblisting_id, 'form':form})    
 
 def delete_joblisting(request, joblisting_id):
     JobListing.objects.filter(id=int(joblisting_id)).delete()
@@ -728,6 +735,7 @@ def delete_joblisting(request, joblisting_id):
 
 
 def create_service(request):
+    form = ServicesForm()
     if request.method == 'POST':
         title = request.POST.get('title')
         image = request.FILES.get('image')
@@ -738,9 +746,10 @@ def create_service(request):
         Service.objects.create(**data)
         return redirect('/create_service')
     service = Service.objects.all().order_by('created_at')
-    return render(request, 'admin/create_service.html', {'service':service})
+    return render(request, 'admin/create_service.html', {'service':service, 'form':form})
 
 def edit_service(request, service_id):
+    form = ServicesForm()
     service = Service.objects.get(id=int(service_id))
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -756,7 +765,7 @@ def edit_service(request, service_id):
             service.image = image
         service.save()
         return redirect('/create_service')
-    return render(request, 'admin/edit_service.html', {'service':service, 'service_id':service_id})
+    return render(request, 'admin/edit_service.html', {'service':service, 'service_id':service_id, 'form':form})
 
 
 def delete_service(request, service_id):
@@ -764,6 +773,7 @@ def delete_service(request, service_id):
     return redirect('/create_service')
 
 def create_team(request):
+    form = TeamsForm()
     if request.method == 'POST':
         name = request.POST.get('name')
         image = request.FILES.get('image')
@@ -774,9 +784,10 @@ def create_team(request):
         Message.objects.create(**data)
         return redirect('/create_team')
     teams = Message.objects.all().order_by('created_at')
-    return render(request, 'admin/create_team.html', {'teams':teams})
+    return render(request, 'admin/create_team.html', {'teams':teams, 'form':form})
 
 def edit_team(request, team_id):
+    form = TeamsForm()
     team = Message.objects.get(id=int(team_id))
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -792,7 +803,7 @@ def edit_team(request, team_id):
             team.image = image
         team.save()
         return redirect('/create_team')
-    return render(request, 'admin/edit_team.html', {'team':team, 'team_id':team_id})
+    return render(request, 'admin/edit_team.html', {'team':team, 'team_id':team_id, 'form':form})
 
 def delete_team(request, team_id):
     Message.objects.filter(id=int(team_id)).delete()
@@ -807,7 +818,7 @@ def create_destination(request):
         Destination.objects.create(**data)
         return redirect('/create_destination')
     destination = Destination.objects.all().order_by('created_at')
-    return render(request, 'admin/create_destination.html', {'destination':destination})
+    return render(request, 'admin/create_destination.html', {'destination':destination,})
 
 def edit_destination(request, destination_id):
     destination = Destination.objects.get(id=int(destination_id))
@@ -821,7 +832,7 @@ def edit_destination(request, destination_id):
             destination.image = image
         destination.save()
         return redirect('/create_destination')
-    return render(request, 'admin/edit_destination.html', {'destination':destination, 'destination_id':destination_id})
+    return render(request, 'admin/edit_destination.html', {'destination':destination, 'destination_id':destination_id,})
 
 def delete_destination(request, destination_id):
     Destination.objects.filter(id=int(destination_id)).delete()
