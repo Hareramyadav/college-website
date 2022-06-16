@@ -6,6 +6,7 @@
     <div class="banner-form">
         <form method="POST" action="{% url 'create_news' %}" enctype="multipart/form-data">
             {% csrf_token %}
+            {{form.media}}
             <div class="form-group mb-3">
                 <label for="news_image">Image</label>
                 <input type="file" name="news_image" class="form-control" id="" placeholder="">
@@ -16,15 +17,15 @@
             </div>
             <div class="form-group mb-3">
                 <label for="long_desc">Description</label>
-                <input type="text" name="long_desc" class="form-control" id="" placeholder="">
+                <textarea name="long_desc" class="form-control" id="short_desc" placeholder=""></textarea>
             </div>
-            <div class="form-group mb-3">
+            <!-- <div class="form-group mb-3">
                 <label for="menu_position">News Position</label>
                 <select class="form-select" name="news_position" id="">
                     <option value="side_news" selected>Side News</option>
                     <option value="main_news">Main News</option>
                 </select>
-            </div>
+            </div> -->
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </div>
@@ -49,4 +50,11 @@
         </table>
     </div>
 </div>
+
+<script type="text/javascript">
+    CKEDITOR.replace('short_desc');
+    var editor = CKEDITOR.instances['short_desc'];
+    editor.setData();
+</script>
+
 {% endblock %}

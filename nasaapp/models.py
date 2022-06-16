@@ -1,3 +1,4 @@
+from tokenize import blank_re
 from urllib import request
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -161,6 +162,7 @@ class Footer(models.Model):
     instagram = models.URLField(max_length=3000, blank=True, null=True)
     twitter = models.URLField(max_length=3000, blank=True, null=True)
     youtube = models.URLField(max_length=3000, blank=True, null=True)
+    copyright = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

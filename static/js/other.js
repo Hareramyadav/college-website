@@ -98,7 +98,7 @@ $(document).ready(function () {
                         $(`#submenu-${mainMenuId}`).append(`<li><a class="dropdown-item text-capitalize" href="${url}sub_menu/${b.id}">` + b.sub_menu_name + '</a></li>')
                     })
                 } else {
-                    if (a.menu_link === null) {
+                    if (a.menu_link === null || a.menu_link === '') {
                         $('.bottom-header').append(
                             `<a class="nav-link text-capitalize bottom-nav-link text-dark" href="${url}nasacollege/${a.id}">`
                             + a.menu_name +
