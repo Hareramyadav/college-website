@@ -241,7 +241,6 @@ class Testimonial(models.Model):
 
 
 class Footer(models.Model):
-    heading = models.CharField(max_length=1000, null=True, blank=True)
     address = models.CharField(max_length=200, null=True, blank=True)
     phone_number = models.CharField(max_length=200, null=True, blank=True)
     email = models.CharField(max_length=200, null=True, blank=True)
