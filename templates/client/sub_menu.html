@@ -2,9 +2,11 @@
 {% load static %}
 
 {% block content %}
-<div class="sub-menu-page bg-light py-3">
+<div class="sub-menu-page">
+    <div style="background-image: url(../../static/images/inner_page_banner.jpg); padding: 80px 0; background-repeat: no-repeat; background-size: cover;" >
+        <h3 class="container">{{sub_menu_data.sub_menu_name}}</h3>
+    </div>
     <div class="container">
-        <h3>{{sub_menu_data.sub_menu_name}}</h3>
         <p>{{sub_menu_data.long_content | safe}}</p>
     </div>
 </div>

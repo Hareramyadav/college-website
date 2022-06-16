@@ -3,8 +3,9 @@
 
 {% block content %}
 <div class="aboutus-page">
-    <hr>
-    <h3 class="container">About Us</h3>
+    <div class="mb-5" style="background-image: url(../../static/images/inner_page_banner.jpg); padding: 80px 0; background-repeat: no-repeat; background-size: cover;" >
+        <h3 class="container">About Us</h3>
+    </div>
     <div class="about-contents container d-md-flex justify-content-between">
         <div class="contents col-lg-8 me-md-4">
             {% for a in about %}
@@ -20,9 +21,11 @@
                     <p>{{n.created_at}}</p>
                     <a href="{% url 'news' news_id=n.id %}">View Details</a>
                 </div>
+                {% if n.news_image %}
                 <div class="card-image">
                     <img src="{{n.news_image.url}}" alt="" srcset="" height="150" width="200">
                 </div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
