@@ -774,3 +774,17 @@ def sub_menu(request, sub_menu_id):
     header_footer = header_footer_view(request)
     data.update(header_footer)
     return render(request, 'client/sub_menu.html', data)
+
+
+# Error views..............
+def page_not_found_view(request, exception):
+    context = {}
+    response = render(request, "client/404.html", context=context)
+    response.status_code = 404
+    return response
+
+def server_error(request):
+    context = {}
+    response = render(request, "client/500.html", context=context)
+    response.status_code = 500
+    return 
