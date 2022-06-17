@@ -175,24 +175,20 @@ def edit_identity(request, site_id):
 def create_footer(request):
     form = FooterForm()
     if request.method == 'POST':
-        heading = request.POST.get('heading')
         address = request.POST.get('address')
         phone_number = request.POST.get('phone_number')
         email = request.POST.get('email')
-        footer_position = request.POST.get('footer_position')
         facebook = request.POST.get('facebook')
         instagram = request.POST.get('instagram')
         twitter = request.POST.get('twitter')
         youtube = request.POST.get('youtube')
         tiktok = request.POST.get('tiktok')
         license_no = request.POST.get('license_no')
-        quick_links = request.POST.get('quick_links')
         copyright = request.POST.get('copyright')
 
-        data = dict(heading=heading, address=address, phone_number=phone_number, email=email,
+        data = dict( address=address, phone_number=phone_number, email=email,
         facebook=facebook, instagram=instagram, twitter=twitter, youtube=youtube, tiktok=tiktok,
-        license_no=license_no, copyright=copyright,
-                    footer_position=footer_position, quick_links=quick_links)
+        license_no=license_no, copyright=copyright)
         if(Footer.objects.all().count() >= 4):
             messages.warning(request, "You can create only 4 footers")
             return HttpResponseRedirect('/create_footer')
@@ -207,21 +203,29 @@ def edit_footer(request, footer_id):
     form = FooterForm()
     footer = Footer.objects.get(id=int(footer_id))
     if request.method == 'POST':
-        heading = request.POST.get('heading')
         address = request.POST.get('address')
         phone_number = request.POST.get('phone_number')
         email = request.POST.get('email')
-        footer_position = request.POST.get('footer_position')
-        quick_links = request.POST.get('quick_links')
-        social_links = request.POST.get('social_links')
+        facebook = request.POST.get('facebook')
+        instagram = request.POST.get('instagram')
+        twitter = request.POST.get('twitter')
+        youtube = request.POST.get('youtube')
+        tiktok = request.POST.get('tiktok')
+        license_no = request.POST.get('license_no')
+        copyright = request.POST.get('copyright')
 
-        footer.heading = heading
+
         footer.address = address
         footer.phone_number = phone_number
         footer.email = email
-        footer.footer_position = footer_position
-        footer.quick_links = quick_links
-        footer.social_links = social_links
+        footer.facebook = facebook
+        footer.instagram = instagram
+        footer.twitter = twitter
+        footer.youtube = youtube
+        footer.tiktok = tiktok
+        footer.license_no = license_no
+        footer.copyright = copyright
+
 
         footer.save()
         return redirect('/create_footer')
@@ -1130,3 +1134,18 @@ def teams(request):
     header_footer = header_footer_view(request)
     data.update(header_footer)
     return render(request, 'client/teams.html', data)
+
+
+
+# Error views..............
+def page_not_found_view(request, exception):
+    context = {}
+    response = render(request, "client/404.html", context=context)
+    response.status_code = 404
+    return response
+
+def server_error(request):
+    context = {}
+    response = render(request, "client/500.html", context=context)
+    response.status_code = 500
+    return response

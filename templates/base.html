@@ -38,17 +38,17 @@
     <div class="header">
         <nav class="navbar top-navbar">
             <div class="container py-2 align-items-center">
-                {% for footerFirst in footer_first %}
+                {% for footer in footer %}
                 <div class="me-auto">
-                    <h6 class="text-light fw-bold">License: {{footerFirst.license_no}}</h6>
+                    <h6 class="text-light fw-bold">License: {{footer.license_no}}</h6>
                 </div>
                 <div>
                     <span class="d-inline-flex align-items-center me-2"><i class="fas fa-phone header-icon me-2"></i><a
                             class="text-light text-decoration-none"
-                            href="tel:{{footerFirst.phone_number}}">{{footerFirst.phone_number}}</a></span>
+                            href="tel:{{footer.phone_number}}">{{footer.phone_number}}</a></span>
                     <span class="d-inline-flex align-items-center"><i class="fas fa-envelope header-icon me-2"></i><a
                             class="text-light text-decoration-none"
-                            href="mailto:{{footerFirst.email}}">{{footerFirst.email}}</a></span>
+                            href="mailto:{{footer.email}}">{{footer.email}}</a></span>
                 </div>
                 {% endfor %}
             </div>

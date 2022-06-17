@@ -22,3 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('nasaapp.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+handler404 = 'nasaapp.views.page_not_found_view'
+handler500 = 'nasaapp.views.server_error'
