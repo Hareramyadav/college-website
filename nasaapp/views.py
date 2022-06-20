@@ -1,3 +1,4 @@
+from django.conf import settings
 from .models import *
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -10,6 +11,7 @@ from math import ceil
 from .verify_request import *
 from django.contrib.auth import authenticate, logout
 from .forms import *
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -760,6 +762,7 @@ def admission_from(request):
             stream=stream,
         )
         AdmissionForm.objects.create(**data)
+        send_mail('Admission Form Details', data, settings.DEFAULT_FROM_EMAIL, ['nivasolution.com'])
         return redirect('/')
     header_footer = header_footer_view(request)
     return render(request, 'client/admission_from.html', header_footer)
