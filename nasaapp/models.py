@@ -103,6 +103,7 @@ class Message(models.Model):
     image = models.ImageField(blank=True, null=True, upload_to="static/images")
     name = models.CharField(max_length=1000, null=True, blank=True)
     position = models.CharField(max_length=500, null=True, blank=True)
+    short_desc = RichTextField(null=True, blank=True)
     long_desc = RichTextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

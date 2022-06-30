@@ -6,6 +6,11 @@ class MenuForm(ModelForm):
         model = Menu
         fields = '__all__'
 
+class TeamsForm(ModelForm):
+    class Meta:
+        model = Menu
+        fields = '__all__'
+
 class SubMenuForm(ModelForm):
     class Meta:
         model = SubMenu
