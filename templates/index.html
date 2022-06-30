@@ -81,7 +81,7 @@
                         {{a.tagline}}
                     </h2>
                     <p class="text-base text-gray-700 md:text-lg">
-                        {{a.short_desc}}
+                        {{a.short_desc | safe}}
                     </p>
                 </div>
                 <div>
@@ -135,7 +135,7 @@
                         {{team.name}}
                     </h2>
                     <p class="text-base text-gray-700 md:text-lg">
-                        {{team.short_desc}}
+                        {{team.short_desc | safe}}
                     </p>
                 </div>
                 <div>
@@ -165,7 +165,7 @@
                     </a>
                 </div>
                 <div class="modal-body">
-                    {{team.long_desc}}
+                    {{team.long_desc | safe}}
                 </div>
             </div>
         </div>
@@ -310,7 +310,7 @@
                             </svg>
                             <p class="mt-2 text-sm text-gray-600 sm:text-base lg:text-sm xl:text-base">
                                 <a href="{% url 'testimonials' test_id=testimonial.id %}">
-                                    {{testimonial.short_message}}
+                                    {{testimonial.short_message | safe}}
                                 </a>
                             </p>
                         </div>

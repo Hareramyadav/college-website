@@ -6,9 +6,9 @@
     <hr>
     <h3 class="container">About Us</h3>
     <div class="about-contents container d-md-flex justify-content-between">
-        <div class="contents col-lg-8 me-md-4">
+        <div class="col-lg-8 me-md-4" style="text-align:justify;">
             {% for a in about %}
-            <p style="text-align:justify;">{{a.long_desc | safe}}</p>
+            <div>{{a.long_desc | safe}}</div>
             {% endfor %}
         </div>
         <div class="sidebar col-lg-4">
