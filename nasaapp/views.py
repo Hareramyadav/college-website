@@ -1,3 +1,4 @@
+from django.conf import settings
 from .models import *
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -10,6 +11,7 @@ from math import ceil
 from .verify_request import *
 from django.contrib.auth import authenticate, logout
 from .forms import *
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -496,6 +498,49 @@ def delete_blog(request, blog_id):
     return redirect('/create_blog')
 
 @validate_request_for_admin
+def create_team(request):
+    form = TeamsForm()
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        image = request.FILES.get('image')
+        position = request.POST.get('position')
+        short_desc = request.POST.get('short_desc')
+        long_desc = request.POST.get('long_desc')
+
+        data = dict(name=name, image=image, position=position, long_desc=long_desc, short_desc=short_desc)
+        Message.objects.create(**data)
+        return redirect('/create_team')
+    teams = Message.objects.all().order_by('created_at')
+    return render(request, 'admin/create_team.html', {'teams':teams, 'form':form})
+
+@validate_request_for_admin
+def edit_team(request, team_id):
+    form = TeamsForm()
+    team = Message.objects.get(id=int(team_id))
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        image = request.FILES.get('image', None)
+        position = request.POST.get('position')
+        short_desc = request.POST.get('short_desc')
+        long_desc = request.POST.get('long_desc')
+
+        team.name = name
+        team.position = position
+        team.long_desc = long_desc
+        team.short_desc = short_desc
+        
+        if image is not None:
+            team.image = image
+        team.save()
+        return redirect('/create_team')
+    return render(request, 'admin/edit_team.html', {'team':team, 'team_id':team_id, 'form':form})
+
+@validate_request_for_admin
+def delete_team(request, team_id):
+    Message.objects.filter(id=int(team_id)).delete()
+    return redirect('/create_team')
+
+@validate_request_for_admin
 def create_testimonial(request):
     form = TestimonialForm()
     if request.method == 'POST':
@@ -760,6 +805,7 @@ def admission_from(request):
             stream=stream,
         )
         AdmissionForm.objects.create(**data)
+        send_mail('Admission Form Details', data, settings.DEFAULT_FROM_EMAIL, ['nivasolution.com'])
         return redirect('/')
     header_footer = header_footer_view(request)
     return render(request, 'client/admission_from.html', header_footer)
