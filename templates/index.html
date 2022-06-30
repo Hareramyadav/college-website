@@ -24,10 +24,12 @@
                     </p>
                 </div>
                 <div>
+                    {% if slider.button_text %}
                     <a href="{{slider.banner_link}}"
                         class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-orange-400 hover:bg-orange-600 focus:shadow-outline focus:outline-none">
                         {{slider.button_text}}
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
