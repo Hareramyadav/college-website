@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '(#j2&xt=#^%w@3yj5=d4n%_#j#abrv5hj(+f7mp&5r5*3&ry8a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['http://raki.radiatnserversite.com/', 'raki.radiatnserversite.com', 'www.raki.radiatnserversite.com', 'http://127.0.0.1/', '127.0.0.1']
 
@@ -80,29 +80,29 @@ WSGI_APPLICATION = 'nasa.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'raki',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
-    }
-
     # 'default': {
     #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'radijmdg_raki',
-    #     'USER': 'radijmdg_rakiuser',
-    #     'PASSWORD': 'b^lkKx9S(rv?',
+    #     'NAME': 'raki',
+    #     'USER': 'root',
+    #     'PASSWORD': '',
     #     'HOST': 'localhost',
-    #     'PORT': '3306',
+    #     'PORT': '',
     #     'OPTIONS': {
     #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
     #     }
     # }
+
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'radijmdg_raki',
+        'USER': 'radijmdg_rakiuser',
+        'PASSWORD': 'b^lkKx9S(rv?',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
+    }
 }
 
 
