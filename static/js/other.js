@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    // const url = 'http://127.0.0.1:8000/';
-    const url = 'http://nasacollege.com/';
+    const url = 'http://127.0.0.1:8000/';
+    // const url = 'http://nasacollege.com/';
     imageDiv = $('#images').show();
     videoDiv = $('#videos').hide();
     $('#image_button').click(function () {
@@ -139,4 +139,18 @@ $(document).ready(function () {
         else sticky.removeClass('fixed');
     });
 
+
+    // display video input link 
+    var videoLink = $('.video-link').hide();
+    var imageField = $('.image-field');
+    $('#media-type').change(function(){
+        var val = $(this).val();
+        if (val === 'video'){
+            videoLink.show();
+            imageField.hide();
+        }else{
+            videoLink.hide();
+            imageField.show();
+        }
+    });
 });

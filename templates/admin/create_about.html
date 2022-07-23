@@ -33,7 +33,7 @@
             <tbody>
                 {% for a in about %}
                 <tr>
-                    <td>{{a.short_desc}}</td>
+                    <td>{{a.short_desc | safe}}</td>
                     <td>
                         <a href="{% url 'edit_about' about_id=a.id %}" class="text-info"><i
                                 class="fas fa-edit"></i></a>

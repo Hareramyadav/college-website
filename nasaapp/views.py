@@ -399,7 +399,7 @@ def edit_about(request, about_id):
 
 @validate_request_for_admin
 def delete_about(request, about_id):
-    AboutSection.objects.filter(id=int(about_id))
+    AboutSection.objects.filter(id=int(about_id)).delete()
     return redirect('/create_about')
 
 @validate_request_for_admin
